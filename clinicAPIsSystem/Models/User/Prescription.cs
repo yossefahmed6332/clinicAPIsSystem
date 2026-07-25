@@ -7,7 +7,10 @@ namespace clinicAPIsSystem.Models.User
         public int Id { get; set; } 
         public string Diagnosis { get; set; } = null!;
         public Doctor Doctor { get; set; } = null!; 
-        public 
+        public int DoctorId { get; set; } 
+        public Patient Patient { get; set; } = null!; 
+        public int PatientId { get; set; } 
+        public ICollection<Medical> Medicals { get; set; } = new HashSet<Medical>(); 
 
     }
 }

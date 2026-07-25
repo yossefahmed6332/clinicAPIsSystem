@@ -1,4 +1,5 @@
-﻿namespace clinicAPIsSystem.Models.User.MedicalStaff
+﻿using clinicAPIsSystem.Models; 
+namespace clinicAPIsSystem.Models.User.MedicalStaff
 {
     public class MedicalStaff:Employee
     {

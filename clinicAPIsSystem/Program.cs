@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity; 
 
-IdentityUser
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 

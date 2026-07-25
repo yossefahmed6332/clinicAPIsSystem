@@ -1,7 +1,7 @@
 ﻿using clinicAPIsSystem.Models.User.MedicalStaff;
 namespace clinicAPIsSystem.Models
 {
-    public class Qulification
+    public class Qualification
     {
         public int Id { get; set;  }
         public string Degree { get; set; } = null!;
