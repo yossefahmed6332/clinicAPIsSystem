@@ -1,7 +1,7 @@
 ﻿using clinicAPIsSystem.Models; 
 namespace clinicAPIsSystem.Models.User.MedicalStaff
 {
-    public class MedicalStaff:Employee
+    public abstract class MedicalStaff:Employee
     {
         public int YearsOfExperience { get; set; } 
         public string LicenseNumber { get; set; } = null!;
