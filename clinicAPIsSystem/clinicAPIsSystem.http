@@ -1,0 +1,6 @@
+@clinicAPIsSystem_HostAddress = http://localhost:5099
+
+GET {{clinicAPIsSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
