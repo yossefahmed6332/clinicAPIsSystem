@@ -1,6 +1,6 @@
 ﻿namespace clinicAPIsSystem.Models.User
 {
-    public class Employee : ApplicationUser
+    public abstract class Employee : ApplicationUser
     {
         public decimal SalaryPerHour { get; set; } 
         public decimal HoursWorked { get; set; } 
