@@ -6,7 +6,7 @@ namespace clinicAPIsSystem.Models
         public int Id { get; set;  }
         public string Degree { get; set; } = null!;
         public string University { get; set; } = null!;
-        public ICollection<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
+        public ICollection<MedicalStaff> MedicalStaffs { get; set; } = new HashSet<MedicalStaff>();
 
 
     }
