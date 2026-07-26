@@ -22,5 +22,7 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.ApplicationUserDTOs
 
         [Required, EnumDataType(typeof(Gender))]
         public Gender Gender { get; set; }
+        [Required]
+        public string Password { get; set; } = null!;
     }
 }
