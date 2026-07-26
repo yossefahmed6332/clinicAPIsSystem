@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.ApplicationUserDTOs;
-using clinicAPIsSystem.Models;
+using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
+using clinicAPIsSystem.ClinicDTOs.PrescriptionDTOs;
+using clinicAPIsSystem.ClinicDTOs.OperationDtos;
 namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs
 {
     public class PatientDto:ApplicationUserDto

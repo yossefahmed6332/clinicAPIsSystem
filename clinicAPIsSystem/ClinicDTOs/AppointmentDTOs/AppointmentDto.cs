@@ -13,7 +13,7 @@ namespace clinicAPIsSystem.ClinicDTOs.AppointmentDTOs
         public string Reason { get; set; } = null!;
         public string? Note { get; set; }
         public AppointmentStatus Status { get; set; }
-        public ICollection<OpreationDto> Operations { get; set; } = new HashSet<OpreationDto>();
+        public ICollection<OperationDto> Operations { get; set; } = new HashSet<OperationDto>();
 
 
     }

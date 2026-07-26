@@ -1,6 +1,5 @@
-﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.EmployeeDTOs;
-using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.MedicalStaffDTOs;
-using clinicAPIsSystem.Models;
+﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.MedicalStaffDTOs;
+using clinicAPIsSystem.ClinicDTOs.PrescriptionDTOs;
 
 namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs
 {

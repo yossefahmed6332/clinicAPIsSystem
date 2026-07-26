@@ -1,5 +1,5 @@
 ﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.EmployeeDTOs;
-
+using clinicAPIsSystem.ClinicDTOs.OperationDtos; 
 namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.NonMedicalStaffDTOs.AccountantDTOs
 {
     public class AccountantDto:EmployeeDto
