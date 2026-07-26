@@ -1,7 +1,7 @@
 ﻿
 using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
 
-namespace clinicAPIsSystem.ClinicDTOs.Operation
+namespace clinicAPIsSystem.ClinicDTOs.OperationDtos
 {
     public class OpreationDto
     {

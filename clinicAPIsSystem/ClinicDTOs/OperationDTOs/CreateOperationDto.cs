@@ -1,7 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
 
-namespace clinicAPIsSystem.ClinicDTOs.Operation
+namespace clinicAPIsSystem.ClinicDTOs.OperationDtos
 {
     public class CreateOperationDto
     {

@@ -1,7 +1,5 @@
 ﻿using clinicAPIsSystem.Models;
-using clinicAPIsSystem.Models.User;
-using clinicAPIsSystem.Models.User.MedicalStaff;
-
+using clinicAPIsSystem.ClinicDTOs.OperationDtos;
 namespace clinicAPIsSystem.ClinicDTOs.AppointmentDTOs
 {
     public class AppointmentDto
@@ -15,7 +13,7 @@ namespace clinicAPIsSystem.ClinicDTOs.AppointmentDTOs
         public string Reason { get; set; } = null!;
         public string? Note { get; set; }
         public AppointmentStatus Status { get; set; }
-        public ICollection<OperationDto> Operations { get; set; } = new HashSet<OperationDto>();
+        public ICollection<OpreationDto> Operations { get; set; } = new HashSet<OpreationDto>();
 
 
     }
