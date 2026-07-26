@@ -12,6 +12,7 @@ namespace clinicAPIsSystem.Models
         public int PatientId { get; set; } 
         public Appointment Appointment { get; set; } = null!; 
         public int AppointmentId { get; set; } 
+        public DateTime OperationDate { get; set; }
         public decimal Amount { get; set; } 
 
     }
