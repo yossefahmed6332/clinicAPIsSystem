@@ -1,6 +1,7 @@
-﻿using clinicAPIsSystem.Models.User.MedicalStaff;
+﻿using clinicAPIsSystem.Models.User;
+using clinicAPIsSystem.Models.User.MedicalStaff;
 
-namespace clinicAPIsSystem.Models.User
+namespace clinicAPIsSystem.Models
 {
     public class Prescription
     {

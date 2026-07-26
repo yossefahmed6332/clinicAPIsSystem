@@ -1,4 +1,4 @@
-﻿namespace clinicAPIsSystem.Models.User
+﻿namespace clinicAPIsSystem.Models
 {
     public class Medical
     {
