@@ -4,27 +4,26 @@ namespace clinicAPIsSystem.Interfaces.IUserService
     public interface IApplicationUserService
     {
         //method for Create User 
-        public Task<ApplicationUserDto> CreateUserAsync(ApplicationUserDto userDto);//call it in EmployeeService & PatientService 
+        public Task<ApplicationUserDto> CreateUserAsync(CreateApplicationUserDto userDto);//call it in EmployeeService & PatientService 
 
         //methods for getting user information
         public Task<ApplicationUserDto> GetUserByIdAsync(int id);
         public Task<ApplicationUserDto> GetUserByUserNameAsync(string userName);
         public Task<ApplicationUserDto> GetUserByEmailAsync(string email);
 
-        //methods for changing user information , user only do it for himself
-        public Task ChangePhoneNumber(string Token, string newPhoneNumber);
-        public Task ChangeUserNameAsync(string Token, string newUserName);
-        public Task ChangeEmailAsync(string Token, string newEmail);
-        public Task ChangePasswordAsync(string Token, string newPassword);
+        //methods for changing user information , Async can do it for any user 
+        public Task ChangePhoneNumberAsync(string newPhoneNumber, int userId);
+        public Task ChangeUserNameAsync(string newUserName, int userId);
+        public Task ChangeEmailAsync(string newEmail, int userId);
+        public Task ChangePasswordAsync(string currentPassword, string newPassword, int userId);
+        public Task ChangeLastNameAsync(string newLastName, int userId);
+        public Task ChangeFirstNameAsync(string newFirstName, int userId);//change first name for user
 
-        //methods for changing user information , admin can do it for any user 
-        public Task ChangePhoneNumberByAdmin(string newPhoneNumber, int userId);
-        public Task ChangeUserNameByAdmin(string newUserName, int userId);
-        public Task ChangeEmailByAdmin(string newEmail, int userId);
-        public Task ChangePasswordByAdmin(string newPassword, int userId); 
+
+
 
         //method for deleting user 
-        public Task DeleteUserAsync(string Token);
+        public Task DeleteUserAsync(int userId);
 
 
 

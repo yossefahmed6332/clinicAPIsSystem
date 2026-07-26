@@ -9,6 +9,6 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.ApplicationUserDTOs
         public string UserName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
     }
 }
