@@ -9,7 +9,7 @@ namespace clinicAPIsSystem.ClinicDTOs.AppointmentDTOs
         public int Id { get; set; }
         public string DoctorName { get; set; } = null!;
         public int DoctorId { get; set; }
-        public string PatientNam { get; set; } = null!;
+        public string PatientName { get; set; } = null!;
         public int PatientId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public string Reason { get; set; } = null!;
