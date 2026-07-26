@@ -102,7 +102,7 @@ namespace clinicAPIsSystem.Services.UserService.NonMedicalStaffService
 
         public async Task<IEnumerable<CleanerDto>> GetCleanerByCleaningAreasAsync(string cleaningArea)
         {
-            var cleaners = _context.TCleaners.Where(c => c.CleaningArea == cleaningArea);
+            var cleaners =await _context.TCleaners.Where(c => c.CleaningArea == cleaningArea).ToListAsync();
             if (!cleaners.Any())
             {
                 throw new Exception("No cleaners found for the specified cleaning area");
@@ -149,7 +149,7 @@ namespace clinicAPIsSystem.Services.UserService.NonMedicalStaffService
 
         public async Task DeleteCleanerAsync(int cleanerId)
         {
-            var cleaner = _context.TCleaners.Find(cleanerId); 
+            var cleaner =await _context.TCleaners.FindAsync(cleanerId); 
 
             if (cleaner==null)
             {
