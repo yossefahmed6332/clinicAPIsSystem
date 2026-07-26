@@ -3,7 +3,7 @@ using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
 
 namespace clinicAPIsSystem.ClinicDTOs.OperationDtos
 {
-    public class OpreationDto
+    public class OperationDto
     {
         public int Id { get; set; }
         public int AccountantId { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace clinicAPIsSystem.ClinicDTOs.PrescriptionDTOs
 {
-    public class CreatePresciptionDtocs
+    public class CreatePresciptionDto
     {
         [Required, MaxLength(100)]
         public string Diagnosis { get; set; } = null!;

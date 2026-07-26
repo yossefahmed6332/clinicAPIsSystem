@@ -34,9 +34,10 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
                 .WithMany(p => p.Appointments)
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
-
-
+            builder.HasOne(a => a.Nurse)
+                .WithMany(n => n.Appointments)
+                .HasForeignKey(a => a.NurseId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

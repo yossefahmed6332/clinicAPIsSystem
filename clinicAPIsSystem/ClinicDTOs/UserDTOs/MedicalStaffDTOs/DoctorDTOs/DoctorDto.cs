@@ -4,7 +4,7 @@ using clinicAPIsSystem.Models;
 
 namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs
 {
-    public class DoctorDtocs:MedicalStaffDto
+    public class DoctorDto:MedicalStaffDto
     {
         public string SpecializationName { get; set; } = null!;
         public ICollection<PrescriptionDto> Prescriptions { get; set; } = new List<PrescriptionDto>();

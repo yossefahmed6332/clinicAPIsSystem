@@ -8,6 +8,8 @@ namespace clinicAPIsSystem.Models
         public int Id { get; set; } 
         public Doctor Doctor { get; set; } = null!; 
         public int DoctorId { get; set; } 
+        public Nurse? Nurse { get; set; }
+        public int NurseId { get; set; }
         public Patient Patient { get; set; } = null!; 
         public int PatientId { get; set; }
         public DateTime AppointmentDate { get; set; } 
