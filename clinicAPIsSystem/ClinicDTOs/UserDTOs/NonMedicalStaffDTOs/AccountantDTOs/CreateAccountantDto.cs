@@ -5,7 +5,9 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.NonMedicalStaffDTOs.AccountantDTO
     public class CreateAccountantDto:CreateEmployeeDto
     {
         [Required]
-        public string LicenseNumber { get; set; } = null!; 
+        public string LicenseNumber { get; set; } = null!;
+        [Required]
+        public int YearsOfExperience { get; set; }
 
 
     }

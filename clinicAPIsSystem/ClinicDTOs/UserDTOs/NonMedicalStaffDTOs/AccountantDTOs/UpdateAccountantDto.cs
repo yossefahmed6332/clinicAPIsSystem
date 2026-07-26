@@ -6,6 +6,8 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.NonMedicalStaffDTOs.AccountantDTO
     {
         [Required]
         public string LicenseNumber { get; set; } = null!;
+        [Required]
+        public int YearsOfExperience { get; set; }
 
     }
 }
