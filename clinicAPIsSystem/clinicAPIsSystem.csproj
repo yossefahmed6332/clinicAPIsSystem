@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClinicDTOs\UserDTOs\MedicalStaffDTOs\DoctorDTOs\" />
+    <Folder Include="ClinicDTOs\UserDTOs\NonMedicalStaffDTOs\" />
   </ItemGroup>
 
 </Project>
