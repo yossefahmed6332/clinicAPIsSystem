@@ -3,18 +3,15 @@ namespace clinicAPIsSystem.Interfaces.IUserService
 {
     public interface IEmployeeService
     {
-        //method for create employee 
-        public Task CreateEmployeeAsync(CreateEmployeeDto employeeDto);//don't call it in controller call it in NonMedicalStaffService & MedicalStaffService  
-
-        //methhod for getting employee information 
-        public Task<IEnumerable<EmployeeDto>> GetEmployeeBySalaryAsync(decimal salary); 
+        //methods for getting employee information 
+        public Task<IEnumerable<EmployeeDto>> GetEmployeesBySalaryAsync(decimal salary); 
         public Task<IEnumerable<EmployeeDto>> GetEmployeeByHoursWorked(int hoursWorked);
-        public Task<IEnumerable<EmployeeDto>> GetEmployeeByStartShiftAsync(TimeOnly startShift);
-        public Task<IEnumerable<EmployeeDto>>  GetEmployeesByShiftEndAsync(TimeOnly endShift);
+        public Task<IEnumerable<EmployeeDto>> GetEmployeeByStartShiftAsync(TimeOnly shiftStart);
+        public Task<IEnumerable<EmployeeDto>>  GetEmployeesByShiftEndAsync(TimeOnly shiftEnd);
 
         //method for updating employee Data 
         public Task UpdateSalaryPerHourAsync(int employeeId, decimal newSalaryPerHour); 
-        public Task UpdateHoursWorkedAsync(int employeeId, decimal newHoursWorked);
+        public Task UpdateHoursWorkedAsync(int employeeId, int newHoursWorked);
         public Task UpdateShiftStartAsync(int employeeId, TimeOnly newShiftStart);
         public Task UpdateShiftEndAsync(int employeeId, TimeOnly newShiftEnd);
         

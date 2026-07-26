@@ -3,9 +3,7 @@ namespace clinicAPIsSystem.Interfaces.IUserService
 {
     public interface IApplicationUserService
     {
-        //method for Create User 
-        public Task<ApplicationUserDto> CreateUserAsync(CreateApplicationUserDto userDto);//call it in EmployeeService & PatientService 
-
+   
         //methods for getting user information
         public Task<ApplicationUserDto> GetUserByIdAsync(int id);
         public Task<ApplicationUserDto> GetUserByUserNameAsync(string userName);

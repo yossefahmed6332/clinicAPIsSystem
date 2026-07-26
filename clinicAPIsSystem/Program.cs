@@ -1,7 +1,10 @@
 using clinicAPIsSystem.Data;
+using clinicAPIsSystem.Interfaces.IUserService;
 using clinicAPIsSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using clinicAPIsSystem.Services.UserService;
+using clinicAPIsSystem.Models.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();    
+
 
 // OpenAPI
 builder.Services.AddOpenApi();

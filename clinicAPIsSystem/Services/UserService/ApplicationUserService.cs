@@ -9,28 +9,17 @@ namespace clinicAPIsSystem.Services.UserService
     public class ApplicationUserService:IApplicationUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public ApplicationUserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        public ApplicationUserService(
+        UserManager<ApplicationUser> userManager,
+        RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
-        }
-        //method for creating user , just create main data and return it to employeeService
-        public async Task<ApplicationUserDto> CreateUserAsync(CreateApplicationUserDto userDto)
-        {
-            var user = new ApplicationUserDto
-            {
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                UserName = userDto.UserName,
-                Email = userDto.Email,
-                PhoneNumber = userDto.PhoneNumber,
-                Gender  = userDto.Gender,
-            };
+            _roleManager = roleManager;
+    }
 
-            return user; 
-        }
-
-        //method for getting user information
-        public async Task<ApplicationUserDto> GetUserByIdAsync(int id)//get User by Id 
+    //method for getting user information
+    public async Task<ApplicationUserDto> GetUserByIdAsync(int id)//get User by Id 
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
