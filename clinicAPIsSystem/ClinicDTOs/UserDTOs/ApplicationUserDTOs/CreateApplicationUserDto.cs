@@ -14,10 +14,10 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.ApplicationUserDTOs
         [Required, MaxLength(100)]
         public string UserName { get; set; } = null!;
 
-        [Required, EmailAddress]
+        [Required, EmailAddress,MaxLength(300)]
         public string Email { get; set; } = null!;
 
-        [Phone]
+        [Phone, MaxLength(30)]
         public string? PhoneNumber { get; set; }
 
         [Required, EnumDataType(typeof(Gender))]

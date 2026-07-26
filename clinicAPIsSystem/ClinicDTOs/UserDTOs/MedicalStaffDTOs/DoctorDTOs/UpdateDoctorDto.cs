@@ -6,7 +6,7 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs
 {
     public class UpdateDoctorDto:UpdateMedicalStaffDto
     {
-        [Required,MaxLength(50)]
+        [Required,Range(1,int.MaxValue)]
         public int SpecializationId { get; set; } 
     }
 }

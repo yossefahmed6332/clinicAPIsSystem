@@ -5,7 +5,7 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs
 {
     public class CreateDoctorDto:CreateMedicalStaffDto
     {
-        [Required]
+        [Required,Range(1,int.MaxValue)]
         public int SpecializationId { get; set; }
 
     }

@@ -5,11 +5,11 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.MedicalStaffDTOs
 {
     public class UpdateMedicalStaffDto:UpdateEmployeeDto
     {
-        [Required]
+        [Required, Range(0, int.MaxValue)]
         public int YearsOfExperience { get; set; }
         [Required, MaxLength(50)]
         public string LicenseNumber { get; set; } = null!;
-        [Required]
+        [Required, Range(1, int.MaxValue)]
         public int QualificationId { get; set; }
 
     }

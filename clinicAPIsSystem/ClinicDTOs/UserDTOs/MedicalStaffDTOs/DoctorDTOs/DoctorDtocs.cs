@@ -6,7 +6,7 @@ namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs
 {
     public class DoctorDtocs:MedicalStaffDto
     {
-        public SpecializationDto Specialization { get; set; } = null!;
+        public string SpecializationName { get; set; } = null!;
         public ICollection<PrescriptionDto> Prescriptions { get; set; } = new List<PrescriptionDto>();
     }
 }

@@ -1,0 +1,20 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace clinicAPIsSystem.ClinicDTOs.AppointmentDTOs
+{
+    public class CreateAppointmentDto
+    {
+        [Required]
+        public int DoctorId { get; set; } 
+        [Required]
+        public int PatientId { get; set; }
+        [Required]
+        public DateTime AppointmentTime { get; set; }
+        [Required,MaxLength(200)]
+        public string Reason { get; set; } = null!;
+        [MaxLength(200)]
+        public string? Note { get; set; } 
+
+
+    }
+}

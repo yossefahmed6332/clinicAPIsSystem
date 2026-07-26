@@ -12,7 +12,7 @@ namespace clinicAPIsSystem.Models
         public int PatientId { get; set; }
         public DateTime AppointmentDate { get; set; } 
         public string Reason { get; set; } = null!; 
-        public string Note { get; set; } = null!; 
+        public string ?Note { get; set; } 
         public AppointmentStatus Status { get; set; } 
         public ICollection<Operation> Operations { get; set; } = new HashSet<Operation>();
 
