@@ -2,5 +2,6 @@
 {
     public class Cleaner:Employee
     {
+        public string CleaningArea { get; set; } = null!;
     }
 }
