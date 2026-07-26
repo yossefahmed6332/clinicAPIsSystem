@@ -32,9 +32,9 @@ namespace clinicAPIsSystem.Services.UserService
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                UserName = user.UserName!,
+                Email = user.Email!,
+                PhoneNumber = user.PhoneNumber!,
                 Gender = user.Gender
             };
 
@@ -53,9 +53,9 @@ namespace clinicAPIsSystem.Services.UserService
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                UserName = user.UserName!,
+                Email = user.Email!,
+                PhoneNumber = user.PhoneNumber!,
                 Gender = user.Gender
             }; 
             return userDto;
@@ -73,9 +73,9 @@ namespace clinicAPIsSystem.Services.UserService
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                UserName = user.UserName!,
+                Email = user.Email!,
+                PhoneNumber = user.PhoneNumber!,
                 Gender = user.Gender
             };
             return userDto;

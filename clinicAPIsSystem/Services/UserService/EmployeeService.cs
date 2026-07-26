@@ -29,9 +29,9 @@ namespace clinicAPIsSystem.Services.UserService
                 {
                     FirstName = employee.FirstName,
                     LastName= employee.LastName,
-                    Email=employee.Email, 
-                    PhoneNumber=employee.PhoneNumber,
-                    UserName=employee.UserName,
+                    Email=employee.Email!, 
+                    PhoneNumber=employee.PhoneNumber!,
+                    UserName=employee.UserName!,
                     SalaryPerHour=employee.SalaryPerHour,
                     HoursWorked=employee.HoursWorked, 
                     ShiftEnd=employee.ShiftEnd,

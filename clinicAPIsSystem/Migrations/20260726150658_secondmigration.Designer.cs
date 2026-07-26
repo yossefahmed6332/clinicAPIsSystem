@@ -13,7 +13,7 @@ namespace clinicAPIsSystem.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
     [Migration("20260726150658_secondmigration")]
-    partial class secondmigration
+    partial class Secondmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

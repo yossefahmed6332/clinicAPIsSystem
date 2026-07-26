@@ -102,9 +102,9 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
                     // ApplicationUser
                     FirstName = doctorDto.FirstName,
                     LastName = doctorDto.LastName,
-                    UserName = doctorDto.UserName,
-                    Email = doctorDto.Email,
-                    PhoneNumber = doctorDto.PhoneNumber,
+                    UserName = doctorDto.UserName!,
+                    Email = doctorDto.Email!,
+                    PhoneNumber = doctorDto.PhoneNumber!,
                     Gender = doctorDto.Gender,
 
                     // Employee
