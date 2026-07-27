@@ -57,10 +57,9 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
             };
             var result = await _userManager.CreateAsync(nurse,nurseDto.Password);
             //Add Roles
-            var doctorRoleResult = await _userManager.AddToRoleAsync(nurse, "Nurse");
-            var userRoleResult = await _userManager.AddToRoleAsync(nurse, "User");
+            var doctorRoleResult = await _userManager.AddToRoleAsync(nurse, Roles.Nurse.ToString());
 
-            if (!doctorRoleResult.Succeeded || !userRoleResult.Succeeded)
+            if (!doctorRoleResult.Succeeded)
             {
                 throw new Exception("Failed to assign roles.");
             }

@@ -1,6 +1,7 @@
 ﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs;
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
+using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Models.User.MedicalStaff;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -70,10 +71,9 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
             }
 
             // Add roles
-            var doctorRoleResult = await _userManager.AddToRoleAsync(doctor, "Doctor");
-            var userRoleResult = await _userManager.AddToRoleAsync(doctor, "User");
+            var doctorRoleResult = await _userManager.AddToRoleAsync(doctor, Roles.Doctor.ToString());
 
-            if (!doctorRoleResult.Succeeded || !userRoleResult.Succeeded)
+            if (!doctorRoleResult.Succeeded )
             {
                 throw new Exception("Failed to assign roles.");
             }

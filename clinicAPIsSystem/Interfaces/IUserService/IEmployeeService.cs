@@ -3,6 +3,9 @@ namespace clinicAPIsSystem.Interfaces.IUserService
 {
     public interface IEmployeeService
     {
+        //create methods 
+        public Task  CreateReceptionistAsync(CreateEmployeeDto dto);
+        public Task CreateAdminAsync (CreateEmployeeDto dto);
         //methods for getting employee information 
         public Task<IEnumerable<EmployeeDto>> GetEmployeesBySalaryAsync(decimal salary); 
         public Task<IEnumerable<EmployeeDto>> GetEmployeesByHoursWorkedAsync(int hoursWorked);

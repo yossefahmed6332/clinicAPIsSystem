@@ -13,10 +13,12 @@ namespace clinicAPIsSystem.Services.UserService
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly ClinicDbContext _clinicDbContext; 
-        public EmployeeService (ClinicDbContext clinicDbContext)
+        private readonly ClinicDbContext _clinicDbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public EmployeeService (ClinicDbContext clinicDbContext, UserManager<ApplicationUser> userManager)
         {
-            _clinicDbContext = clinicDbContext; 
+            _clinicDbContext = clinicDbContext;
+            _userManager = userManager;
         }
 
         private async Task<IEnumerable<EmployeeDto>> GetEmployeeDto(List<Employee> employees)
@@ -43,7 +45,93 @@ namespace clinicAPIsSystem.Services.UserService
             }
             return dtos; 
         }
+        //create methods
+        public async Task CreateReceptionistAsync(CreateEmployeeDto dto)
+        {
+            bool emailExists= await _userManager.FindByEmailAsync(dto.Email) != null;
+            if (emailExists)
+            {
+                throw new Exception("Email already exists.");
+            }
+            bool usernameExists =await _userManager.FindByNameAsync(dto.UserName) != null;
+            if (usernameExists)
+            {
+                throw new Exception("Username already exists.");
+            }
+            bool phoneNumberExists = await _clinicDbContext.Set<Employee>().AnyAsync(e => e.PhoneNumber == dto.PhoneNumber);
+            if (phoneNumberExists)
+            {
 
+                throw new Exception("Phone number already exists.");
+            }
+
+            var receptionist = new Employee
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                UserName = dto.UserName,
+                SalaryPerHour = dto.SalaryPerHour,
+                HoursWorked = dto.HoursWorked,
+                ShiftStart = dto.ShiftStart,
+                ShiftEnd = dto.ShiftEnd
+            };
+
+            var result = await _userManager.CreateAsync(receptionist, dto.Password);
+            var receptionistRoleResult = await _userManager.AddToRoleAsync(receptionist, Roles.Receptionist.ToString());
+
+            if (!receptionistRoleResult.Succeeded)
+            {
+                throw new Exception("Failed to assign roles.");
+            }
+
+
+        }
+
+        public async Task CreateAdminAsync(CreateEmployeeDto dto)
+        {
+            bool emailExists = await _userManager.FindByEmailAsync(dto.Email) != null;
+            if (emailExists)
+            {
+                throw new Exception("Email already exists.");
+            }
+            bool usernameExists = await _userManager.FindByNameAsync(dto.UserName) != null;
+            if (usernameExists)
+            {
+                throw new Exception("Username already exists.");
+            }
+            bool phoneNumberExists = await _clinicDbContext.Set<Employee>().AnyAsync(e => e.PhoneNumber == dto.PhoneNumber);
+            if (phoneNumberExists)
+            {
+
+                throw new Exception("Phone number already exists.");
+            }
+
+            var receptionist = new Employee
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                UserName = dto.UserName,
+                SalaryPerHour = dto.SalaryPerHour,
+                HoursWorked = dto.HoursWorked,
+                ShiftStart = dto.ShiftStart,
+                ShiftEnd = dto.ShiftEnd
+            };
+
+            var result = await _userManager.CreateAsync(receptionist, dto.Password);
+            var receptionistRoleResult = await _userManager.AddToRoleAsync(receptionist, Roles.Admin.ToString());
+
+            if (!receptionistRoleResult.Succeeded)
+            {
+                throw new Exception("Failed to assign roles.");
+            }
+
+        }
+
+        //Read
 
         public async Task<IEnumerable<EmployeeDto>> GetEmployeesBySalaryAsync (decimal salary)
         {

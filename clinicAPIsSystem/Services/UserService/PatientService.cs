@@ -61,8 +61,8 @@ namespace clinicAPIsSystem.Services.UserService
             }
 
             // Add Patient Role
-            await _userManager.AddToRoleAsync(patient, "User");
-            await _userManager.AddToRoleAsync(patient, "Patient");
+            await _userManager.AddToRoleAsync(patient, Roles.Patient.ToString());
+            await _userManager.AddToRoleAsync(patient, Roles.User.ToString());
 
         }
     }

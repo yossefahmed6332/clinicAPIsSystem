@@ -67,8 +67,8 @@ namespace clinicAPIsSystem.Services.UserService.NonMedicalStaffService
             }
 
             // Add roles
-            var AccountantRoleResult = await _userManager.AddToRoleAsync(Accountant, "Accountant");
-            var userRoleResult = await _userManager.AddToRoleAsync(Accountant, "User");
+            var AccountantRoleResult = await _userManager.AddToRoleAsync(Accountant, Roles.Accountant.ToString());
+            var userRoleResult = await _userManager.AddToRoleAsync(Accountant, Roles.User.ToString());
 
             if (!AccountantRoleResult.Succeeded || !userRoleResult.Succeeded)
             {
