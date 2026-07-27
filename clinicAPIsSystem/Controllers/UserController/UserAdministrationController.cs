@@ -24,7 +24,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         public async Task<IActionResult> AssignUserAsAdmin(int userId)
         {
             await _userService.AssignUserAsAdminAsync(userId);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
@@ -64,7 +64,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         public async Task<IActionResult> UpdateUser(int userId, [FromBody] UpdateApplicationUserDto updatedUser)
         {
             await _userService.UpdateUserAsync(updatedUser, userId);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
@@ -72,7 +72,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         public async Task<IActionResult> DeleteUser(int userId)
         {
             await _userService.DeleteUserAsync(userId);
-            return Ok();
+            return NoContent();
         }
     }
 }

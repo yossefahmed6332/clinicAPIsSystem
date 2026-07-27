@@ -20,7 +20,7 @@ namespace clinicAPIsSystem.Controllers.UserController.IMedicalController
         public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorDto doctorDto)
         {
             await _doctorService.CreateDoctorAsync(doctorDto);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
@@ -36,7 +36,7 @@ namespace clinicAPIsSystem.Controllers.UserController.IMedicalController
         public async Task<IActionResult> UpdateDoctor(int id, [FromBody] UpdateDoctorDto doctorDto)
         {
             await _doctorService.UpdateDoctorAsync(id, doctorDto);
-            return Ok();
+            return NoContent();
         }
 
 

@@ -49,7 +49,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         {
             var currentUserId = GetCurrentUserId();
             await _applicationUserService.UpdateUserAsync(dto, currentUserId);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize]
@@ -58,7 +58,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         {
             var currentUserId = GetCurrentUserId();
             await _applicationUserService.DeleteUserAsync(currentUserId);
-            return Ok();
+            return NoContent();
         }
 
         private int GetCurrentUserId()

@@ -22,14 +22,14 @@ namespace clinicAPIsSystem.Controllers.UserController.IMedicalController
         public async Task<IActionResult> CreateNurse([FromBody] CreateNurseDto nurseDto)
         {
             await _nurseService.CreateNurseAsync(nurseDto);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
         public async Task<IActionResult> UpdateNurse(int id, [FromBody] UpdateNurseDto nurseDto)
         {
             await _nurseService.UpdateNurseAsync(id, nurseDto);
-            return Ok();
+            return NoContent();
         }
 
 

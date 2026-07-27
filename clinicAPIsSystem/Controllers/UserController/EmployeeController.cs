@@ -23,7 +23,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         public async Task<IActionResult> CreateReceptionist([FromBody] CreateEmployeeDto receptionistDto)
         {
             await _employeeService.CreateReceptionistAsync(receptionistDto);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
@@ -31,7 +31,7 @@ namespace clinicAPIsSystem.Controllers.UserController
         public async Task<IActionResult> CreateAdmin([FromBody] CreateEmployeeDto adminDto)
         {
             await _employeeService.CreateAdminAsync(adminDto);
-            return Ok();
+            return NoContent();
         }
 
         [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)},{nameof(Roles.Accountant)}")]
