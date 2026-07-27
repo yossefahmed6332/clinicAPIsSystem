@@ -18,8 +18,23 @@ namespace clinicAPIsSystem.Services.UserService
             _roleManager = roleManager;
     }
 
-    //method for getting user information
-    public async Task<ApplicationUserDto> GetUserByIdAsync(int id)//get User by Id 
+    public async Task AssignUserAsAdminAsync(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            // Check if the Admin role exists, if not, create it
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole<int>("Admin"));
+            }
+            // Assign the Admin role to the user
+            await _userManager.AddToRoleAsync(user, "Admin");
+        }
+        //method for getting user information
+        public async Task<ApplicationUserDto> GetUserByIdAsync(int id)//get User by Id 
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)

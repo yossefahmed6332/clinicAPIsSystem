@@ -8,6 +8,8 @@ namespace clinicAPIsSystem.Interfaces.IUserService
         public Task<ApplicationUserDto> GetUserByIdAsync(int id);
         public Task<ApplicationUserDto> GetUserByUserNameAsync(string userName);
         public Task<ApplicationUserDto> GetUserByEmailAsync(string email);
+        public Task AssignUserAsAdminAsync(int userId);
+
 
         //methods for changing user information , Async can do it for any user 
         public Task ChangePhoneNumberAsync(string newPhoneNumber, int userId);

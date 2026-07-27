@@ -62,7 +62,7 @@ namespace clinicAPIsSystem.Services.UserService
             return dtos.Result; 
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeeByHoursWorked (int hoursWorked)
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesByHoursWorkedAsync(int hoursWorked)
         {
             var employee = await _clinicDbContext.Set<Employee>()
              .Where(e => e.HoursWorked == hoursWorked)
@@ -79,7 +79,7 @@ namespace clinicAPIsSystem.Services.UserService
             return dtos.Result;
         
     }
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeeByStartShiftAsync(TimeOnly shiftStart)
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesByStartShiftAsync(TimeOnly shiftStart)
         {
             var employee = await _clinicDbContext.Set<Employee>()
             .Where(e => e.ShiftStart == shiftStart)
