@@ -1,6 +1,8 @@
-﻿namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.NurseDTOs
+﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.MedicalStaffDTOs;
+
+namespace clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.NurseDTOs
 {
-    public class UpdateNurseDto
+    public class UpdateNurseDto:UpdateMedicalStaffDto
     {
     }
 }

@@ -65,34 +65,28 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
             }
         }
 
-
-    public async Task UpdateYearsOfExperienceAsync(int nurseId ,int yearsOfExperience)
+        public async Task UpdateNurseAsync (int id , UpdateNurseDto nurseDto)
         {
-            var nurse= await _context.TNurses.FindAsync(nurseId);
-
+            var nurse = await _context.TNurses.FindAsync(id);
             if (nurse == null)
             {
-                throw new Exception($"Nurse with ID{nurseId} doesn't exist ");
-
+                throw new Exception("Nurse not found.");
             }
-            nurse.YearsOfExperience= yearsOfExperience;
-            await _context.SaveChangesAsync();
-
-        }
-
-
-    public async Task UpdateLicenseNumberAsync(int nurseId , string licenseNumber)
-        {
-            var nurse = await _context.TNurses.FindAsync(nurseId);
-
-            if (nurse == null)
-            {
-                throw new Exception($"Nurse with ID{nurseId} doesn't exist ");
-
-            }
-
-            nurse.LicenseNumber= licenseNumber;
+            // Update properties
+            nurse.FirstName = nurseDto.FirstName;
+            nurse.LastName = nurseDto.LastName;
+            nurse.PhoneNumber = nurseDto.PhoneNumber;
+            nurse.Gender = nurseDto.Gender;
+            nurse.Email = nurseDto.Email;
+            nurse.UserName = nurseDto.UserName;
+            nurse.ShiftStart = nurseDto.ShiftStart;
+            nurse.ShiftEnd = nurseDto.ShiftEnd;
+            nurse.SalaryPerHour = nurseDto.SalaryPerHour;
+            nurse.HoursWorked = nurseDto.HoursWorked;
+            nurse.YearsOfExperience = nurseDto.YearsOfExperience;
+            nurse.LicenseNumber = nurseDto.LicenseNumber;
             await _context.SaveChangesAsync();
         }
+
     }
 }
