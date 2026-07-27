@@ -23,7 +23,7 @@ namespace clinicAPIsSystem.Services
                 Status = AppointmentStatus.Pending,
                 AppointmentDate = dto.AppointmentTime,
                 Reason = dto.Reason,
-                Note = dto.Note
+                Note = dto.Note,
             };
             _context.TAppointments.Add(appointment);
             await _context.SaveChangesAsync();
@@ -187,6 +187,8 @@ namespace clinicAPIsSystem.Services
             _context.TAppointments.Remove(appointment);
             await _context.SaveChangesAsync();
         }
+
+
 
 
 

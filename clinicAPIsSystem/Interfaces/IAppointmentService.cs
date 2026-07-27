@@ -18,7 +18,6 @@ namespace clinicAPIsSystem.Interfaces
         // Update
         public Task UpdateAppointmentAsync(int id, UpdateAppointmentDto appointment);
         public Task UpdateAppointmentStatusAsync(int appointmentId, AppointmentStatus status);
-
         // Delete
         public Task DeleteAppointmentAsync(int id);
     }

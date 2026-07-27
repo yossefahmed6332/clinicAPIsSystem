@@ -4,14 +4,14 @@ namespace clinicAPIsSystem.Interfaces
     public interface IMedicalService
     {
         // Create
-        public Task<MedicalDto> AddMedicalAsync(CreateMedicalDto medical);
+        public Task AddMedicalAsync(CreateMedicalDto medical);
 
         // Read
         public Task<IEnumerable<MedicalDto>> GetAllMedicalsAsync();
-        public Task<MedicalDto?> GetMedicalByIdAsync(int id);
+        public Task<MedicalDto> GetMedicalByIdAsync(int id);
 
         // Update
-        public Task<MedicalDto> UpdateMedicalAsync(UpdateMedicalDto medical);
+        public Task<MedicalDto> UpdateMedicalAsync(UpdateMedicalDto medical, int id);
 
         // Delete
         public Task DeleteMedicalAsync(int id);
