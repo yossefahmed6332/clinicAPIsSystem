@@ -12,30 +12,36 @@ namespace clinicAPIsSystem.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AuthService(
             UserManager<ApplicationUser> userManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _configuration = configuration;
-        }
+            _signInManager = signInManager;
 
+        }
         public async Task<string> LoginAsync(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _signInManager.UserManager.FindByEmailAsync(email);
 
             if (user == null)
                 throw new UnauthorizedAccessException("Invalid email or password.");
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
+            var result = await _signInManager.CheckPasswordSignInAsync(
+                user,
+                password,
+                lockoutOnFailure: true
+            );
 
-            if (!isPasswordValid)
+            if (!result.Succeeded)
                 throw new UnauthorizedAccessException("Invalid email or password.");
 
             return await GenerateJwtTokenAsync(user);
         }
-
         public async Task<string> GenerateJwtTokenAsync(ApplicationUser user)
         {
             var roles = await _userManager.GetRolesAsync(user);

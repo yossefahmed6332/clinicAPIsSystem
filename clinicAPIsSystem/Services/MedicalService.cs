@@ -4,12 +4,13 @@ using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Models;
 using Microsoft.Identity.Client;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 namespace clinicAPIsSystem.Services
 {
     public class MedicalService:IMedicalService
     {
         private readonly ClinicDbContext _context;
-        public MedicalService(ClinicDbContext context)
+        public MedicalService(ClinicDbContext context, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
         }

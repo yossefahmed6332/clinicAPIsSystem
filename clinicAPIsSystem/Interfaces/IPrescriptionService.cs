@@ -4,22 +4,22 @@ namespace clinicAPIsSystem.Interfaces
     public interface IPrescriptionService
     {
         // Create
-        Task<PrescriptionDto> AddPrescriptionAsync(CreatePresciptionDto  prescription);
-        Task<bool> AddMedicalToPrescriptionAsync(int prescriptionId, int medicalId);
+        public Task AddPrescriptionAsync(CreatePresciptionDto  prescription);
+        public Task AddMedicalToPrescriptionAsync(int prescriptionId, int medicalId);
 
         // Read
-        Task<IEnumerable<PrescriptionDto>> GetAllPrescriptionsAsync();
-        Task<PrescriptionDto?> GetPrescriptionByIdAsync(int id);
-        Task<IEnumerable<PrescriptionDto>> GetPrescriptionsByPatientIdAsync(int patientId);
-        Task<IEnumerable<PrescriptionDto>> GetPrescriptionsByDoctorIdAsync(int doctorId);
+        public Task<IEnumerable<PrescriptionDto>> GetAllPrescriptionsAsync();
+        public Task<PrescriptionDto> GetPrescriptionByIdAsync(int id);
+        public Task<IEnumerable<PrescriptionDto>> GetPrescriptionsByPatientIdAsync(int patientId);
+        public Task<IEnumerable<PrescriptionDto>> GetPrescriptionsByDoctorIdAsync(int doctorId);
         public Task<IEnumerable<PrescriptionDto>> GetPrescriptionsByMedicalIdAsync(int medicalId);
 
 
         // Update
-        Task<PrescriptionDto> UpdatePrescriptionAsync(UpdatePrescriptionDto prescription);
+        public Task UpdatePrescriptionAsync(int prescriptionId, PrescriptionDto updatedPrescription);
 
         // Delete
-        Task<bool> DeletePrescriptionAsync(int id);
-        Task<bool> RemoveMedicalFromPrescriptionAsync(int prescriptionId, int medicalId);
+        public Task DeletePrescriptionAsync(int id);
+        public Task RemoveMedicalFromPrescriptionAsync(int prescriptionId, int medicalId);
     }
 }
