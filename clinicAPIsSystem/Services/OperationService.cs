@@ -15,7 +15,6 @@ namespace clinicAPIsSystem.Services
             _context = context;
         }
 
-        #region Create
 
         public async Task AddOperationAsync(CreateOperationDto dto)
         {
@@ -46,9 +45,7 @@ namespace clinicAPIsSystem.Services
             await _context.SaveChangesAsync();
         }
 
-        #endregion
 
-        #region Get
 
         public async Task<IEnumerable<OperationDto>> GetAllOperationsAsync()
         {
@@ -102,10 +99,9 @@ namespace clinicAPIsSystem.Services
         }
 
 
-       
 
 
-        #region Helpers
+
 
         private static OperationDto MapToDto(Operation operation)
         {
@@ -118,7 +114,5 @@ namespace clinicAPIsSystem.Services
                 Amount = operation.Amount
             };
         }
-
-        #endregion
     }
 }
