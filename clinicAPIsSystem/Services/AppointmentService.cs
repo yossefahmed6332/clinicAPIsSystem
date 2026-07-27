@@ -150,17 +150,7 @@ namespace clinicAPIsSystem.Services
         }
 
 
-        //update method
-        public async Task UpdateAppointmentStatusAsync(int id, AppointmentStatus status)
-        {
-            var appointment = await _context.TAppointments.FindAsync(id);
-            if (appointment == null)
-            {
-                throw new KeyNotFoundException($"Appointment with ID {id} not found.");
-            }
-            appointment.Status = status;
-            await _context.SaveChangesAsync();
-        }
+        //update method 
         public async Task UpdateAppointmentAsync(int id, UpdateAppointmentDto dto)
         {
             var appointment = await _context.TAppointments.FindAsync(id);
@@ -168,13 +158,16 @@ namespace clinicAPIsSystem.Services
             {
                 throw new KeyNotFoundException($"Appointment with ID {id} not found.");
             }
-            appointment.DoctorId = dto.DoctorId;
             appointment.PatientId = dto.PatientId;
+            appointment.DoctorId = dto.DoctorId;
+            appointment.Status = dto.Status;
             appointment.AppointmentDate = dto.AppointmentTime;
             appointment.Reason = dto.Reason;
             appointment.Note = dto.Note;
+            _context.TAppointments.Update(appointment);
             await _context.SaveChangesAsync();
         }
+
 
         //delete method
         public async Task DeleteAppointmentAsync(int id)
