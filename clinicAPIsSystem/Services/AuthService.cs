@@ -47,16 +47,17 @@ namespace clinicAPIsSystem.Services
             var roles = await _userManager.GetRolesAsync(user);
 
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+{
+    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
 
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName!),
+    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
 
-                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
+    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName!),
 
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+    new Claim(JwtRegisteredClaimNames.Email, user.Email!),
 
+    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+};
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

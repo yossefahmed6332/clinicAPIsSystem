@@ -2,7 +2,6 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
 using clinicAPIsSystem.Models.User.MedicalStaff;
-using clinicAPIsSystem.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop.Infrastructure;
@@ -14,12 +13,10 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
     {
         private readonly UserManager<Doctor> _userManager;
         private readonly ClinicDbContext _context;
-        private readonly ISpecializationService _specializationService;
-        public DoctorService(UserManager<Doctor> userManager, ISpecializationService specializationService, ClinicDbContext context
+        public DoctorService(UserManager<Doctor> userManager, ClinicDbContext context
             )
         {
             _userManager = userManager;
-            _specializationService = specializationService;
             _context = context;
         }
         //create doctor method 

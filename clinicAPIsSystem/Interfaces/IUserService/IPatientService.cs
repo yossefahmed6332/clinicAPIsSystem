@@ -1,7 +1,9 @@
-﻿namespace clinicAPIsSystem.Interfaces.IUserService
+﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
+
+namespace clinicAPIsSystem.Interfaces.IUserService
 {
     public interface IPatientService
     {
-        //write methods for patient service here in future (if needed)
+        public Task CreatePatientAsync(CreatePatientDto dto);
     }
 }
