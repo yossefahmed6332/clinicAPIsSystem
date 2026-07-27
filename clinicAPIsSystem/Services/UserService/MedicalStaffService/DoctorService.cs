@@ -73,7 +73,7 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
             // Add roles
             var doctorRoleResult = await _userManager.AddToRoleAsync(doctor, Roles.Doctor.ToString());
 
-            if (!doctorRoleResult.Succeeded )
+            if (!doctorRoleResult.Succeeded)
             {
                 throw new Exception("Failed to assign roles.");
             }
@@ -128,52 +128,24 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
             return doctors;
         }
 
-        public async Task UpdateDoctorSpecializationAsync(int doctorId, string specializationName)
+        public async Task UpdateDoctorAsync(int id, UpdateDoctorDto doctorDto)
         {
-            var specialization = await _context.TSpecializations.
-                FirstOrDefaultAsync(s => s.Name == specializationName);
-
-            if (specialization == null)
-            {
-                throw new Exception("Specialization not found , add new specialization with name and description");
-            }
-
-            var doctor = await _context.TDoctors.FindAsync(doctorId);
-
+            var doctor = await _context.TDoctors.FindAsync(id);
             if (doctor == null)
             {
-                throw new Exception("Doctor Not found");
+                throw new Exception("Doctor not found.");
             }
-            doctor.SpecializationId = specialization.Id;
-            await _context.SaveChangesAsync();
+            // Update doctor properties
+            doctor.FirstName = doctorDto.FirstName;
+            doctor.LastName = doctorDto.LastName;
+            doctor.UserName = doctorDto.UserName;
+            doctor.Email = doctorDto.Email;
+            doctor.PhoneNumber = doctorDto.PhoneNumber;
+            doctor.Gender = doctorDto.Gender;
+            doctor.SalaryPerHour = doctorDto.SalaryPerHour;
+            doctor.HoursWorked = doctorDto.HoursWorked;
+            doctor.Specialization.Id = doctorDto.SpecializationId;
 
-        }
-
-        public async Task UpdateYearsOfExperienceAsync(int doctorId, int yearsOfExperience)
-        {
-            var doctor = await _context.TDoctors
-                .FindAsync(doctorId); 
-            if (doctor ==null)
-            {
-                throw new Exception("doctor Not found");
-            }
-
-            doctor.YearsOfExperience= yearsOfExperience; 
-            await _context.SaveChangesAsync(); 
-
-
-        }
-        public async Task UpdateLicenseNumberAsync(int doctorId, string licenseNumber)
-        {
-            var doctor = await _context.TDoctors
-                .FindAsync(doctorId);
-            if (doctor == null)
-            {
-                throw new Exception("doctor Not found");
-            }
-
-            doctor.LicenseNumber= licenseNumber;
-            await _context.SaveChangesAsync();
         }
     }
 }

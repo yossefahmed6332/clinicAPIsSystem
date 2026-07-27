@@ -8,8 +8,6 @@ namespace clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService
         //method for getting doctor information
         public Task<IEnumerable<DoctorDto>> GetDoctorBySpecializationAsync(string specialization);
         //method for updating doctor information 
-        public Task UpdateDoctorSpecializationAsync (int doctorId, string newSpecializationName);
-        public Task UpdateYearsOfExperienceAsync(int doctorId, int yearsOfExperience);
-        public Task UpdateLicenseNumberAsync(int doctorId, string licenseNumber);
+        public Task UpdateDoctorAsync(int id, UpdateDoctorDto doctorDto);
     }
 }
