@@ -9,10 +9,9 @@ namespace clinicAPIsSystem.Interfaces {
         public Task<IEnumerable<OperationDto>> GetAllOperationsAsync();
         public Task<OperationDto> GetOperationByIdAsync(int id);
         public Task<IEnumerable<OperationDto>> GetOperationsByPatientIdAsync(int patientId);
-        public Task<IEnumerable<OperationDto>> GetOperationsByAccountantIdAsync(int accountantId);
+        public Task<IEnumerable<OperationDto>> GetOperationsByReceptionistIdAsync(int ReceptionistId);
         public Task<IEnumerable<OperationDto>> GetOperationsByAppointmentIdAsync(int appointmentId);
 
         // Delete
-        public Task DeleteOperationAsync(int id);
     }
 }

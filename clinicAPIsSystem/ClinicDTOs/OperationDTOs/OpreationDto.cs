@@ -6,8 +6,8 @@ namespace clinicAPIsSystem.ClinicDTOs.OperationDtos
     public class OperationDto
     {
         public int Id { get; set; }
-        public int AccountantId { get; set; }
-        public string AccountantName { get; set; } = null!;
+        public int ReceptionistId { get; set; }
+        public string ReceptionistName { get; set; } = null!;
 
         public int PatientId { get; set; }
         public string PatientName { get; set; } = null!;

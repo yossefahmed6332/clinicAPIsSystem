@@ -6,8 +6,8 @@ namespace clinicAPIsSystem.Models
     public class Operation
     {
         public int Id { get; set; } 
-        public Accountant Accountant { get; set; } = null!; 
-        public int AccountantId { get; set; } 
+        public Employee Receptionist{ get; set; } = null!; 
+        public int ReceptionistId { get; set; } 
         public Patient Patient { get; set; } = null!; 
         public int PatientId { get; set; } 
         public Appointment Appointment { get; set; } = null!; 

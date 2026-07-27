@@ -6,7 +6,7 @@ namespace clinicAPIsSystem.ClinicDTOs.OperationDtos
     public class CreateOperationDto
     {
         [Required, Range(1, int.MaxValue)]
-        public int AccountantId { get; set; }
+        public int ReceptionistId { get; set; }
         [Required, Range(1, int.MaxValue)]
         public int PatientId { get; set; }
         [Required, Range(1, int.MaxValue)]
