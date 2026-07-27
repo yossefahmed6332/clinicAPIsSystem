@@ -1,4 +1,5 @@
-﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
+﻿using clinicAPIsSystem.ClinicDTOs.AuthDTOs;
+using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
 using clinicAPIsSystem.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,9 @@ namespace clinicAPIsSystem.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] string email, [FromBody] string password)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var token = await _authServices.LoginAsync(email,password);
+            var token = await _authServices.LoginAsync(dto); 
             
             return Ok(token);
         }

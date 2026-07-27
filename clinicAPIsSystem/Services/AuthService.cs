@@ -1,4 +1,5 @@
-﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
+﻿using clinicAPIsSystem.ClinicDTOs.AuthDTOs;
+using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
 using clinicAPIsSystem.Interfaces;
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Models.User;
@@ -27,8 +28,10 @@ namespace clinicAPIsSystem.Services
             _signInManager = signInManager;
 
         }
-        public async Task<string> LoginAsync(string email, string password)
+        public async Task<string> LoginAsync(LoginDto dto)
         {
+            var email = dto.Email;
+            var password = dto.Password; 
             var user = await _signInManager.UserManager.FindByEmailAsync(email);
 
             if (user == null)

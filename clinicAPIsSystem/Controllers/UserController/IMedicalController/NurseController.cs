@@ -26,6 +26,7 @@ namespace clinicAPIsSystem.Controllers.UserController.IMedicalController
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
+        [HttpPut]
         public async Task<IActionResult> UpdateNurse(int id, [FromBody] UpdateNurseDto nurseDto)
         {
             await _nurseService.UpdateNurseAsync(id, nurseDto);

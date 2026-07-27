@@ -36,7 +36,7 @@ namespace clinicAPIsSystem.Controllers.UserController.NonMedicalStaffController
             
         }
         [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Accountant)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get/{CleaningArea:string}")]
+        [HttpGet("get/{CleaningArea}")]
         public async Task<IActionResult> GetCleanerByCleaningAreasAsync(string cleaningArea)
         {
             var user = await _cleanerService.GetCleanerByCleaningAreasAsync(cleaningArea);

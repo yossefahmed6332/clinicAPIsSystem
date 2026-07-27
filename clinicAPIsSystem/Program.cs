@@ -50,6 +50,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 
 #endregion
 
+
 #region JWT Key Validation
 
 var jwtKey = builder.Configuration["JWT:Key"];
@@ -139,12 +140,23 @@ builder.Services.AddScoped<AdminSeeder>();
 #endregion
 
 #region OpenAPI
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
 #endregion
 
 var app = builder.Build();
+#region swagger 
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+#endregion 
 
 #region Seeder
 
