@@ -2,6 +2,7 @@
 using clinicAPIsSystem.Interfaces.IUserService; 
 using clinicAPIsSystem.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace clinicAPIsSystem.Services.UserService
@@ -16,9 +17,25 @@ namespace clinicAPIsSystem.Services.UserService
         {
             _userManager = userManager;
             _roleManager = roleManager;
-    }
+        }
+        public async Task<IEnumerable<ApplicationUserDto>> GetAllUsersAsync()
+        {
+            var users = await _userManager.Users
+                .Select(a => new ApplicationUserDto
+                {
+                    Id = a.Id,
+                    UserName = a.UserName!,
+                    Email = a.Email!,
+                    PhoneNumber = a.PhoneNumber!,
+                    FirstName = a.FirstName,
+                    LastName = a.LastName
+                })
+                .ToListAsync();
 
-    public async Task AssignUserAsAdminAsync(int userId)
+            return users;
+        }
+
+        public async Task AssignUserAsAdminAsync(int userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null)
@@ -97,98 +114,22 @@ namespace clinicAPIsSystem.Services.UserService
         }
 
         //method for updating user information
-
-        public async Task ChangePhoneNumberAsync(string newPhoneNumber, int userId)//change phone number for user
+        public async Task UpdateUserAsync(UpdateApplicationUserDto dto,int id)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new Exception($"User with ID {id} not found");
             }
-            user.PhoneNumber = newPhoneNumber;
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to update phone number");
-            }
+
+            user.UserName = dto.UserName;
+            user.Email = dto.Email;
+            user.PhoneNumber = dto.PhoneNumber;
+            user.FirstName = dto.FirstName;
+            user.LastName= dto.LastName;
 
         }
-        public async Task ChangeEmailAsync(string newEmail, int userId)//change email for user
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            user.Email = newEmail;
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to update email");
-            }
-        }
-
-        public async Task ChangePasswordAsync(string currentPassword, string newPassword, int userId)//change password for user
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to change password");
-            }
-        }
-
-
-        public async Task ChangeUserNameAsync(string newUserName, int userId)//change username for user
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            user.UserName = newUserName;
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to update username");
-            }
-        }
-
-        public async Task ChangeFirstNameAsync(string newFirstName, int userId)//change first name for user
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            user.FirstName = newFirstName;
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to update first name");
-            }
-        }
-
-
-        public async Task ChangeLastNameAsync(string newLastName, int userId)//change last name for user
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            user.LastName = newLastName;
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new Exception("Failed to update last name");
-            }
-        }
-
+        
 
         public async Task DeleteUserAsync(int userId)//delete user by id
         {
