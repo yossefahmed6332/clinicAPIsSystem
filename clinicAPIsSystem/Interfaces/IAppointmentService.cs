@@ -1,11 +1,11 @@
 using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
 using clinicAPIsSystem.Models;
-namespace clinicAPIsSystem.Services.Interfaces
+namespace clinicAPIsSystem.Interfaces
 {
     public interface IAppointmentService
     {
         // Create
-        public Task<AppointmentDto> AddAppointmentAsync(CreateAppointmentDto appointment);
+        public Task CreateAppointmentAsync(CreateAppointmentDto appointment);
 
         // Read
         public Task<IEnumerable<AppointmentDto>> GetAllAppointmentsAsync();
@@ -16,10 +16,10 @@ namespace clinicAPIsSystem.Services.Interfaces
         public Task<IEnumerable<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status);
 
         // Update
-        public Task<AppointmentDto> UpdateAppointmentAsync(UpdateAppointmentDto appointment);
-        public Task<bool> UpdateAppointmentStatusAsync(int appointmentId, AppointmentStatus status);
+        public Task UpdateAppointmentAsync(int id, UpdateAppointmentDto appointment);
+        public Task UpdateAppointmentStatusAsync(int appointmentId, AppointmentStatus status);
 
         // Delete
-        public Task<bool> DeleteAppointmentAsync(int id);
+        public Task DeleteAppointmentAsync(int id);
     }
 }

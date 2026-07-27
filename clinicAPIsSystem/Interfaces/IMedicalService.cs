@@ -1,5 +1,5 @@
 using clinicAPIsSystem.ClinicDTOs.MedicalDTOs;
-namespace clinicAPIsSystem.Services.Interfaces
+namespace clinicAPIsSystem.Interfaces
 {
     public interface IMedicalService
     {

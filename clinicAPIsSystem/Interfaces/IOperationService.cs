@@ -1,6 +1,5 @@
 using clinicAPIsSystem.ClinicDTOs.OperationDtos;
-namespace clinicAPIsSystem.Services.Interfaces
-{
+namespace clinicAPIsSystem.Interfaces;
     public interface IOperationService
     {
         // Create

@@ -1,6 +1,6 @@
 using clinicAPIsSystem.ClinicDTOs.QualificationDTOs;
 using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.MedicalStaffDTOs;
-namespace clinicAPIsSystem.Services.Interfaces
+namespace clinicAPIsSystem.Interfaces
 {
     public interface IQualificationService
     {

@@ -1,5 +1,5 @@
 using clinicAPIsSystem.ClinicDTOs.PrescriptionDTOs; 
-namespace clinicAPIsSystem.Services.Interfaces
+namespace clinicAPIsSystem.Interfaces
 {
     public interface IPrescriptionService
     {

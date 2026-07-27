@@ -1,6 +1,6 @@
 using clinicAPIsSystem.ClinicDTOs.SpecializationDTOs;
 using clinicAPIsSystem.ClinicDTOs.UserDTOs.MedicalStaffDTOs.DoctorDTOs; 
-namespace clinicAPIsSystem.Services.Interfaces
+namespace clinicAPIsSystem.Interfaces
 {
     public interface ISpecializationService
     {
