@@ -1,10 +1,13 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿using clinicAPIsSystem.ClinicDTOs.UserDTOs.PatientDTOs;
 using clinicAPIsSystem.Interfaces;
 using clinicAPIsSystem.Models;
+using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace clinicAPIsSystem.Services
 {
@@ -40,7 +43,11 @@ namespace clinicAPIsSystem.Services
             if (!result.Succeeded)
                 throw new UnauthorizedAccessException("Invalid email or password.");
 
-            return await GenerateJwtTokenAsync(user);
+            string token = await GenerateJwtTokenAsync(user);
+            if (token == null)
+                throw new UnauthorizedAccessException("Failed to Access account , try again later.");
+
+            return token;
         }
         public async Task<string> GenerateJwtTokenAsync(ApplicationUser user)
         {
@@ -83,6 +90,43 @@ namespace clinicAPIsSystem.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task RegisterAsUserAsync(CreatePatientDto dto)
+        {
+            if (await _userManager.Users.AnyAsync(u => u.Email == dto.Email))
+                throw new InvalidOperationException("User with this email already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.PhoneNumber == dto.PhoneNumber))
+                throw new InvalidOperationException("User with this phone number already exists.");
+
+            if (await _userManager.Users.AnyAsync(u => u.UserName == dto.UserName))
+                throw new InvalidOperationException("User with this username already exists.");
+
+            var patient = new Patient
+            {
+                UserName = dto.UserName,
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                PhoneNumber = dto.PhoneNumber
+            };
+
+            var createResult = await _userManager.CreateAsync(patient, dto.Password);
+
+            if (!createResult.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    string.Join(", ", createResult.Errors.Select(e => e.Description)));
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(patient, nameof(Roles.Patient));
+
+            if (!roleResult.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    "Could not assign role to the user: " + string.Join(", ", roleResult.Errors.Select(e => e.Description)));
+            }
         }
     }
 }
