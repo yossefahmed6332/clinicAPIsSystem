@@ -1,12 +1,18 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Interfaces.IUserService;
+using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using clinicAPIsSystem.Services.UserService.MedicalStaffService;
+using clinicAPIsSystem.Services.UserService.NonMedicalStaffService; 
 using System.Text;
+using clinicAPIsSystem.Interfaces.IUserService.INonMedicalStaffService;
+using clinicAPIsSystem.Interfaces;
+using clinicAPIsSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +93,20 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped < IPatientService, PatientService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<INurseServices,NurseService>();
+builder.Services.AddScoped<IAccountantService,AccountantService>();
+builder.Services.AddScoped<ICleanerService, CleanerService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>(); 
+builder.Services.AddScoped<IAuthServices,AuthService>();
+builder.Services.AddScoped<IMedicalService, MedicalService>();
+builder.Services.AddScoped<IOperationService,OperationService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
+builder.Services.AddScoped<IQualificationService,QualificationService>();
+builder.Services.AddScoped<ISpecializationService,SpecializationService>();
+
+
 
 #endregion
 
