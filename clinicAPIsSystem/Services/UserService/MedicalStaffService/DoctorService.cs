@@ -12,9 +12,9 @@ namespace clinicAPIsSystem.Services.UserService.MedicalStaffService
 {
     public class DoctorService : IDoctorService
     {
-        private readonly UserManager<Doctor> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ClinicDbContext _context;
-        public DoctorService(UserManager<Doctor> userManager, ClinicDbContext context
+        public DoctorService(UserManager<ApplicationUser> userManager, ClinicDbContext context
             )
         {
             _userManager = userManager;

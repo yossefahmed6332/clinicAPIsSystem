@@ -61,8 +61,12 @@ namespace clinicAPIsSystem.Services.UserService
             }
 
             // Add Patient Role
-            await _userManager.AddToRoleAsync(patient, Roles.Patient.ToString());
-            await _userManager.AddToRoleAsync(patient, Roles.User.ToString());
+            result = await _userManager.AddToRoleAsync(patient, Roles.Patient.ToString());
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException("Failed to assign patient role.");
+            }
+           
 
         }
     }

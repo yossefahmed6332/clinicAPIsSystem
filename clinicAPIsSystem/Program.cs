@@ -1,18 +1,19 @@
 using clinicAPIsSystem.Data;
+using clinicAPIsSystem.Data.Seeder;
+using clinicAPIsSystem.Interfaces;
 using clinicAPIsSystem.Interfaces.IUserService;
 using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
+using clinicAPIsSystem.Interfaces.IUserService.INonMedicalStaffService;
 using clinicAPIsSystem.Models;
+using clinicAPIsSystem.Services;
 using clinicAPIsSystem.Services.UserService;
+using clinicAPIsSystem.Services.UserService.MedicalStaffService;
+using clinicAPIsSystem.Services.UserService.NonMedicalStaffService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using clinicAPIsSystem.Services.UserService.MedicalStaffService;
-using clinicAPIsSystem.Services.UserService.NonMedicalStaffService; 
 using System.Text;
-using clinicAPIsSystem.Interfaces.IUserService.INonMedicalStaffService;
-using clinicAPIsSystem.Interfaces;
-using clinicAPIsSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,14 +50,24 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 
 #endregion
 
+#region JWT Key Validation
+
+var jwtKey = builder.Configuration["JWT:Key"];
+if (string.IsNullOrWhiteSpace(jwtKey))
+{
+    throw new InvalidOperationException("JWT:Key is missing from configuration. Please set it in appsettings.json or environment variables.");
+}
+
+#endregion
+
 #region Authentication (JWT)
 
 builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -73,7 +84,7 @@ builder.Services.AddAuthentication(options =>
 
             // Secret Key
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)
+                Encoding.UTF8.GetBytes(jwtKey)
             ),
 
             // Remove default 5-minute tolerance
@@ -89,24 +100,41 @@ builder.Services.AddAuthorization();
 
 #endregion
 
+#region CORS
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+                builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+                ?? new[] { "http://localhost:3000" }
+              )
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+#endregion
+
 #region Dependency Injection
 
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped < IPatientService, PatientService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
-builder.Services.AddScoped<INurseServices,NurseService>();
-builder.Services.AddScoped<IAccountantService,AccountantService>();
+builder.Services.AddScoped<INurseServices, NurseService>();
+builder.Services.AddScoped<IAccountantService, AccountantService>();
 builder.Services.AddScoped<ICleanerService, CleanerService>();
-builder.Services.AddScoped<IAppointmentService, AppointmentService>(); 
-builder.Services.AddScoped<IAuthServices,AuthService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IAuthServices, AuthService>();
 builder.Services.AddScoped<IMedicalService, MedicalService>();
-builder.Services.AddScoped<IOperationService,OperationService>();
+builder.Services.AddScoped<IOperationService, OperationService>();
 builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
-builder.Services.AddScoped<IQualificationService,QualificationService>();
-builder.Services.AddScoped<ISpecializationService,SpecializationService>();
-
-
+builder.Services.AddScoped<IQualificationService, QualificationService>();
+builder.Services.AddScoped<ISpecializationService, SpecializationService>();
+builder.Services.AddScoped<RoleSeeder>();
+builder.Services.AddScoped<AdminSeeder>();
 
 #endregion
 
@@ -118,6 +146,21 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+#region Seeder
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var roleSeeder = services.GetRequiredService<RoleSeeder>();
+    var adminSeeder = services.GetRequiredService<AdminSeeder>();
+
+    await roleSeeder.SeedAsync();
+    await adminSeeder.SeedAsync();
+}
+
+#endregion
+
 #region Middleware
 
 if (app.Environment.IsDevelopment())
@@ -126,6 +169,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 
