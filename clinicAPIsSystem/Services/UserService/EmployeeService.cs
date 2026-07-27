@@ -167,7 +167,7 @@ namespace clinicAPIsSystem.Services.UserService
             return dtos.Result;
         
     }
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesByStartShiftAsync(TimeOnly shiftStart)
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesByShiftStartAsync(TimeOnly shiftStart)
         {
             var employee = await _clinicDbContext.Set<Employee>()
             .Where(e => e.ShiftStart == shiftStart)

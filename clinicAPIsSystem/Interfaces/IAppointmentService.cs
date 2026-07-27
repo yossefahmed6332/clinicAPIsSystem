@@ -14,7 +14,7 @@ namespace clinicAPIsSystem.Interfaces
         public Task<IEnumerable<AppointmentDto>> GetAppointmentsByPatientIdAsync(int patientId);
         public Task <IEnumerable<AppointmentDto>> GetAppointmentsByPatientAndDoctorAsync(int patientId, int doctorId);
         public Task<IEnumerable<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status);
-
+        
         // Update
         public Task UpdateAppointmentAsync(int id, UpdateAppointmentDto appointment);
         public Task UpdateAppointmentStatusAsync(int appointmentId, AppointmentStatus status);

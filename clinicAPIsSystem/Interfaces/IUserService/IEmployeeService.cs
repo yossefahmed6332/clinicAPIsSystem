@@ -9,7 +9,7 @@ namespace clinicAPIsSystem.Interfaces.IUserService
         //methods for getting employee information 
         public Task<IEnumerable<EmployeeDto>> GetEmployeesBySalaryAsync(decimal salary); 
         public Task<IEnumerable<EmployeeDto>> GetEmployeesByHoursWorkedAsync(int hoursWorked);
-        public Task<IEnumerable<EmployeeDto>> GetEmployeesByStartShiftAsync(TimeOnly shiftStart);
+        public Task<IEnumerable<EmployeeDto>> GetEmployeesByShiftStartAsync(TimeOnly shiftStart);
         public Task<IEnumerable<EmployeeDto>>  GetEmployeesByShiftEndAsync(TimeOnly shiftEnd);
 
         //method for updating employee Data 

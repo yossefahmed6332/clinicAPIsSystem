@@ -113,6 +113,27 @@ namespace clinicAPIsSystem.Services.UserService
             return userDto;
         }
 
+        public async Task<IEnumerable<ApplicationUserDto>> GetUserByRole(Roles role)
+        {
+            var usersInRole = await _userManager.GetUsersInRoleAsync(role.ToString());
+
+            var userDtos = usersInRole
+                .Select(user => new ApplicationUserDto
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserName = user.UserName!,
+                    Email = user.Email!,
+                    PhoneNumber = user.PhoneNumber!,
+                    Gender = user.Gender
+                })
+                .ToList();
+
+            return userDtos;
+        }
+
+
         //method for updating user information
         public async Task UpdateUserAsync(UpdateApplicationUserDto dto,int id)
         {
