@@ -76,37 +76,6 @@ namespace clinicAPIsSystem.Services.UserService.NonMedicalStaffService
         }
 
 
-        public async Task<AccountantDto> GetAccountantByIdAsync(int accountantId)
-        {
-            var accountant = await _clinicDbContext.TAccountants
-                .Where(a => a.Id == accountantId)
-                .Select(a => new AccountantDto
-                {
-                    Id = a.Id,
-                    FirstName = a.FirstName,
-                    LastName = a.LastName,
-                    UserName = a.UserName!,
-                    Email = a.Email!,
-                    PhoneNumber = a.PhoneNumber!,
-                    Gender = a.Gender,
-                    SalaryPerHour = a.SalaryPerHour,
-                    HoursWorked = a.HoursWorked,
-                    ShiftStart = a.ShiftStart,
-                    ShiftEnd = a.ShiftEnd,
-                    YearsOfExperience = a.YearsOfExperience,
-                    LicenseNumber = a.LicenseNumber
-                })
-                .FirstOrDefaultAsync();
-            if (accountant == null)
-            {
-                throw new Exception("Accountant not found.");
-            }
-            return accountant;
-
-
-
-        }
-
         public async Task<AccountantDto> GetAccountantByLicenseAsync(string licenseNumber   )
         {
             var accountant = await _clinicDbContext.TAccountants
@@ -138,7 +107,35 @@ namespace clinicAPIsSystem.Services.UserService.NonMedicalStaffService
 
 
 
-        }
 
+        }
+        public async Task UpdateAccountantAsync(int id ,UpdateAccountantDto accountant) 
+        {
+            var user = await _clinicDbContext
+                .TAccountants
+                .Where(a => a.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new Exception("User not found"); 
+            }
+
+            user.Email= accountant.Email;
+            user.PhoneNumber= accountant.PhoneNumber;
+            user.FirstName= accountant.FirstName;
+            user.LastName= accountant.LastName;
+            user.UserName= accountant.UserName;
+            user.HoursWorked= accountant.HoursWorked;
+            user.SalaryPerHour= accountant.SalaryPerHour;
+            user.ShiftEnd= accountant.ShiftEnd;
+            user.ShiftStart= accountant.ShiftStart;
+            user.LicenseNumber= accountant.LicenseNumber;
+            user.YearsOfExperience= accountant.YearsOfExperience;
+
+            await _clinicDbContext.SaveChangesAsync(); 
+            
+
+        }
     }
 }
