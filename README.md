@@ -772,19 +772,6 @@ The following services are registered in `Program.cs`:
 
 ---
 
-## 🖼 Screenshots
-
-### Swagger UI
-> _Insert Screenshot Here_
-
-### Architecture Diagram
-> _Insert Screenshot Here_
-
-### Database Diagram
-> _Insert Screenshot Here_
-
----
-
 ## 🌟 Project Highlights
 
 - **Domain-rich modeling** — staff aren't a single generic "User" type; each role (Doctor, Nurse, Accountant, Cleaner, Receptionist, Admin) carries its own meaningful attributes.
@@ -793,16 +780,6 @@ The following services are registered in `Program.cs`:
 - **Security-first startup** — the app refuses to start without a JWT signing key configured, avoiding accidental deployment with insecure defaults.
 - **Self-documenting** — Swagger/OpenAPI is wired in out of the box for interactive exploration and client generation.
 - **Sensible defaults, explicit overrides** — CORS, connection strings, and JWT settings are all externalized to configuration rather than hardcoded.
-
----
-
-## 📄 License
-
-No license file is currently included in this repository. Until one is added, all rights are reserved by the project owner, and the code should not be assumed to be open for reuse or redistribution.
-
-> Consider adding an [OSI-approved license](https://choosealicense.com/) (e.g., MIT, Apache 2.0) if you intend for this project to be used or contributed to by others.
-
----
 
 ## 🤝 Contributing
 
