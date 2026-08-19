@@ -1,4 +1,4 @@
-﻿using clinicAPIsSystem.Models;
+﻿using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 
