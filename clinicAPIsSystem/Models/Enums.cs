@@ -16,7 +16,8 @@
         Receptionist,
         Cleaner,
         Accountant,
-        Patient
+        Patient,
+        Admin
     }
     public enum OperationType
     {

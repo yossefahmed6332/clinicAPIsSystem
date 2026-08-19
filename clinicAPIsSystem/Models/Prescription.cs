@@ -1,6 +1,5 @@
 ﻿using clinicAPIsSystem.Models.User;
 using clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff;
-using clinicAPIsSystem.Models.User.MedicalStaff;
 
 namespace clinicAPIsSystem.Models
 {
@@ -11,7 +10,7 @@ namespace clinicAPIsSystem.Models
         public string Dosage { get; set; } = null!; 
         public string Frequency { get; set; } = null!; 
         public string Duration { get; set; } = null!; 
-        public string? Instructions { get; set; } ;
+        public string? Instructions { get; set; } 
         public string Diagnosis { get; set; } = null!;
         public Doctor Doctor { get; set; } = null!; 
         public int DoctorId { get; set; } 

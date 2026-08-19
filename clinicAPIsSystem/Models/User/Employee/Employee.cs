@@ -2,10 +2,10 @@
 {
     public abstract class Employee:ApplicationUser
     {
-        protected decimal SalaryPerHour { get; set; }
-        protected int HoursWorked { get; set; }
-        protected TimeOnly ShiftStart { get; set; }
-        protected TimeOnly ShiftEnd { get; set; } 
+        public decimal SalaryPerHour { get;  set; }
+        public int HoursWorked { get; set; }
+        public TimeOnly ShiftStart { get; set; }
+        public TimeOnly ShiftEnd { get; set; } 
 
     }
 }

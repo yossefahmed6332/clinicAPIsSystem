@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Identity;
 
 namespace clinicAPIsSystem.Data.Seeder
 {
-    public class RoleSeeder
+    public class UserUserRoleeeder
     {
         private readonly RoleManager<IdentityRole<int>> _roleManager;
-        public RoleSeeder(RoleManager<IdentityRole<int>> roleManager)
+        public UserUserRoleeeder(RoleManager<IdentityRole<int>> roleManager)
         {
             _roleManager = roleManager;
         }
         public async Task SeedAsync()
         {
-            string[] roles =
+            string[] UserUserRole =
             {
-            Roles.Admin.ToString(),
-            Roles.Doctor.ToString(),
-            Roles.Nurse.ToString(),
-            Roles.Patient.ToString(),
-            Roles.Accountant.ToString(),
-            Roles.Receptionist.ToString(),
-            Roles.Cleaner.ToString()
+            UserRole.Admin.ToString(),
+            UserRole.Doctor.ToString(),
+            UserRole.Nurse.ToString(),
+            UserRole.Patient.ToString(),
+            UserRole.Accountant.ToString(),
+            UserRole.Receptionist.ToString(),
+            UserRole.Cleaner.ToString()
         };
 
-            foreach (var role in roles)
+            foreach (var role in UserUserRole)
             {
                 if (!await _roleManager.RoleExistsAsync(role))
                 {

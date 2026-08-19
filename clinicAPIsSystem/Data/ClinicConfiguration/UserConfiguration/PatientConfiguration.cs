@@ -7,8 +7,8 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            // Additional configuration for Patient entity can be added here if needed
             
+
             
         }
     }

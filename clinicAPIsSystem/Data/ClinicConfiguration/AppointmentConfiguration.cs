@@ -1,5 +1,4 @@
 ﻿using clinicAPIsSystem.Models;
-using clinicAPIsSystem.Models.User.MedicalStaff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
     

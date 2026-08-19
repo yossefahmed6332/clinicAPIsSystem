@@ -2,10 +2,11 @@
 {
     public abstract class Graduated:Employee
     {
-        protected string Degree { get; set; } = null!;
-        protected string University { get; set; } = null!; 
-        protected int YearsOfExperience { get; set; }
-        protected string License { get; set; }=null!;
+        public string Degree { get; set; } = null!;
+        public string University { get; set; } = null!; 
+        public int YearsOfExperience { get; set; }
+        public int GraduationYear { get; set; }
+        public string License { get; set; }=null!;
 
     }
 }
