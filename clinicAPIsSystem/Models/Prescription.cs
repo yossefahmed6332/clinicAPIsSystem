@@ -12,6 +12,7 @@ namespace clinicAPIsSystem.Models
         public string Duration { get; set; } = null!; 
         public string? Instructions { get; set; } 
         public string Diagnosis { get; set; } = null!;
+        public DateTime Date { get; set; }
         public Doctor Doctor { get; set; } = null!; 
         public int DoctorId { get; set; } 
         public Patient Patient { get; set; } = null!; 

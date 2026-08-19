@@ -3,7 +3,7 @@ using clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
 
 namespace clinicAPIsSystem.Models
 {
-    public class Operation
+    public class PaymentOperation
     {
         public int Id { get; set; } 
         public decimal Amount { get; set; } 

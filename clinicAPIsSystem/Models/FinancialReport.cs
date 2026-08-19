@@ -5,11 +5,10 @@ namespace clinicAPIsSystem.Models
     public class FinancialReport
     {
         public int Id { get; set; } 
-        public decimal MonthlyIncome { get; set; } 
-        public Accountant? Accountant { get; set; } 
-        public int? AccountantId { get; set; }
-        public Manager? Manager { get; set; } 
-        public int ? ManagerId { get; set; }
+        public decimal MonthlyExpenses { get; set; }
+        public decimal NetProfit { get; set; }
+        public decimal MonthlyRevenue { get; set; }
+
 
     }
 }

@@ -4,6 +4,6 @@ namespace clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff
 {
     public class Accountant:NonMedicalStaff
     {
-        public ICollection<FinancialReport> FinancialReports { get; set; } = new HashSet<FinancialReport>();
+        public ICollection<PaymentOperation> PaymentOperations { get; set; } = new HashSet<PaymentOperation>(); 
     }
 }

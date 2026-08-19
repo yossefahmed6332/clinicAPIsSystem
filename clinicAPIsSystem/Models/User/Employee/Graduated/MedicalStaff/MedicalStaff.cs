@@ -2,5 +2,7 @@
 {
     public abstract class MedicalStaff:Graduated
     {
+        public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
+
     }
 }

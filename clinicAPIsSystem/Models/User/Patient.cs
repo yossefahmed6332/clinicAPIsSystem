@@ -9,7 +9,7 @@
         public MedicalRecord MedicalRecord {  get;  set; } = new MedicalRecord();
         public int MedicalRecordId { get; set; } 
 
-        public ICollection<Operation> Operations { get; set; } = new HashSet<Operation>();
+        public ICollection<PaymentOperation> PaymentOperations { get; set; } = new HashSet<PaymentOperation>();
 
 
     }
