@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace clinicAPIsSystem.DTOs.UserDTO.ApplicationUserDto
+namespace clinicAPIsSystem.DTOs.UserDTO.ApplicationUserDTOs
 {
     public abstract class CreateApplicationUserDto
     {

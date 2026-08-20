@@ -1,8 +1,8 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTO.ApplicationUserDTOs; 
+
 namespace clinicAPIsSystem.DTOs.UserDTO.AdminDTO
 {
-    public class CreateAdminDto : CreateApplicationUserDto
+    public class AdminDto:ApplicationUserDto
     {
-
     }
 }
