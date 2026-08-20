@@ -20,7 +20,10 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
                 .HasMaxLength(100);
             builder.Property(a => a.PhoneNumber)
                 .IsRequired()
-                .HasMaxLength(15);
+                .HasMaxLength(30);
+            builder.Property(a=>a.UserName)
+                .IsRequired()
+                .HasMaxLength(50);
 
             // Set indexes 
             builder.HasIndex(a => a.Email)
