@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.UserDTO.ApplicationUserDTOs
 {
-    public abstract class UpdateApplicationUser
+    public abstract class UpdateApplicationUserDto
     {
         [Required, MaxLength(50)]
         public string FirstName { get; set; } = null!;
