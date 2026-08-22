@@ -14,8 +14,6 @@ namespace clinicAPIsSystem.Models
         public DateTime RecordedAt {  get; set; }
         public Nurse Nurse { get; set; } = null!;
         public int NurseId { get; set; } 
-        public Patient Patient { get; set; } = null!; 
-        public int PatientId { get; set; } 
         public MedicalRecord MedicalRecord { get; set; } = null!;
         public int MedicalRecordId { get;set; }
 
