@@ -2,11 +2,23 @@
 {
     public abstract class Graduated:Employee
     {
-        public string Degree { get; set; } = null!;
-        public string University { get; set; } = null!; 
-        public int YearsOfExperience { get; set; }
-        public int GraduationYear { get; set; }
-        public string License { get; set; }=null!;
+        public string Degree { get; protected set; } = null!;
+        public string University { get; protected set; } = null!; 
+        public int YearsOfExperience { get; protected set; }
+        public int GraduationYear { get; protected set; }
+        public string License { get; protected set; }=null!;
+
+        public Graduated(string firstName, string lastName, string userName, string email, decimal salaryPerHour, int hoursWorked, TimeOnly shiftStart, TimeOnly shiftEnd, string degree, string university, int yearsOfExperience, int graduationYear, string license) : base(firstName, lastName, userName, email, salaryPerHour, hoursWorked, shiftStart, shiftEnd)
+        {
+            Degree = degree;
+            University = university;
+            YearsOfExperience = yearsOfExperience;
+            GraduationYear = graduationYear;
+            License = license;
+        }
+        public Graduated()
+        {
+        }
 
     }
 }
