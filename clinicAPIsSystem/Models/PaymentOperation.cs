@@ -5,16 +5,30 @@ namespace clinicAPIsSystem.Models
 {
     public class PaymentOperation
     {
-        public int Id { get; set; } 
-        public decimal Amount { get; set; } 
-        public DateTime Date { get; set; }
-        public OperationType OperationType {  get; set; }
-        public OperationStatus Status { get; set; } 
-        public Patient? Patient { get; set; }
-        public int ? PatientId { get; set;  }
-        public Accountant ? Accountant { get; set; } 
-        public int? AccountantId { get; set; } 
-        public PaymentMethod PaymentMethod { get; set; } 
+        public int Id { get; private set; } 
+        public decimal Amount { get; private set; } 
+        public DateTime Date { get; private set; }
+        public OperationType OperationType {  get; private set; }
+        public OperationStatus Status { get; private set; } 
+        public Patient? Patient { get; private set; }
+        public int ? PatientId { get; private set;  }
+        public Accountant ? Accountant { get; private set; } 
+        public int? AccountantId { get; private set; } 
+        public PaymentMethod PaymentMethod { get; private set; }
+
+        public PaymentOperation(decimal amount, DateTime date, OperationType operationType, OperationStatus status, int? patientId, int? accountantId, PaymentMethod paymentMethod)
+        {
+            Amount = amount;
+            Date = date;
+            OperationType = operationType;
+            Status = status;
+            PatientId = patientId;
+            AccountantId = accountantId;
+            PaymentMethod = paymentMethod;
+        }
+        public PaymentOperation()
+        {
+        }
 
     }
 }

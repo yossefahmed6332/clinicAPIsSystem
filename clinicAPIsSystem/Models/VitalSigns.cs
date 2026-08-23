@@ -18,6 +18,21 @@ namespace clinicAPIsSystem.Models
         public MedicalRecord MedicalRecord { get; set; } = null!; 
         public int MedicalRecordId {  get; set; }
 
-       
+        public VitalSigns(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int medicalRecordId)
+        {
+            BloodPressureSystolic = bloodPressureSystolic;
+            BloodPressureDiastolic = bloodPressureDiastolic;
+            HeartRate = heartRate;
+            Temperature = temperature;
+            OxygenSaturation = oxygenSaturation;
+            RecordedAt = recordedAt;
+            NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
+        }
+        public VitalSigns()
+        {
+        }
+
+
     }
 }

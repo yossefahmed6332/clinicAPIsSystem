@@ -5,17 +5,29 @@ namespace clinicAPIsSystem.Models
 {
     public class Appointment
     {
-       public int Id { get; set; } 
-        public DateTime  StartDate { get; set; }
-        public DateTime EndDate { get; set; } 
-        public Patient Patient { get; set; } = null!; 
-        public int PatientId { get; set; }
-        public Nurse Nurse { get; set; } = null!; 
-        public int NurseId {  get; set; }
+       public int Id { get; private set; } 
+        public DateTime  StartDate { get; private set; }
+        public DateTime EndDate { get; private set; } 
+        public Patient? Patient { get; private set; } 
+        public int PatientId { get; private set; }
+        public Nurse? Nurse { get; private set; } 
+        public int NurseId {  get; private set; }
        
-        public Doctor Doctor { get; set; }=null!;
-        public int DoctorId { get; set; } 
-        public AppointmentStatus Status { get; set; } 
+        public Doctor? Doctor { get; private set; }
+        public int DoctorId { get; private set; } 
+        public AppointmentStatus Status { get; private set; } 
+        public Appointment(DateTime startDate, DateTime endDate, int patientId, int nurseId, int doctorId)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
+            PatientId = patientId;
+            NurseId = nurseId;
+            DoctorId = doctorId;
+            Status = AppointmentStatus.pending;
+        }
+        public Appointment()
+        {
+        }
 
 
     }

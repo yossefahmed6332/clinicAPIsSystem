@@ -5,17 +5,32 @@ namespace clinicAPIsSystem.Models
 {
     public class ExaminationResult
     {
-        public int Id { get; set; } 
-        public string TestType { get; set; } = null!; 
-        public string ResultValue { get; set; } = null!;
-        public string unit { get; set; } = null!; 
-        public string NormalRange { get; set; } = null!; 
-        public string Notes { get; set; }=null!;
-        public DateTime RecordedAt {  get; set; }
-        public Nurse Nurse { get; set; } = null!;
-        public int NurseId { get; set; } 
-        public MedicalRecord MedicalRecord { get; set; } = null!;
-        public int MedicalRecordId { get;set; }
+        public int Id { get; private set; } 
+        public string? TestType { get; private set; } 
+        public string? ResultValue { get; private set; } 
+        public string? unit { get; private set; } 
+        public string? NormalRange { get; private set; }
+        public string? Notes { get; private set; }
+        public DateTime RecordedAt {  get; private set; }
+        public Nurse? Nurse { get; private set; } 
+        public int NurseId { get; private set; } 
+        public MedicalRecord? MedicalRecord { get; private set; } 
+        public int MedicalRecordId { get;private set; }
+        public ExaminationResult(string testType, string resultValue, string unit, string normalRange, string notes, DateTime recordedAt, int nurseId, int medicalRecordId)
+        {
+            TestType = testType;
+            ResultValue = resultValue;
+            this.unit = unit;
+            NormalRange = normalRange;
+            Notes = notes;
+            RecordedAt = recordedAt;
+            NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
+        }   
+
+        public ExaminationResult()
+        {
+        }
 
     }
 }

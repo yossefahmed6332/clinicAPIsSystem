@@ -4,14 +4,25 @@ namespace clinicAPIsSystem.Models
 {
     public class MedicalRecord
     {
-        public int Id { get; set; } 
-        public decimal Height { get; set; }
-        public decimal Weight { get; set; } 
-        public string BloodType { get; set; } = null!; 
-        public Patient Patient { get; set; } = null!;
-        public int PatientId { get; set; }
-        public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
-        public ICollection<ExaminationResult> ExaminationResults { get; set; } = new HashSet<ExaminationResult>();
-        public ICollection<VitalSigns> VitalSigns { get; set; } = new HashSet<VitalSigns>();
+        public int Id { get; private set; } 
+        public decimal Height { get; private set; }
+        public decimal Weight { get; private set; } 
+        public string? BloodType { get; private set; } 
+        public Patient? Patient { get; private set; } 
+        public int PatientId { get; private set; }
+        public ICollection<Prescription> Prescriptions { get; private set; } = new HashSet<Prescription>();
+        public ICollection<ExaminationResult> ExaminationResults { get; private set; } = new HashSet<ExaminationResult>();
+        public ICollection<VitalSigns> VitalSigns { get; private set; } = new HashSet<VitalSigns>();
+
+        public MedicalRecord(decimal height, decimal weight, string bloodType, int patientId)
+        {
+            Height = height;
+            Weight = weight;
+            BloodType = bloodType;
+            PatientId = patientId;
+        }
+        public MedicalRecord()
+        {
+        }
     }
 }
