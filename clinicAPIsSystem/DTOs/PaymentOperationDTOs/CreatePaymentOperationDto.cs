@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using clinicAPIsSystem.Models;
 namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
 {
     public class CreatePaymentOperationDto

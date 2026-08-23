@@ -1,4 +1,5 @@
-﻿namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
+﻿using clinicAPIsSystem.Models;
+namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
 {
     public class PaymentOperationDto
     {

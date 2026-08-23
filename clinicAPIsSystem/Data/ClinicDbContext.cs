@@ -25,11 +25,18 @@ namespace clinicAPIsSystem.Data
         public virtual DbSet<Doctor> TDoctors { get; set; }
         public virtual DbSet<Nurse> TNurses { get; set; }
         public virtual DbSet<Accountant> TAccountants { get; set; }
+        public virtual DbSet<Receptionist> TReceptionists { get; set; }
+        public virtual DbSet<Manager> TManagers { get; set; }
         public virtual DbSet<Cleaner> TCleaners { get; set; }
          public virtual DbSet<Patient> TPatients { get; set; }
         public virtual DbSet<Prescription> TPrescriptions { get; set; }
         public virtual DbSet<Appointment> TAppointments { get; set; }
         public virtual DbSet<PaymentOperation> TPaymentOperations { get; set; }
+        public virtual DbSet<MedicalRecord> TMedicalRecords { get; set; }
+        public virtual DbSet<Admin> TAdmins { get; set; }
+        public virtual DbSet<FinancialReport> TFinancialReports { get; set; }
+        public virtual DbSet<ExaminationResult> TExaminationResults { get; set; }
+        public virtual DbSet<VitalSigns> TVitalSigns { get; set; }
 
 
     }

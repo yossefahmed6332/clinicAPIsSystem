@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using clinicAPIsSystem.Models;
 namespace clinicAPIsSystem.DTOs.AppointmentDTOs
 {
     public class CreateAppointmentDto

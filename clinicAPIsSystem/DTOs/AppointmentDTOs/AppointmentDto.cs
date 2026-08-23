@@ -1,4 +1,4 @@
-﻿
+﻿using clinicAPIsSystem.Models;
 namespace clinicAPIsSystem.DTOs.AppointmentDTOs
 {
     public class AppointmentDto

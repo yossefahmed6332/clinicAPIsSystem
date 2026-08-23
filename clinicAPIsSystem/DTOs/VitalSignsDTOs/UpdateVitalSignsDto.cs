@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
 {
-    public class UpdateExaminationResultDto
+    public class UpdateVitalSignsDto
     {
 
         [Required, Range(0, 300)]
@@ -22,7 +22,7 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         [Required, Range(1, int.MaxValue)]
         public int PatientId { get; private set; }
 
-        public UpdateExaminationResultDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int patientId)
+        public UpdateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int patientId)
         {
             BloodPressureSystolic = bloodPressureSystolic;
             BloodPressureDiastolic = bloodPressureDiastolic;
