@@ -7,9 +7,13 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            
+            // Set properties
+            builder.Property(p => p.MedicalRecordId).IsRequired();
+            //set indexes
+            builder.HasIndex(p => p.MedicalRecordId).IsUnique();
 
-            
+
+
         }
     }
 }

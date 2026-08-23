@@ -23,7 +23,7 @@ namespace clinicAPIsSystem.Models
             PatientId = patientId;
             NurseId = nurseId;
             DoctorId = doctorId;
-            Status = AppointmentStatus.pending;
+            Status = AppointmentStatus.Pending;
         }
         public Appointment()
         {
