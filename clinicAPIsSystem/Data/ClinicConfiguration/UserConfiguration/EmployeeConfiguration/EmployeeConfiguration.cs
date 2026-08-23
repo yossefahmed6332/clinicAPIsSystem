@@ -8,14 +8,14 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeCo
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
             //set properties 
-            builder.Property(a => a.SalaryPerHour).IsRequired(); 
+            builder.Property(a => a.SalaryPerHour).IsRequired();
             builder.Property(a => a.HoursWorked).IsRequired();
             builder.Property(a => a.ShiftStart).IsRequired().HasColumnType("DateTime2");
             builder.Property(a => a.ShiftEnd).IsRequired().HasColumnType("DateTime2");
 
-           
+
 
 
         }
-            }
-        } 
+    }
+}

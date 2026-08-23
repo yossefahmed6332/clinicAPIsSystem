@@ -14,6 +14,6 @@
             ShiftStart = shiftStart;
             ShiftEnd = shiftEnd;
         }
-    {
+    
     }
 }

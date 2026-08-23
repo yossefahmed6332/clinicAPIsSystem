@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace clinicAPIsSystem.Data.Seeder
 {
-    public class UserUserRoleeeder
+    public class RoleSeeder
     {
         private readonly RoleManager<IdentityRole<int>> _roleManager;
-        public UserUserRoleeeder(RoleManager<IdentityRole<int>> roleManager)
+        public RoleSeeder(RoleManager<IdentityRole<int>> roleManager)
         {
             _roleManager = roleManager;
         }

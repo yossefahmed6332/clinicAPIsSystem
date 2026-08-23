@@ -1,6 +1,6 @@
-﻿namespace clinicAPIsSystem.DTOs.OperationDTOs
+﻿namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
 {
-    public class OperationDto
+    public class PaymentOperationDto
     {
         public int Id { get; private set; }
         public decimal Amount { get; private set; }
@@ -11,7 +11,7 @@
         public int? AccountantId { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
 
-        public OperationDto(int id, decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
+        public PaymentOperationDto(int id, decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
         {
             Id = id;
             Amount = amount;

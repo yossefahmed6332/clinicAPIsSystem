@@ -1,4 +1,5 @@
-﻿using clinicAPIsSystem.Models;
+﻿using clinicAPIsSystem.DTOs.PrescriptionDTOs;
+using clinicAPIsSystem.DTOs.AppointmentDTOs;
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.MedicalStaffDTO.DoctorDTO
 {

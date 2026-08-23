@@ -1,14 +1,6 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Data.Seeder;
-using clinicAPIsSystem.Interfaces;
-using clinicAPIsSystem.Interfaces.IUserService;
-using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
-using clinicAPIsSystem.Interfaces.IUserService.INonMedicalStaffService;
-using clinicAPIsSystem.Models;
-using clinicAPIsSystem.Services;
-using clinicAPIsSystem.Services.UserService;
-using clinicAPIsSystem.Services.UserService.MedicalStaffService;
-using clinicAPIsSystem.Services.UserService.NonMedicalStaffService;
+using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -118,26 +110,7 @@ builder.Services.AddCors(options =>
 
 #endregion
 
-#region Dependency Injection
 
-builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IPatientService, PatientService>();
-builder.Services.AddScoped<IDoctorService, DoctorService>();
-builder.Services.AddScoped<INurseServices, NurseService>();
-builder.Services.AddScoped<IAccountantService, AccountantService>();
-builder.Services.AddScoped<ICleanerService, CleanerService>();
-builder.Services.AddScoped<IAppointmentService, AppointmentService>();
-builder.Services.AddScoped<IAuthServices, AuthService>();
-builder.Services.AddScoped<IMedicalService, MedicalService>();
-builder.Services.AddScoped<IOperationService, OperationService>();
-builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
-builder.Services.AddScoped<IQualificationService, QualificationService>();
-builder.Services.AddScoped<ISpecializationService, SpecializationService>();
-builder.Services.AddScoped<RoleSeeder>();
-builder.Services.AddScoped<AdminSeeder>();
-
-#endregion
 
 #region OpenAPI
 builder.Services.AddEndpointsApiExplorer();

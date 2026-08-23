@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace clinicAPIsSystem.DTOs.OperationDTOs
+namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
 {
-    public class CreateOperationDto
+    public class CreatePaymentOperationDto
     {
         [Required, Range(0.01, double.MaxValue)]
         public decimal Amount { get; private set; }
@@ -19,7 +19,7 @@ namespace clinicAPIsSystem.DTOs.OperationDTOs
         [Required, EnumDataType(typeof(PaymentMethod))]
         public PaymentMethod PaymentMethod { get; private set; }
 
-        public CreateOperationDto(decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
+        public CreatePaymentOperationDto(decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
         {
             Amount = amount;
             Date = date;

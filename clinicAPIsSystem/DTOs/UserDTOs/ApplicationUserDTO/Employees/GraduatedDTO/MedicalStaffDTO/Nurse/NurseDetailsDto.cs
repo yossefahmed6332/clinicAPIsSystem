@@ -1,4 +1,6 @@
 ﻿
+using clinicAPIsSystem.DTOs.VitalSignsDTOs;
+using clinicAPIsSystem.DTOs.ExaminationResultDTOs; 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.MedicalStaffDTO.Nurse
 {
     public class NurseDetailsDto:MedicalStaffDto
