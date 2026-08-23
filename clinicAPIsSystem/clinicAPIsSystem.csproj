@@ -19,8 +19,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\VitalSignsDTOs\" />
-  </ItemGroup>
-
 </Project>
