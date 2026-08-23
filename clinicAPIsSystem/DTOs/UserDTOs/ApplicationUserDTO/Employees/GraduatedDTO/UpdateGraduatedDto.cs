@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO
 {
-    public class UpdateGraduatedDto : UpdateEmployeeDto
+    public abstract class UpdateGraduatedDto : UpdateEmployeeDto
     {
         [Required, MaxLength(100)]
         public string Degree { get; protected set; }

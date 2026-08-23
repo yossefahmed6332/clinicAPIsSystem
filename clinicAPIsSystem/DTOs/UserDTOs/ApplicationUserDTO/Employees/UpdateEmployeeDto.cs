@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees
 {
-    public class UpdateEmployeeDto : UpdateApplicationUserDto
+    public abstract class UpdateEmployeeDto : UpdateApplicationUserDto
     {
         [Required, Range(typeof(decimal), "0", "79228162514264337593543950335")]
         public decimal SalaryPerHour { get; protected set; }

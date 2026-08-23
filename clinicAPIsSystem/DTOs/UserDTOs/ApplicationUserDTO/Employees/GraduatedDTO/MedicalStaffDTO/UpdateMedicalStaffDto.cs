@@ -1,6 +1,6 @@
 ﻿namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.MedicalStaffDTO
 {
-    public class UpdateMedicalStaffDto:UpdateGraduatedDto
+    public abstract class UpdateMedicalStaffDto:UpdateGraduatedDto
     {
         public string Specialization { get; private set; }
         public UpdateMedicalStaffDto(string userName, string email, string firstName, string lastName, string phoneNumber, decimal salaryPerHour, int hoursWorked, TimeOnly shiftStart, TimeOnly shiftEnd, string degree, string university, string yearsOfExperience, int graduationYear, string licenseNumber, string specialization)

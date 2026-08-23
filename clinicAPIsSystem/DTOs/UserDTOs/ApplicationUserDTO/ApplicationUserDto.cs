@@ -1,6 +1,6 @@
 ﻿namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO
 {
-    public class ApplicationUserDto
+    public abstract class ApplicationUserDto
     {
         public int Id { get; protected set; } 
         public string UserName { get; protected set; }

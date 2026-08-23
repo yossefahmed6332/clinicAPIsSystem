@@ -1,7 +1,7 @@
 ﻿
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.MedicalStaffDTO
 {
-    public class CreateMedicalStaffDto:CreateGraduatedDto
+    public abstract class CreateMedicalStaffDto:CreateGraduatedDto
     {
         public string Specialization { get; private set; }
 

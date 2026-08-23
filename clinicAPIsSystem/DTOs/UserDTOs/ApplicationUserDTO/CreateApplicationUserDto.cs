@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO
 {
-    public class CreateApplicationUserDto
+    public abstract class CreateApplicationUserDto
     {
         [Required, MaxLength(50)]
         public string FirstName { get; protected set; }

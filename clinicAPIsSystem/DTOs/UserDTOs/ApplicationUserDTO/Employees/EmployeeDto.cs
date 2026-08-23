@@ -1,6 +1,6 @@
 ﻿namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees
 {
-    public class EmployeeDto: ApplicationUserDto
+    public abstract class EmployeeDto: ApplicationUserDto
     {
         public decimal SalaryPerHour { get; protected set; }
         public int HoursWorked { get; protected set; }

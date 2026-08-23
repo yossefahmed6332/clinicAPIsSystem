@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO
 {
-    public class GraduatedDto:EmployeeDto
+    public abstract class GraduatedDto:EmployeeDto
     {
         public string Degree { get; protected set; }
         public string University { get; protected set; }
