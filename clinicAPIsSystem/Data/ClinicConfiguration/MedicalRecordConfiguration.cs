@@ -11,7 +11,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.HasKey(m => m.Id);
             builder.Property(m=>m.Height).IsRequired();
             builder.Property(m => m.Weight).IsRequired();
-            builder.Property(m=>m.BloodType).IsRequired();
+            builder.Property(m=>m.BloodType).IsRequired().HasMaxLength(10);
             builder.Property(m=>m.PatientId).IsRequired();
 
             //set relationships
