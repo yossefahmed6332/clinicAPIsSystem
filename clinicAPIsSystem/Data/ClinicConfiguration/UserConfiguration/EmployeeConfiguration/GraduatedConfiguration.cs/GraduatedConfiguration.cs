@@ -1,7 +1,7 @@
 ﻿using clinicAPIsSystem.Models.User.Employee.Graduated;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration.cs
+namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration
 {
     public class GraduatedConfiguration:IEntityTypeConfiguration<Graduated>
     {

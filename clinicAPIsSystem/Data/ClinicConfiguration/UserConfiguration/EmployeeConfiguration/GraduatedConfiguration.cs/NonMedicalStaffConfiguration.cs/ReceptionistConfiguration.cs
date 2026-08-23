@@ -1,7 +1,7 @@
 ﻿using clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
 using Microsoft.EntityFrameworkCore;
 
-namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration.cs.NonMedicalStaffConfiguration.cs
+namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration.NonMedicalStaffConfiguration
 {
     public class ReceptionistConfiguration:IEntityTypeConfiguration<Receptionist>
     {

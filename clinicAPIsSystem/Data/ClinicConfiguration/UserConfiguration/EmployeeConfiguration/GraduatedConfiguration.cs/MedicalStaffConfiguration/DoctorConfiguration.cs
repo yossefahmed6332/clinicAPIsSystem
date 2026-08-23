@@ -1,7 +1,7 @@
 ﻿using clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff;
 using Microsoft.EntityFrameworkCore;
 
-namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration.cs.MedicalStaffConfiguration
+namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeConfiguration.GraduatedConfiguration.MedicalStaffConfiguration
 {
     public class DoctorConfiguration:IEntityTypeConfiguration<Doctor>
     {
