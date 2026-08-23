@@ -16,8 +16,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
                 .IsRequired()
                 .HasMaxLength(50);
             builder.Property(a => a.Email)
-                .IsRequired()
-                .HasMaxLength(100);
+                .IsRequired();
             builder.Property(a => a.PhoneNumber)
                 .IsRequired()
                 .HasMaxLength(30);
