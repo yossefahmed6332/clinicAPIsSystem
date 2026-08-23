@@ -18,7 +18,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.HasOne(m => m.Patient)
                 .WithOne(p => p.MedicalRecord)
                 .HasForeignKey<MedicalRecord>(m => m.PatientId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }
