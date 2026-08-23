@@ -1,7 +1,7 @@
 ﻿
 namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
 {
-    public class FinanialReportDTOs
+    public class FinancialReportDto
     {
         public int Id { get; private set; }
         public decimal MonthlyExpenses { get; private set; }
@@ -10,7 +10,7 @@ namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
         public DateTime Date { get; private set; } = DateTime.Now;
 
 
-        public FinanialReportDTOs(int id, decimal monthlyExpenses, decimal monthlyRevenue, decimal netProfit, DateTime date)
+        public FinancialReportDto(int id, decimal monthlyExpenses, decimal monthlyRevenue, decimal netProfit, DateTime date)
         {
             Id = id;
             MonthlyExpenses = monthlyExpenses;

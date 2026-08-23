@@ -24,7 +24,7 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         [Required]
         public int MedicalRecordId { get; private set; }
 
-        public CreateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int patientId, int medicalRecordId)
+        public CreateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId,  int medicalRecordId)
         {
             BloodPressureSystolic = bloodPressureSystolic;
             BloodPressureDiastolic = bloodPressureDiastolic;

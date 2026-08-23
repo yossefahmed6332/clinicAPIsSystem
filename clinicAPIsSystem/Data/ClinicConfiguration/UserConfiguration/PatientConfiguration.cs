@@ -11,6 +11,11 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
             builder.Property(p => p.MedicalRecordId).IsRequired();
             //set indexes
             builder.HasIndex(p => p.MedicalRecordId).IsUnique();
+            //set relationships
+            builder.HasOne(p => p.MedicalRecord)
+                .WithOne(m => m.Patient)
+                .HasForeignKey<Patient>(p => p.MedicalRecordId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 
