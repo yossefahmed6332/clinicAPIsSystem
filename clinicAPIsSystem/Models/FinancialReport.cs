@@ -8,13 +8,15 @@ namespace clinicAPIsSystem.Models
         public decimal MonthlyExpenses { get; private set; }
         public decimal NetProfit { get; private set; }
         public decimal MonthlyRevenue { get; private set; }
+        public DateTime Date { get; private set; } 
 
         public FinancialReport() { }
-        public FinancialReport(decimal monthlyExpenses, decimal netProfit, decimal monthlyRevenue)
+        public FinancialReport(decimal monthlyExpenses, decimal netProfit, decimal monthlyRevenue, DateTime date)
         {
             MonthlyExpenses = monthlyExpenses;
             NetProfit = netProfit;
             MonthlyRevenue = monthlyRevenue;
+            Date = date;
         }
 
 
