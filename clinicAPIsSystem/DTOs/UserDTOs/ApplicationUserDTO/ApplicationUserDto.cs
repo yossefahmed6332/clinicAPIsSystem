@@ -2,12 +2,12 @@
 {
     public class ApplicationUserDto
     {
-        public int Id { get; private set; } 
-        public string UserName { get; private set; }
-        public string Email { get; private set; } 
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; } 
-        public string PhoneNumber { get; private set; }
+        public int Id { get; protected set; } 
+        public string UserName { get; protected set; }
+        public string Email { get; protected set; } 
+        public string FirstName { get; protected set; }
+        public string LastName { get; protected set; } 
+        public string PhoneNumber { get; protected set; }
 
 
         public ApplicationUserDto(int id, string userName, string email, string firstName, string lastName, string phoneNumber)

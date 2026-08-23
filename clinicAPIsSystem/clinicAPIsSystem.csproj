@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DTOs\UserDTOs\ApplicationUserDTO\Employees\EmployeeDto.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="DTOs\UserDTOs\ApplicationUserDTO\Employees\EmployeeDto.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.18" />

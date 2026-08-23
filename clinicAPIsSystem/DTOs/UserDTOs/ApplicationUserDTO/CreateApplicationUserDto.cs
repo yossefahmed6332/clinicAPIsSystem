@@ -5,15 +5,15 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO
     public class CreateApplicationUserDto
     {
         [Required, MaxLength(50)]
-        public string FirstName { get; private set; }
+        public string FirstName { get; protected set; }
         [Required, MaxLength(50)]
-        public string LastName { get; private set; }
+        public string LastName { get; protected set; }
         [Required, EmailAddress]
-        public string Email { get; private set; }
+        public string Email { get; protected set; }
         [Required, MaxLength(50)]
-        public string UserName { get; private set; }
+        public string UserName { get; protected set; }
         [Required, MaxLength(30)]
-        public string PhoneNumber { get; private set; } 
+        public string PhoneNumber { get; protected set; } 
         public CreateApplicationUserDto(string firstName, string lastName, string email, string userName, string phoneNumber)
         {
             FirstName = firstName;
