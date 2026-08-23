@@ -8,7 +8,7 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedD
         public string Degree { get; protected set; }
         [Required,MaxLength(100)]
         public string University { get; protected set; }
-        [Required,MaxLength(100)]
+        [Required]
         public int YearsOfExperience { get; protected set; }
         [Required,Range(1900,2600)]
         public int GraduationYear { get; protected set; }

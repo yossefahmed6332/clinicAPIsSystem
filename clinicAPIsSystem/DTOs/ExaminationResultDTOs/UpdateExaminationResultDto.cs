@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
 {
@@ -20,9 +21,10 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
         public int PatientId { get; private set; }
         [Required, Range(1, int.MaxValue)]
         public int NurseId { get; private set; }
+        [Required,Range(1,int.MaxValue)]
+        public int MedicalRecordId { get; private set; } 
 
-
-        public UpdateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId)
+        public UpdateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId,int medicalRecordId)
         {
             TestType = testType;
             ResultValue = resultValue;
@@ -32,6 +34,7 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
             RecordedAt = recordedAt;
             PatientId = patientId;
             NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
         }
     }
 }

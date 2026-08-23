@@ -20,9 +20,10 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
         public int PatientId { get; private set; }
         [Required, Range(1, int.MaxValue)]
         public int NurseId { get; private set; }
+        [Required, Range(1, int.MaxValue)]
+        public int MedicalRecordId { get; private set; }
 
-
-        public CreateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId)
+        public CreateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId, int medicalRecordId)
         {
             TestType = testType;
             ResultValue = resultValue;

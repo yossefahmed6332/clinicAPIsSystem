@@ -10,7 +10,7 @@ namespace clinicAPIsSystem.DTOs.AppointmentDTOs
         public int NurseId { get; private set; }
         public int DoctorId { get; private set; }
         public AppointmentStatus Status { get; private set; } 
-        public AppointmentDto(int id, DateTime startDate, DateTime endDate, int patientId, int nurseId, int doctorId)
+        public AppointmentDto(int id, DateTime startDate, DateTime endDate, int patientId, int nurseId, int doctorId,AppointmentStatus status)
         {
             Id = id;
             StartDate = startDate;
@@ -18,7 +18,7 @@ namespace clinicAPIsSystem.DTOs.AppointmentDTOs
             PatientId = patientId;
             NurseId = nurseId;
             DoctorId = doctorId;
-            Status = AppointmentStatus.pending;
+            Status = status ;
         }
     }
 }

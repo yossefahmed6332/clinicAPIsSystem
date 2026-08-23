@@ -21,8 +21,10 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         public int NurseId { get; private set; }
         [Required, Range(1, int.MaxValue)]
         public int PatientId { get; private set; }
+        [Required, Range(1, int.MaxValue)]
+        public int MedicalRecordId { get; private set; }
 
-        public UpdateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int patientId)
+        public UpdateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int patientId, int medicalRecordId                )
         {
             BloodPressureSystolic = bloodPressureSystolic;
             BloodPressureDiastolic = bloodPressureDiastolic;
@@ -32,6 +34,7 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
             RecordedAt = recordedAt;
             NurseId = nurseId;
             PatientId = patientId;
+            MedicalRecordId = medicalRecordId;
         }
 
 
