@@ -8,6 +8,5 @@
         }
         public Doctor() { }
         public ICollection<Prescription> Prescriptions { get; private set; } = new HashSet<Prescription>();
-
     }
 }

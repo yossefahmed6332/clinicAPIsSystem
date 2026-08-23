@@ -29,7 +29,7 @@ namespace clinicAPIsSystem.Data
          public virtual DbSet<Patient> TPatients { get; set; }
         public virtual DbSet<Prescription> TPrescriptions { get; set; }
         public virtual DbSet<Appointment> TAppointments { get; set; }
-        public virtual DbSet<Operation> TOperations { get; set; }
+        public virtual DbSet<PaymentOperation> TPaymentOperations { get; set; }
 
 
     }

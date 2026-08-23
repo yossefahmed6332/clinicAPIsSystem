@@ -15,13 +15,10 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.Property(e => e.NormalRange).IsRequired().HasMaxLength(100);
             builder.Property(e => e.RecordedAt).IsRequired().HasColumnType("DateTime2");
             builder.Property(e=>e.Notes).HasMaxLength(1000).IsRequired();
-            builder.Property(e => e.PatientId).IsRequired();
             builder.Property(e => e.NurseId).IsRequired();
             builder.Property(e=>e.MedicalRecordId).IsRequired();
             //set relationships 
-            builder.HasOne(e => e.Patient)
-                .WithMany(e=> e.ExaminationResults)
-                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasOne(e => e.Nurse)
                 .WithMany(e => e.ExaminationResults)
                 .OnDelete(DeleteBehavior.Restrict);

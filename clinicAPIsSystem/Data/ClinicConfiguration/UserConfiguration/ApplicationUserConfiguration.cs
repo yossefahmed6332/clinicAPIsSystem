@@ -12,7 +12,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
             builder.Property(a=>a.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
-            builder.Property(a => a.SecondName)
+            builder.Property(a => a.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
             builder.Property(a => a.Email)

@@ -17,7 +17,6 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.Property(v => v.OxygenSaturation).IsRequired();
             builder.Property(v => v.RecordedAt).IsRequired().HasColumnType("DateTime2");
             builder.Property(v => v.NurseId).IsRequired();
-            builder.Property(v => v.PatientId).IsRequired();
             builder.Property(v => v.MedicalRecordId).IsRequired();
 
 
@@ -26,10 +25,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
                 .WithMany(n => n.VitalSigns)
                 .HasForeignKey(v => v.NurseId)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(v => v.Patient)
-                .WithMany(p => p.VitalSigns)
-                .HasForeignKey(v => v.PatientId)
-                .OnDelete(DeleteBehavior.Cascade);
+                
             builder.HasOne(v => v.MedicalRecord)
                 .WithMany(m => m.VitalSigns)
                 .HasForeignKey(v => v.MedicalRecordId)

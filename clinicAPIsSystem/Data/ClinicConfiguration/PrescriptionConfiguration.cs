@@ -18,7 +18,6 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.Property(p=>p.Diagnosis).IsRequired().HasMaxLength(100);
             builder.Property(p=>p.Date).IsRequired().HasColumnType("DateTime2");
             builder.Property(p => p.DoctorId).IsRequired();
-            builder.Property(p => p.PatientId).IsRequired();
             builder.Property(p => p.MedicalRecordId).IsRequired();
 
             //set relationships
@@ -26,10 +25,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
                 .WithMany(d => d.Prescriptions)
                 .HasForeignKey(p => p.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(p => p.Patient)
-                .WithMany(p => p.Prescriptions)
-                .HasForeignKey(p => p.PatientId)
-                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasOne(p => p.MedicalRecord)
                 .WithMany(m => m.Prescriptions)
                 .HasForeignKey(p => p.MedicalRecordId)
