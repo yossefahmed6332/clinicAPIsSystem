@@ -18,13 +18,11 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
         [Required]
         public DateTime RecordedAt { get; private set; }
         [Required, Range(1, int.MaxValue)]
-        public int PatientId { get; private set; }
-        [Required, Range(1, int.MaxValue)]
         public int NurseId { get; private set; }
         [Required,Range(1,int.MaxValue)]
         public int MedicalRecordId { get; private set; } 
 
-        public UpdateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId,int medicalRecordId)
+        public UpdateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt,  int nurseId,int medicalRecordId)
         {
             TestType = testType;
             ResultValue = resultValue;
@@ -32,7 +30,6 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
             NormalRange = normalRange;
             Note = note;
             RecordedAt = recordedAt;
-            PatientId = patientId;
             NurseId = nurseId;
             MedicalRecordId = medicalRecordId;
         }

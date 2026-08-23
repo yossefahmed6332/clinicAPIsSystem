@@ -9,10 +9,10 @@
         public string NormalRange { get; private set; }
         public string Note { get; private set; }
         public DateTime RecordedAt { get; private set; } 
-        public int PatientId { get; private set; }
         public int NurseId { get; private set; }
+        public int MedicalRecordId { get; private set; }
 
-        public ExaminationResultDto(int id, string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt, int patientId, int nurseId)
+        public ExaminationResultDto(int id, string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt,  int nurseId, int medicalRecordId)
         {
             Id = id;
             TestType = testType;
@@ -21,7 +21,6 @@
             NormalRange = normalRange;
             Note = note;
             RecordedAt = recordedAt;
-            PatientId = patientId;
             NurseId = nurseId;
         }
 

@@ -20,8 +20,7 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         public DateTime RecordedAt { get; private set; }
         [Required, Range(1, int.MaxValue)]
         public int NurseId { get; private  set; }
-        [Required, Range(1, int.MaxValue)]
-        public int PatientId { get; private set; }
+
         [Required]
         public int MedicalRecordId { get; private set; }
 
@@ -34,7 +33,6 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
             OxygenSaturation = oxygenSaturation;
             RecordedAt = recordedAt;
             NurseId = nurseId;
-            PatientId = patientId;
             MedicalRecordId = medicalRecordId;
         }
 

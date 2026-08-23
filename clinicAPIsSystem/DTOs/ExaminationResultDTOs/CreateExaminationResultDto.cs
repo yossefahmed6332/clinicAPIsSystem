@@ -17,8 +17,6 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
         [Required]
         public DateTime RecordedAt { get; private set; }
         [Required, Range(1, int.MaxValue)]
-        public int PatientId { get; private set; }
-        [Required, Range(1, int.MaxValue)]
         public int NurseId { get; private set; }
         [Required, Range(1, int.MaxValue)]
         public int MedicalRecordId { get; private set; }
@@ -31,8 +29,8 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
             NormalRange = normalRange;
             Note = note;
             RecordedAt = recordedAt;
-            PatientId = patientId;
             NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
         }
     }
 }
