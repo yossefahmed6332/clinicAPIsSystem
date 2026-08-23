@@ -12,7 +12,8 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.Property(f => f.MonthlyExpenses).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(f => f.MonthlyRevenue).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(f => f.NetProfit).IsRequired().HasColumnType("decimal(18,2)");
-           
+            builder.Property(f => f.Date).IsRequired().HasColumnType("datetime2");
+
 
 
 
