@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3624" height="948" viewBox="0 0 3624 948" font-family="Helvetica, Arial, sans-serif">
+<rect x="0" y="0" width="3624" height="948" fill="#ffffff"/>
+<g>
+<rect x="20.0" y="20.0" width="527.6" height="182.0" fill="#ffffff" stroke="#314354" stroke-width="1"/>
+<rect x="20.0" y="20.0" width="527.6" height="26" fill="#647687" stroke="#314354" stroke-width="1"/>
+<text x="283.8" y="37.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IPatientRepository</text>
+<text x="30.0" y="63.0" fill="#000000" font-size="12">+ICreatePatient(patient:Patient) : void</text>
+<line x1="20.0" y1="72.0" x2="547.6" y2="72.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="89.0" fill="#000000" font-size="12">+IGetAllPatient() : List&lt;Patient&gt;</text>
+<line x1="20.0" y1="98.0" x2="547.6" y2="98.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="115.0" fill="#000000" font-size="12">+IGetPatient(id:int) : Patient</text>
+<line x1="20.0" y1="124.0" x2="547.6" y2="124.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="141.0" fill="#000000" font-size="12">+IGetPatientDetails(id: int) : { List&lt;Appointment&gt;, List&lt;PaymentOperation&gt; }</text>
+<line x1="20.0" y1="150.0" x2="547.6" y2="150.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="167.0" fill="#000000" font-size="12">+UpdatePatient(patient:Patient) : void</text>
+<line x1="20.0" y1="176.0" x2="547.6" y2="176.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="193.0" fill="#000000" font-size="12">+DeletePatient(id:int) : void</text>
+</g>
+<g>
+<rect x="597.6" y="20.0" width="260.0" height="156.0" fill="#ffffff" stroke="#314354" stroke-width="1"/>
+<rect x="597.6" y="20.0" width="260.0" height="26" fill="#647687" stroke="#314354" stroke-width="1"/>
+<text x="727.6" y="37.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IAdminRepository</text>
+<text x="607.6" y="63.0" fill="#000000" font-size="12">+ICreateAdmin(admin:Admin) : void</text>
+<line x1="597.6" y1="72.0" x2="857.6" y2="72.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="607.6" y="89.0" fill="#000000" font-size="12">+IGetAllAdmin() : List&lt;Admin&gt;</text>
+<line x1="597.6" y1="98.0" x2="857.6" y2="98.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="607.6" y="115.0" fill="#000000" font-size="12">+IGetAdmin(id:int) : Admin</text>
+<line x1="597.6" y1="124.0" x2="857.6" y2="124.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="607.6" y="141.0" fill="#000000" font-size="12">+IUpdateAdmin(admin:Admin) : void</text>
+<line x1="597.6" y1="150.0" x2="857.6" y2="150.0" stroke="#314354" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="607.6" y="167.0" fill="#000000" font-size="12">+DeletePatient(id:int) : void</text>
+</g>
+<g>
+<rect x="20.0" y="262.0" width="296.6" height="182.0" fill="#ffffff" stroke="#6F0000" stroke-width="1"/>
+<rect x="20.0" y="262.0" width="296.6" height="26" fill="#a20025" stroke="#6F0000" stroke-width="1"/>
+<text x="168.3" y="279.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">INurseRepository</text>
+<text x="30.0" y="305.0" fill="#000000" font-size="12">+ICreateNurse(nurse:Nurse) : void</text>
+<line x1="20.0" y1="314.0" x2="316.6" y2="314.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="331.0" fill="#000000" font-size="12">+IGetAllNurse() : List&lt;Nurse&gt;</text>
+<line x1="20.0" y1="340.0" x2="316.6" y2="340.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="357.0" fill="#000000" font-size="12">+IGetNurse(id:int) : Nurse</text>
+<line x1="20.0" y1="366.0" x2="316.6" y2="366.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="383.0" fill="#000000" font-size="12">+IGetNurseDetails(id: int) : NurseDetails</text>
+<line x1="20.0" y1="392.0" x2="316.6" y2="392.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="409.0" fill="#000000" font-size="12">+IUpdateNurse(nurse:Nurse) : void</text>
+<line x1="20.0" y1="418.0" x2="316.6" y2="418.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="435.0" fill="#000000" font-size="12">+IDeleteNurse(id:int) : void</text>
+</g>
+<g>
+<rect x="366.6" y="262.0" width="303.2" height="182.0" fill="#ffffff" stroke="#6F0000" stroke-width="1"/>
+<rect x="366.6" y="262.0" width="303.2" height="26" fill="#a20025" stroke="#6F0000" stroke-width="1"/>
+<text x="518.2" y="279.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IDoctorRepository</text>
+<text x="376.6" y="305.0" fill="#000000" font-size="12">+ICreateDoctor(doctor:Doctor) : void</text>
+<line x1="366.6" y1="314.0" x2="669.8" y2="314.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="376.6" y="331.0" fill="#000000" font-size="12">+IGetAllDoctor() : List&lt;Doctor&gt;</text>
+<line x1="366.6" y1="340.0" x2="669.8" y2="340.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="376.6" y="357.0" fill="#000000" font-size="12">+IGetDoctor(id:int) : Doctor</text>
+<line x1="366.6" y1="366.0" x2="669.8" y2="366.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="376.6" y="383.0" fill="#000000" font-size="12">+IGetDoctorDetails(id:int) : DoctorDetails</text>
+<line x1="366.6" y1="392.0" x2="669.8" y2="392.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="376.6" y="409.0" fill="#000000" font-size="12">+IUpdateDoctorDto(doctor:Doctor) : void</text>
+<line x1="366.6" y1="418.0" x2="669.8" y2="418.0" stroke="#6F0000" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="376.6" y="435.0" fill="#000000" font-size="12">+IDeleteDoctor(id:int) : void</text>
+</g>
+<g>
+<rect x="20.0" y="504.0" width="283.4" height="156.0" fill="#ffffff" stroke="#006EAF" stroke-width="1"/>
+<rect x="20.0" y="504.0" width="283.4" height="26" fill="#1ba1e2" stroke="#006EAF" stroke-width="1"/>
+<text x="161.7" y="521.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IManagerRepository</text>
+<text x="30.0" y="547.0" fill="#000000" font-size="12">+ICreateManager(manager:Manager) : void</text>
+<line x1="20.0" y1="556.0" x2="303.4" y2="556.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="573.0" fill="#000000" font-size="12">+IGetAllManager() : List&lt;Manager&gt;</text>
+<line x1="20.0" y1="582.0" x2="303.4" y2="582.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="599.0" fill="#000000" font-size="12">+IGetManager(id:int) : Manager</text>
+<line x1="20.0" y1="608.0" x2="303.4" y2="608.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="625.0" fill="#000000" font-size="12">+IUpdateManager(manager:Manager) : void</text>
+<line x1="20.0" y1="634.0" x2="303.4" y2="634.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="651.0" fill="#000000" font-size="12">+IDeleteManagerDto(id:int) : void</text>
+</g>
+<g>
+<rect x="353.4" y="504.0" width="382.4" height="156.0" fill="#ffffff" stroke="#006EAF" stroke-width="1"/>
+<rect x="353.4" y="504.0" width="382.4" height="26" fill="#1ba1e2" stroke="#006EAF" stroke-width="1"/>
+<text x="544.6" y="521.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IReceptionistRepository</text>
+<text x="363.4" y="547.0" fill="#000000" font-size="12">+ICreateReceptionist(receptionist:Receptionist) : void</text>
+<line x1="353.4" y1="556.0" x2="735.8" y2="556.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="363.4" y="573.0" fill="#000000" font-size="12">+IGetAllReceptionist() : List&lt;Receptionist&gt;</text>
+<line x1="353.4" y1="582.0" x2="735.8" y2="582.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="363.4" y="599.0" fill="#000000" font-size="12">+IGetReceptionist(id:int) : Receptionist</text>
+<line x1="353.4" y1="608.0" x2="735.8" y2="608.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="363.4" y="625.0" fill="#000000" font-size="12">+IUpdateReceptionist(receptionist:Receptionist) : void</text>
+<line x1="353.4" y1="634.0" x2="735.8" y2="634.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="363.4" y="651.0" fill="#000000" font-size="12">+IDeleteReceptionistDto(id:int) : void</text>
+</g>
+<g>
+<rect x="785.8" y="504.0" width="342.8" height="156.0" fill="#ffffff" stroke="#006EAF" stroke-width="1"/>
+<rect x="785.8" y="504.0" width="342.8" height="26" fill="#1ba1e2" stroke="#006EAF" stroke-width="1"/>
+<text x="957.2" y="521.0" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">IAccountantRepository</text>
+<text x="795.8" y="547.0" fill="#000000" font-size="12">+ICreateAccountant(accountant:Accountant) : void</text>
+<line x1="785.8" y1="556.0" x2="1128.6" y2="556.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="795.8" y="573.0" fill="#000000" font-size="12">+IGetAllAccountant() : List&lt;Accountant&gt;</text>
+<line x1="785.8" y1="582.0" x2="1128.6" y2="582.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="795.8" y="599.0" fill="#000000" font-size="12">+IGetAccountant(id:int) : Accountant</text>
+<line x1="785.8" y1="608.0" x2="1128.6" y2="608.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="795.8" y="625.0" fill="#000000" font-size="12">+IUpdateAccountant(accountant:Accountant) : void</text>
+<line x1="785.8" y1="634.0" x2="1128.6" y2="634.0" stroke="#006EAF" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="795.8" y="651.0" fill="#000000" font-size="12">+IDeleteAccountant(id:int) : void</text>
+</g>
+<g>
+<rect x="20.0" y="720.0" width="461.6" height="156.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="20.0" y="720.0" width="461.6" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="250.8" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IPaymentOperation</text>
+<text x="30.0" y="763.0" fill="#000000" font-size="12">+ICreatePaymentOperation(paymentOperation:PaymentOperation) : void</text>
+<line x1="20.0" y1="772.0" x2="481.6" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="789.0" fill="#000000" font-size="12">+IGetAllPaymentOperation() : List&lt;PaymentOperation&gt;</text>
+<line x1="20.0" y1="798.0" x2="481.6" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="815.0" fill="#000000" font-size="12">+IGetPaymentOperation(id:int) : PaymentOperation</text>
+<line x1="20.0" y1="824.0" x2="481.6" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="841.0" fill="#000000" font-size="12">+IUpdatePaymentOperation(paymentOperation:PaymentOperation) : void</text>
+<line x1="20.0" y1="850.0" x2="481.6" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="30.0" y="867.0" fill="#000000" font-size="12">+IDeletePaymentOperation(id:int) : void</text>
+</g>
+<g>
+<rect x="531.6" y="720.0" width="408.8" height="182.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="531.6" y="720.0" width="408.8" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="736.0" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IMedicalRecordRepository</text>
+<text x="541.6" y="763.0" fill="#000000" font-size="12">+ICreateMedicalRecord(medicalRecord:MedicalRecord) : void</text>
+<line x1="531.6" y1="772.0" x2="940.4" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="541.6" y="789.0" fill="#000000" font-size="12">+IGetAllMedicalRecord() : List&lt;MedicalRecord&gt;</text>
+<line x1="531.6" y1="798.0" x2="940.4" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="541.6" y="815.0" fill="#000000" font-size="12">+IGetMedicalRecord(id:int) : MedicalRecord</text>
+<line x1="531.6" y1="824.0" x2="940.4" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="541.6" y="841.0" fill="#000000" font-size="12">+IGetMedicalRecordByPatientId(patientId:int):MedicalRecord</text>
+<line x1="531.6" y1="850.0" x2="940.4" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="541.6" y="867.0" fill="#000000" font-size="12">+IUpdateMedicalRecord(medicalRecord:MedicalRecord) : void</text>
+<line x1="531.6" y1="876.0" x2="940.4" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="541.6" y="893.0" fill="#000000" font-size="12">+IDeleteMedicalRecord(id:int):void</text>
+</g>
+<g>
+<rect x="990.4" y="720.0" width="547.4" height="182.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="990.4" y="720.0" width="547.4" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="1264.1" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IAppointmentRepository</text>
+<text x="1000.4" y="763.0" fill="#000000" font-size="12">+ICreateAppointment(appointment:Appointment) : void</text>
+<line x1="990.4" y1="772.0" x2="1537.8" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1000.4" y="789.0" fill="#000000" font-size="12">+IGetAllAppointment() : List&lt;Appointment&gt;</text>
+<line x1="990.4" y1="798.0" x2="1537.8" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1000.4" y="815.0" fill="#000000" font-size="12">+IGetAppointment(id:int) : Appointment</text>
+<line x1="990.4" y1="824.0" x2="1537.8" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1000.4" y="841.0" fill="#000000" font-size="12">+IGetAppointmentByStatus(appointmentStatus:AppointmentStatus):List&lt;Appointment&gt;</text>
+<line x1="990.4" y1="850.0" x2="1537.8" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1000.4" y="867.0" fill="#000000" font-size="12">+IUpdateAppointment(appointment:Appointment) : void</text>
+<line x1="990.4" y1="876.0" x2="1537.8" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1000.4" y="893.0" fill="#000000" font-size="12">+IDeleteAppointment(id:int):void</text>
+</g>
+<g>
+<rect x="1587.8" y="720.0" width="441.8" height="208.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="1587.8" y="720.0" width="441.8" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="1808.7" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IPrescriptionRepository</text>
+<text x="1597.8" y="763.0" fill="#000000" font-size="12">+ICreatePrescription(prescription:Prescription) : void</text>
+<line x1="1587.8" y1="772.0" x2="2029.6" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="789.0" fill="#000000" font-size="12">+IGetAllPrescription() : List&lt;Prescription&gt;</text>
+<line x1="1587.8" y1="798.0" x2="2029.6" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="815.0" fill="#000000" font-size="12">+IGetPrescription(id:int) : Prescription</text>
+<line x1="1587.8" y1="824.0" x2="2029.6" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="841.0" fill="#000000" font-size="12">+IGetPrescriptionsByDoctorId(doctorId:int):List&lt;Prescriptions&gt;</text>
+<line x1="1587.8" y1="850.0" x2="2029.6" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="867.0" fill="#000000" font-size="12">+IGetPrescriptionByPatientId(patientId:int):List&lt;Prescriptions&gt;</text>
+<line x1="1587.8" y1="876.0" x2="2029.6" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="893.0" fill="#000000" font-size="12">+IUpdateAppointment(prescription:Prescription) : void</text>
+<line x1="1587.8" y1="902.0" x2="2029.6" y2="902.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="1597.8" y="919.0" fill="#000000" font-size="12">+IDeleteAppointment(id:int):void</text>
+</g>
+<g>
+<rect x="2079.6" y="720.0" width="408.8" height="208.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="2079.6" y="720.0" width="408.8" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="2284.0" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IVitalSignsRepository</text>
+<text x="2089.6" y="763.0" fill="#000000" font-size="12">+ICreateVitalSigns(vitalSigns:VitalSigns) : void</text>
+<line x1="2079.6" y1="772.0" x2="2488.4" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="789.0" fill="#000000" font-size="12">+IGetAllVitalSigns() : List&lt;VitalSigns&gt;</text>
+<line x1="2079.6" y1="798.0" x2="2488.4" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="815.0" fill="#000000" font-size="12">+IGetVitalSigns(id:int) : VitalSigns</text>
+<line x1="2079.6" y1="824.0" x2="2488.4" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="841.0" fill="#000000" font-size="12">+IGetVitalSignsByNurseId(nurseId:int):List&lt;VitalSigns&gt;</text>
+<line x1="2079.6" y1="850.0" x2="2488.4" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="867.0" fill="#000000" font-size="12">+IGetVitalSignsByPatientId(patientId:int):List&lt;VitalSigns&gt;</text>
+<line x1="2079.6" y1="876.0" x2="2488.4" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="893.0" fill="#000000" font-size="12">+IUpdatevitalSigns(vitalSigns:VitalSigns) : void</text>
+<line x1="2079.6" y1="902.0" x2="2488.4" y2="902.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2089.6" y="919.0" fill="#000000" font-size="12">+IDeleteVitalSigns(id:int):void</text>
+</g>
+<g>
+<rect x="2538.4" y="720.0" width="501.2" height="208.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="2538.4" y="720.0" width="501.2" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="2789.0" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IExaminationResultRepository</text>
+<text x="2548.4" y="763.0" fill="#000000" font-size="12">+ICreateExaminationResult(examinationResult:ExaminationResult) : void</text>
+<line x1="2538.4" y1="772.0" x2="3039.6" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="789.0" fill="#000000" font-size="12">+IGetAllExaminationResult() : List&lt;ExaminationResult&gt;</text>
+<line x1="2538.4" y1="798.0" x2="3039.6" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="815.0" fill="#000000" font-size="12">+IGetExaminationResult(id:int) : ExaminationResult</text>
+<line x1="2538.4" y1="824.0" x2="3039.6" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="841.0" fill="#000000" font-size="12">+IGetExaminationResultsByNurseId(nurseId:int):List&lt;ExaminationResult&gt;</text>
+<line x1="2538.4" y1="850.0" x2="3039.6" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="867.0" fill="#000000" font-size="12">+IGetExaminationResultByPatientId(patientId:int):List&lt;ExaminationResult&gt;</text>
+<line x1="2538.4" y1="876.0" x2="3039.6" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="893.0" fill="#000000" font-size="12">+IUpdateExaminationResult(examinationResult:ExaminationResult) : void</text>
+<line x1="2538.4" y1="902.0" x2="3039.6" y2="902.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="2548.4" y="919.0" fill="#000000" font-size="12">+IDeleteExaminationResult(id:int):void</text>
+</g>
+<g>
+<rect x="3089.6" y="720.0" width="514.4" height="182.0" fill="#ffffff" stroke="#b85450" stroke-width="1"/>
+<rect x="3089.6" y="720.0" width="514.4" height="26" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="3346.8" y="737.0" fill="#000000" font-size="12" font-weight="bold" text-anchor="middle">IFinancialReportRepository</text>
+<text x="3099.6" y="763.0" fill="#000000" font-size="12">+ICreateFinancialReport(financialReport:FinancialReport) : void</text>
+<line x1="3089.6" y1="772.0" x2="3604.0" y2="772.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="3099.6" y="789.0" fill="#000000" font-size="12">+IGetAllFinancialReport() : List&lt;FinancialReport&gt;</text>
+<line x1="3089.6" y1="798.0" x2="3604.0" y2="798.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="3099.6" y="815.0" fill="#000000" font-size="12">+IGetFinancialReport(id:int) : FinancialReport</text>
+<line x1="3089.6" y1="824.0" x2="3604.0" y2="824.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="3099.6" y="841.0" fill="#000000" font-size="12">+IGetFinancialReportByRange(min:decimal,max:decimal):List&lt;FinantialReport&gt;</text>
+<line x1="3089.6" y1="850.0" x2="3604.0" y2="850.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="3099.6" y="867.0" fill="#000000" font-size="12">+IUpdateFinancialReport(financialReport:FinancialReport) : void</text>
+<line x1="3089.6" y1="876.0" x2="3604.0" y2="876.0" stroke="#b85450" stroke-width="0.5" stroke-opacity="0.4"/>
+<text x="3099.6" y="893.0" fill="#000000" font-size="12">+IDeleteFinancialReport(id:int):void</text>
+</g>
+</svg>
