@@ -75,8 +75,14 @@ builder.Services.AddScoped<IVitalSignsRepository, VitalSignsRepository>();
 
 //dependency injection for services
 
+#endregion
 
-
+#region AutoMapper
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<UserMappingProfile>();
+});
+#endregion
 
 
 
