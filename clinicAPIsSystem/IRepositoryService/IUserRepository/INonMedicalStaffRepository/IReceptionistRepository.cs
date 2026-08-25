@@ -1,0 +1,13 @@
+﻿using clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
+
+namespace clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRepository
+{
+    public interface IReceptionistRepository
+    {
+        public Task<Receptionist> ICreateReceptionistAsync();
+        public Task<List<Receptionist>> IGetAllReceptionistsAsync();
+        public Task<Receptionist> IGetReceptionistAsync(int id);
+        public Task<Receptionist> IUpdateReceptionistAsync(Receptionist receptionist);
+        public Task IDeleteReceptionistAsync(int id);
+    }
+}

@@ -1,5 +1,6 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Data.Seeder;
+using clinicAPIsSystem.IRepositoryService.IUserRepository;
 using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 
 #endregion
 
+
+#region Dependency Injection
+builder.Services.AddScoped<IPatientRepository,PatientRepository>();
 
 #region JWT Key Validation
 
