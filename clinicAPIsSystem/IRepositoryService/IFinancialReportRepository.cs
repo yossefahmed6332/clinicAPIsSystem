@@ -9,7 +9,5 @@ namespace clinicAPIsSystem.IRepositoryService
         public Task<FinancialReport> GetFinancialReportAsync(int id);
         public Task<List<FinancialReport>> GetFinancialReportsByRangeAsync(decimal min, decimal max,DateTime startDate, DateTime endDate);
         public Task<List<FinancialReport>> GetFinancialReportsByDateRangeAsync(DateTime startDate, DateTime endDate);
-        public Task<FinancialReport> UpdateFinancialReportAsync(FinancialReport financialReport);
-        public Task DeleteFinancialReportAsync (FinancialReport financialReport);
     }
 }

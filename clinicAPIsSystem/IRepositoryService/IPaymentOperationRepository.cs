@@ -9,7 +9,5 @@ namespace clinicAPIsSystem.IRepositoryService
         public Task<PaymentOperation> GetPaymentOperationAsync(int id);
         public Task<List<PaymentOperation>> GetPaymentOperationsByPatientIdAsync(int patientId);
         public Task<List<PaymentOperation>> GetPaymentOperationsByAccountantIdAsync(int accountantId);
-        public Task<PaymentOperation> UpdatePaymentOperationAsync(PaymentOperation paymentOperation);
-        public Task DeletePaymentOperationAsync(PaymentOperation paymentOperation);
     }
 }

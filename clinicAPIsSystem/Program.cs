@@ -1,7 +1,16 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Data.Seeder;
+using clinicAPIsSystem.IRepositoryService;
 using clinicAPIsSystem.IRepositoryService.IUserRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IMedicalStaffRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRepository;
 using clinicAPIsSystem.Models.User;
+using clinicAPIsSystem.RepositoryService;
+using clinicAPIsSystem.RepositoryService.UserRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository.NonMedicalStaffRepository.clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +54,31 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 
 
 #region Dependency Injection
+//depency injection for repository services
+//depenct injection for users repositories
 builder.Services.AddScoped<IPatientRepository,PatientRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<ICleanerRepository,CleanerRepository>();
+builder.Services.AddScoped<IAccountantRepository, AccountantRepository>();
+builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
+builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
+builder.Services.AddScoped<INurseRepository, NurseRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+//depenct injection for other repositories
+builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IExaminationResultRepository, ExaminationResultRepository>();
+builder.Services.AddScoped<IFinancialReportRepository, FinancialReportRepository>();
+builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+builder.Services.AddScoped<IPaymentOperationRepository,PaymentOperationRepository>();
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+builder.Services.AddScoped<IVitalSignsRepository, VitalSignsRepository>();
+
+//dependency injection for services
+
+
+
+
+
 
 #region JWT Key Validation
 

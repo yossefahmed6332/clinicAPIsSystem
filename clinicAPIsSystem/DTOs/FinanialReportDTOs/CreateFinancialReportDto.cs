@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
 {
-    public class CreateFinantialReportDto
+    public class CreateFinancialReportDto
     {
         [Required, Range(0, double.MaxValue)]
         public decimal MonthlyExpenses { get; private set; }
@@ -13,7 +13,7 @@ namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
         [Required]
         public DateTime Date { get;private set; } = DateTime.Now;
 
-        public CreateFinantialReportDto(decimal monthlyExpenses, decimal monthlyRevenue, decimal netProfit, DateTime date)
+        public CreateFinancialReportDto(decimal monthlyExpenses, decimal monthlyRevenue, decimal netProfit, DateTime date)
         {
             MonthlyExpenses = monthlyExpenses;
             MonthlyRevenue = monthlyRevenue;

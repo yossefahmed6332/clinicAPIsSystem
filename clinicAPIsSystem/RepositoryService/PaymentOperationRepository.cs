@@ -39,17 +39,7 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TPaymentOperations.Where(po => po.AccountantId == accountantId).ToListAsync();
         }
 
-        public async Task<PaymentOperation> UpdatePaymentOperationAsync(PaymentOperation paymentOperation)
-        {
-            _context.TPaymentOperations.Update(paymentOperation);
-            await _context.SaveChangesAsync();
-            return paymentOperation;
-        }
 
-        public async Task DeletePaymentOperationAsync(PaymentOperation paymentOperation)
-        {
-            _context.TPaymentOperations.Remove(paymentOperation);
-            await _context.SaveChangesAsync();
-        }
+
     }
 }

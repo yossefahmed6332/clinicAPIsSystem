@@ -42,18 +42,7 @@ namespace clinicAPIsSystem.RepositoryService
                 .ToListAsync();
         }
 
-        public async Task<FinancialReport> UpdateFinancialReportAsync(FinancialReport financialReport)
-        {
-             _context.TFinancialReports.Update(financialReport);
-            await _context.SaveChangesAsync();
-            return financialReport;
-        }
 
-        public async Task DeleteFinancialReportAsync(FinancialReport financialReport)
-        {
-            _context.TFinancialReports.Remove(financialReport);
-            await _context.SaveChangesAsync();
-        }
     
     }
 }
