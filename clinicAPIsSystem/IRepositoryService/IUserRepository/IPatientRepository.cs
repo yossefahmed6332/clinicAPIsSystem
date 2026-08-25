@@ -5,12 +5,12 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository
 {
     public interface IPatientRepository
     {
-        public Task<Patient> ICreatePatientAsync();
-        public Task<List<Patient>> IGetAllPatientsAsync ();
-        public Task<Patient> IGetPatientAsync(int id);
-        public Task<(List<Appointment>, List<PaymentOperation>)> IGetPatientDetailsAsync(int id);
-        public Task<Patient> IUpdatePatientAsync( Patient patient);
-        public Task IDeletePatientAsync(int id);
+        public Task<( Patient patient,bool addUserRes,bool addPasswordRes,bool addRoleRes)> CreatePatientAsync(Patient patient,string password);
+        public Task<List<Patient>> GetAllPatientsAsync ();
+        public Task<Patient> GetPatientAsync(int id);
+        public Task<(List<Appointment>, List<PaymentOperation>)> GetPatientDetailsAsync(int id);
+        public Task<Patient> UpdatePatientAsync( Patient patient);
+        public Task DeletePatientAsync(Patient patient);
 
     }
 }

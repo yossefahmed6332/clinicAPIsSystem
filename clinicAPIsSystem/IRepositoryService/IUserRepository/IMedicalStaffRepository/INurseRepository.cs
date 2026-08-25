@@ -5,11 +5,11 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository.IMedicalStaffRepos
 {
     public interface INurseRepository
     {
-        public Task<Nurse> ICreateNurseAsync();
-        public Task<List<Nurse>> IGetAllNursesAsync();
-        public Task<Nurse> IGetNurseAsync(int id);
-        public Task<( ICollection<VitalSigns> vitalSignsRecorded, ICollection<ExaminationResult> examinationResults, ICollection<Appointment> appointments)> IGetNurseWithDetailsAsync(int id);
-        public Task<Nurse> IUpdateNurseAsync(Nurse nurse);
-        public Task IDeleteNurseAsync(int id);
+        public Task<(Nurse nurse, bool addUserRes, bool addPasswordRes, bool addRoleRes)> CreateNurseAsync(Nurse nurse, string password);
+        public Task<List<Nurse>> GetAllNursesAsync();
+        public Task<Nurse> GetNurseAsync(int id);
+        public Task<( ICollection<VitalSigns> vitalSignsRecorded, ICollection<ExaminationResult> examinationResults, ICollection<Appointment> appointments)> GetNurseWithDetailsAsync(int id);
+        public Task<Nurse> UpdateNurseAsync(Nurse nurse);
+        public Task DeleteNurseAsync(Nurse nurse);
     }
 }

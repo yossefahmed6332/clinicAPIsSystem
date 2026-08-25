@@ -4,10 +4,10 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRe
 {
     public interface IAccountantRepository
     {
-        public Task<Accountant> ICreateAccountantAsync();
-        public Task<List<Accountant>> IGetAllAccountantsAsync();
-        public Task<Accountant> IGetAccountantAsync(int id); 
-        public Task<Accountant> IUpdateAccountantAsync(Accountant accountant);
-        public Task IDeleteAccountantAsync(int id);
+        public Task<(Accountant accountant,bool addUserRes , bool addPasswordRes , bool addRoleRes)> CreateAccountantAsync(Accountant accountant,string password);
+        public Task<List<Accountant>> GetAllAccountantsAsync();
+        public Task<Accountant> GetAccountantAsync(int id); 
+        public Task<Accountant> UpdateAccountantAsync(Accountant accountant);
+        public Task DeleteAccountantAsync(Accountant accountant);
     }
 }

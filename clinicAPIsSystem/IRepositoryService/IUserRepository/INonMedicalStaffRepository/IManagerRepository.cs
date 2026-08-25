@@ -4,10 +4,10 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRe
 {
     public interface IManagerRepository
     {
-        public Task<Manager> ICreateManagerAsync();
-        public Task<List<Manager>> IGetAllManagersAsync();
-        public Task<Manager> IGetManagerAsync(int id);
-        public Task<Manager> IUpdateManagerAsync(Manager manager);
-        public Task IDeleteManagerAsync(int id);
+        public Task<(Manager manager , bool addUserRes , bool addPasswordRes , bool addRoleRes)> CreateManagerAsync(Manager manager, string password );
+        public Task<List<Manager>> GetAllManagersAsync();
+        public Task<Manager> GetManagerAsync(int id);
+        public Task<Manager> UpdateManagerAsync(Manager manager);
+        public Task DeleteManagerAsync(Manager manager);
     }
 }
