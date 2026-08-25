@@ -4,12 +4,12 @@ namespace clinicAPIsSystem.IRepositoryService
 {
     public interface IAppointmentRepository
     {
-        public Task<Appointment> ICreateAppointmentAsync(Appointment appointment);
-        public Task<List<Appointment>> IGetAllAppointmentsAsync();
-        public Task<Appointment> IGetAppointmentAsync(int id);
-        public Task<List<Appointment>> IGetAppointmentsByStatusAsync( AppointmentStatus status);
-        public Task<Appointment> IUpdateAppointmentAsync(Appointment appointment);
-        public Task IDeleteAppointmentAsync(int id);
+        public Task<Appointment> CreateAppointmentAsync(Appointment appointment);
+        public Task<List<Appointment>> GetAllAppointmentsAsync();
+        public Task<Appointment> GetAppointmentAsync(int id);
+        public Task<List<Appointment>> GetAppointmentsByStatusAsync( AppointmentStatus status);
+        public Task<Appointment> UpdateAppointmentAsync(Appointment appointment);
+        public Task DeleteAppointmentAsync(Appointment appointment);
 
     }
 }

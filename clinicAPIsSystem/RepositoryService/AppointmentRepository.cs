@@ -11,38 +11,34 @@ namespace clinicAPIsSystem.RepositoryService
         {
             _context = context;
         }
-        public async Task<Appointment> ICreateAppointmentAsync(Appointment appointment)
+        public async Task<Appointment> CreateAppointmentAsync(Appointment appointment)
         {
-            _context.TAppointments.Add(appointment);
+           await _context.TAppointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
             return appointment;
         }
-        public async Task<List<Appointment>> IGetAllAppointmentsAsync()
+        public async Task<List<Appointment>> GetAllAppointmentsAsync()
         {
             return await _context.TAppointments.ToListAsync();
         }
-        public async Task<Appointment> IGetAppointmentAsync(int id)
+        public async Task<Appointment> GetAppointmentAsync(int id)
         {
             return await _context.TAppointments.FindAsync(id);
         }
-        public async Task<List<Appointment>> IGetAppointmentsByStatusAsync(AppointmentStatus status)
+        public async Task<List<Appointment>> GetAppointmentsByStatusAsync(AppointmentStatus status)
         {
             return await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
         }
-        public async Task<Appointment> IUpdateAppointmentAsync(Appointment appointment)
+        public async Task<Appointment> UpdateAppointmentAsync(Appointment appointment)
         {
-            _context.Entry(appointment).State = EntityState.Modified;
+            _context.TAppointments.Update(appointment);
             await _context.SaveChangesAsync();
             return appointment;
         }
-        public async Task IDeleteAppointmentAsync(int id)
+        public async Task DeleteAppointmentAsync(Appointment appointment)
         {
-            var appointment = await _context.TAppointments.FindAsync(id);
-            if (appointment != null)
-            {
-                _context.TAppointments.Remove(appointment);
-                await _context.SaveChangesAsync();
-            }
+            _context.TAppointments.Remove(appointment);
+            await _context.SaveChangesAsync();
         }
 
     }

@@ -4,12 +4,12 @@ namespace clinicAPIsSystem.IRepositoryService
 {
     public interface IFinancialReportRepository
     {
-        public Task<FinancialReport> ICreateFinancialReportAsync();
-        public Task<List<FinancialReport>> IGetAllFinancialReportsAsync();
-        public Task<FinancialReport> IGetFinancialReportAsync(int id);
-        public Task<List<FinancialReport>> IGetFinancialReportsByRangeAsync(decimal min, decimal max,DateTime startDate, DateTime endDate);
-        public Task<List<FinancialReport>> IGetFinancialReportsByDateRangeAsync(DateTime startDate, DateTime endDate);
-        public Task<FinancialReport> IUpdateFinancialReportAsync(FinancialReport financialReport);
-        public Task IDeleteFinancialReportAsync(int id);
+        public Task<FinancialReport> CreateFinancialReportAsync(FinancialReport financialReport);
+        public Task<List<FinancialReport>> GetAllFinancialReportsAsync();
+        public Task<FinancialReport> GetFinancialReportAsync(int id);
+        public Task<List<FinancialReport>> GetFinancialReportsByRangeAsync(decimal min, decimal max,DateTime startDate, DateTime endDate);
+        public Task<List<FinancialReport>> GetFinancialReportsByDateRangeAsync(DateTime startDate, DateTime endDate);
+        public Task<FinancialReport> UpdateFinancialReportAsync(FinancialReport financialReport);
+        public Task DeleteFinancialReportAsync (FinancialReport financialReport);
     }
 }

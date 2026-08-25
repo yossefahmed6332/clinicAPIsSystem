@@ -4,12 +4,12 @@ namespace clinicAPIsSystem.IRepositoryService
 {
     public interface IPaymentOperationRepository
     {
-        public Task<PaymentOperation> ICreatePaymentOperationAsync();
-        public Task<List<PaymentOperation>> IGetAllPaymentOperationsAsync();
-        public Task<PaymentOperation> IGetPaymentOperationAsync(int id);
-        public Task<List<PaymentOperation>> IGetPaymentOperationsByPatientIdAsync(int patientId);
-        public Task<List<PaymentOperation>> IGetPaymentOperationsByAccountantIdAsync(int accountantId);
-        public Task<PaymentOperation> IUpdatePaymentOperationAsync(PaymentOperation paymentOperation);
-        public Task IDeletePaymentOperationAsync(int id);
+        public Task<PaymentOperation> CreatePaymentOperationAsync(PaymentOperation paymentOperation);
+        public Task<List<PaymentOperation>> GetAllPaymentOperationsAsync();
+        public Task<PaymentOperation> GetPaymentOperationAsync(int id);
+        public Task<List<PaymentOperation>> GetPaymentOperationsByPatientIdAsync(int patientId);
+        public Task<List<PaymentOperation>> GetPaymentOperationsByAccountantIdAsync(int accountantId);
+        public Task<PaymentOperation> UpdatePaymentOperationAsync(PaymentOperation paymentOperation);
+        public Task DeletePaymentOperationAsync(PaymentOperation paymentOperation);
     }
 }

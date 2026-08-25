@@ -4,12 +4,12 @@ namespace clinicAPIsSystem.IRepositoryService
 {
     public interface IMedicalRecordRepository
     {
-        public Task<MedicalRecord> ICreateMedicalRecordAsync();
-        public Task<List<MedicalRecord>> IGetAllMedicalRecordsAsync();
-        public Task<MedicalRecord> IGetMedicalRecordAsync(int id);
-        public Task<MedicalRecord> IGetMedicalRecordsByPatientIdAsync(int patientId);
-        public Task<MedicalRecord> IUpdateMedicalRecordAsync(MedicalRecord medicalRecord);
-        public Task IDeleteMedicalRecordAsync(int id);
+        public Task<MedicalRecord> CreateMedicalRecordAsync(MedicalRecord medicalRecord);
+        public Task<List<MedicalRecord>> GetAllMedicalRecordsAsync();
+        public Task<MedicalRecord> GetMedicalRecordAsync(int id);
+        public Task<MedicalRecord> GetMedicalRecordByPatientIdAsync(int patientId);
+        public Task<MedicalRecord> UpdateMedicalRecordAsync(MedicalRecord medicalRecord);
+        public Task DeleteMedicalRecordAsync(MedicalRecord medicalRecord);
 
     }
 }
