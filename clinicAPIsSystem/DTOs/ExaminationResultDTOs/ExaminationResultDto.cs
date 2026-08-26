@@ -2,28 +2,17 @@
 {
     public class ExaminationResultDto
     {
-        public int Id { get; private set; }
-        public string TestType { get; private set; }
-        public string ResultValue { get; private set; }
-        public string Unit { get; private set; }
-        public string NormalRange { get; private set; }
-        public string Note { get; private set; }
-        public DateTime RecordedAt { get; private set; } 
-        public int NurseId { get; private set; }
-        public int MedicalRecordId { get; private set; }
+        public int Id { get;  set; }
+        public string? TestType { get;  set; }
+        public string? ResultValue { get;  set; }
+        public string? Unit { get;  set; }
+        public string? NormalRange { get;  set; }
+        public string? Note { get;  set; }
+        public DateTime RecordedAt { get;  set; } 
+        public int NurseId { get;  set; }
+        public int MedicalRecordId { get;  set; }
 
-        public ExaminationResultDto(int id, string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt,  int nurseId, int medicalRecordId)
-        {
-            Id = id;
-            TestType = testType;
-            ResultValue = resultValue;
-            Unit = unit;
-            NormalRange = normalRange;
-            Note = note;
-            RecordedAt = recordedAt;
-            NurseId = nurseId;
-            MedicalRecordId = medicalRecordId;
-        }
+
 
     }
     }

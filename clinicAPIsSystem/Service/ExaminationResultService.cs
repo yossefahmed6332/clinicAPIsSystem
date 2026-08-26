@@ -3,7 +3,6 @@ using clinicAPIsSystem.DTOs.ExaminationResultDTOs;
 using clinicAPIsSystem.IService;
 using clinicAPIsSystem.IRepositoryService;
 using clinicAPIsSystem.Models;
-using clinicAPIsSystem.IRepositoryService.IUserRepository.IMedicalStaffRepository;
 
 namespace clinicAPIsSystem.Service
 {
@@ -20,7 +19,16 @@ namespace clinicAPIsSystem.Service
         }
         public async Task<ExaminationResultDto> CreateExaminationResultAsync(CreateExaminationResultDto createExaminationResultDto)
         {
-            var examinationResult = _mapper.Map<ExaminationResult>(createExaminationResultDto);
+            var examinationResult = new ExaminationResult(
+                createExaminationResultDto.TestType
+                , createExaminationResultDto.ResultValue
+                , createExaminationResultDto.Unit
+                , createExaminationResultDto.NormalRange
+                , createExaminationResultDto.Note
+                , createExaminationResultDto.RecordedAt
+                , createExaminationResultDto.NurseId
+                , createExaminationResultDto.MedicalRecordId
+            );
             examinationResult = await _examinationResultRepository.CreateExaminationResultAsync(examinationResult);
             return _mapper.Map<ExaminationResultDto>(examinationResult);
         }
@@ -66,6 +74,10 @@ namespace clinicAPIsSystem.Service
         public async Task DeleteExaminationResultAsync(int id)
         {
             var examinationResult = await _examinationResultRepository.GetExaminationResultAsync(id);
+            if (examinationResult == null)
+            {
+                throw new KeyNotFoundException($"Examination result with ID {id} not found");
+            }
             await _examinationResultRepository.DeleteExaminationResultAsync(examinationResult);
         }
     }

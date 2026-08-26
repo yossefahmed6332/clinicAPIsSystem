@@ -5,32 +5,22 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
     public class UpdateExaminationResultDto
     {
         [Required, MaxLength(500)]
-        public string TestType { get; private set; }
+        public string? TestType { get;  set; }
         [Required, MaxLength(50)]
-        public string ResultValue { get; private set; }
+        public string? ResultValue { get;  set; }
         [Required, MaxLength(50)]
-        public string Unit { get; private set; }
+        public string?   Unit { get;  set; }
         [Required, MaxLength(100)]
-        public string NormalRange { get; private set; }
+        public string? NormalRange { get;  set; }
         [Required, MaxLength(1000)]
-        public string Note { get; private set; }
+        public string? Note { get;  set; }
         [Required]
-        public DateTime RecordedAt { get; private set; }
+        public DateTime RecordedAt { get;  set; }
         [Required, Range(1, int.MaxValue)]
-        public int NurseId { get; private set; }
+        public int NurseId { get;  set; }
         [Required,Range(1,int.MaxValue)]
-        public int MedicalRecordId { get; private set; } 
+        public int MedicalRecordId { get;  set; } 
 
-        public UpdateExaminationResultDto(string testType, string resultValue, string unit, string normalRange, string note, DateTime recordedAt,  int nurseId,int medicalRecordId)
-        {
-            TestType = testType;
-            ResultValue = resultValue;
-            Unit = unit;
-            NormalRange = normalRange;
-            Note = note;
-            RecordedAt = recordedAt;
-            NurseId = nurseId;
-            MedicalRecordId = medicalRecordId;
-        }
+
     }
 }
