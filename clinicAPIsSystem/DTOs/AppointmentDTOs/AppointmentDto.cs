@@ -3,22 +3,13 @@ namespace clinicAPIsSystem.DTOs.AppointmentDTOs
 {
     public class AppointmentDto
     {
-        public int Id { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate {get; private set; }
-        public int PatientId { get; private set; }
-        public int NurseId { get; private set; }
-        public int DoctorId { get; private set; }
-        public AppointmentStatus Status { get; private set; } 
-        public AppointmentDto(int id, DateTime startDate, DateTime endDate, int patientId, int nurseId, int doctorId,AppointmentStatus status)
-        {
-            Id = id;
-            StartDate = startDate;
-            EndDate = endDate;
-            PatientId = patientId;
-            NurseId = nurseId;
-            DoctorId = doctorId;
-            Status = status ;
-        }
+        public int Id { get;  set; }
+        public DateTime StartDate { get;  set; }
+        public DateTime EndDate {get;  set; }
+        public int PatientId { get;  set; }
+        public int NurseId { get;  set; }
+        public int DoctorId { get;  set; }
+        public AppointmentStatus Status { get;  set; } 
+
     }
 }

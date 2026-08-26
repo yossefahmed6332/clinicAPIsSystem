@@ -22,6 +22,7 @@
             Note = note;
             RecordedAt = recordedAt;
             NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
         }
 
     }
