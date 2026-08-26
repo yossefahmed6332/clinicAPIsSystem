@@ -18,7 +18,24 @@ namespace clinicAPIsSystem.Service
 
         public async Task<AppointmentDto> CreateAppointmentAsync(CreateAppointmentDto createAppointmentDto)
         {
-            var appointment = _mapper.Map<Appointment>(createAppointmentDto);
+            //check if the appointment is in the past 
+            if (createAppointmentDto.StartDate < DateTime.Now)
+            {
+                throw new ArgumentException("Appointment cannot be created in the past");
+            }
+
+            //check if the doctor has ather appointment in the same time range
+            if (await _appointmentRepository.GetAppointmentInTimeRange(createAppointmentDto.StartDate, createAppointmentDto.EndDate, createAppointmentDto.DoctorId) != null)
+            {
+                throw new ArgumentException("Doctor is not available in the given time range");
+            }
+
+            var appointment = new Appointment(createAppointmentDto.StartDate
+                ,createAppointmentDto.EndDate
+                ,createAppointmentDto.PatientId
+                ,createAppointmentDto.NurseId
+                ,createAppointmentDto.DoctorId);
+
 
             appointment =await _appointmentRepository.CreateAppointmentAsync(appointment);
             return _mapper.Map<AppointmentDto>(appointment);
@@ -58,8 +75,14 @@ namespace clinicAPIsSystem.Service
                     $"Appointment with ID {id} not found.");
             }
 
-            _mapper.Map(updateAppointmentDto, appointment);
-
+            appointment.Update(
+                updateAppointmentDto.StartDate,
+                updateAppointmentDto.EndDate,
+                updateAppointmentDto.Status,
+                updateAppointmentDto.NurseId,
+                updateAppointmentDto.PatientId,
+                updateAppointmentDto.DoctorId
+            );
             appointment = await _appointmentRepository
                 .UpdateAppointmentAsync(appointment);
 

@@ -8,6 +8,7 @@ namespace clinicAPIsSystem.IRepositoryService
         public Task<List<Appointment>> GetAllAppointmentsAsync();
         public Task<Appointment> GetAppointmentAsync(int id);
         public Task<List<Appointment>> GetAppointmentsByStatusAsync( AppointmentStatus status);
+        public Task<Appointment> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId);
         public Task<Appointment> UpdateAppointmentAsync(Appointment appointment);
         public Task DeleteAppointmentAsync(Appointment appointment);
 

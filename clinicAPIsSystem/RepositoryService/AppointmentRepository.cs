@@ -2,6 +2,7 @@
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Data;
 using Microsoft.EntityFrameworkCore;
+//note: I catch null reference exception in the service layer, so I don't need to catch it here 
 namespace clinicAPIsSystem.RepositoryService
 {
     public class AppointmentRepository:IAppointmentRepository
@@ -28,6 +29,13 @@ namespace clinicAPIsSystem.RepositoryService
         public async Task<List<Appointment>> GetAppointmentsByStatusAsync(AppointmentStatus status)
         {
             return await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
+        }
+
+        public async Task<Appointment> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId)
+        {
+            return await _context.TAppointments
+                .Where(a => a.StartDate < endDate && a.EndDate > startDate && a.DoctorId == doctorId)
+                .FirstOrDefaultAsync();
         }
         public async Task<Appointment> UpdateAppointmentAsync(Appointment appointment)
         {
