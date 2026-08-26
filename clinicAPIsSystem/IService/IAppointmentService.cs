@@ -9,7 +9,7 @@ namespace clinicAPIsSystem.IService
         public Task<List<AppointmentDto>> GetAllAppointmentsAsync();
         public Task<AppointmentDto> GetAppointmentAsync(int id);
         public Task<List<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status);
-        public Task<AppointmentDto> UpdateAppointmentAsync(UpdateAppointmentDto appointment);
-        public Task DeleteAppointmentAsync(int  id);
+        public Task<AppointmentDto> UpdateAppointmentAsync(UpdateAppointmentDto appointment,int id);
+        public Task DeleteAppointmentAsync(int id);
     }
 }

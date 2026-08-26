@@ -10,7 +10,6 @@ namespace clinicAPIsSystem.IService
         public Task<FinancialReportDto> GetFinancialReportAsync(int id);
         public Task<List<FinancialReportDto>> GetFinancialReportsByRangeAsync(decimal min, decimal max, DateTime startDate, DateTime endDate);
         public Task<List<FinancialReportDto>> GetFinancialReportsByDateRangeAsync(DateTime startDate, DateTime endDate);
-        public Task DeleteFinancialReportAsync(int id);
 
     }
 }

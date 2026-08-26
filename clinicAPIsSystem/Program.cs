@@ -153,6 +153,9 @@ builder.Services.AddCors(options =>
 
 #endregion
 
+#region Global Exception Handling
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+#endregion
 
 
 #region OpenAPI
@@ -173,6 +176,10 @@ if (app.Environment.IsDevelopment())
 }
 
 #endregion 
+
+#region Exception handler 
+app.UseExceptionHandler();
+#endregion
 
 #region Seeder
 

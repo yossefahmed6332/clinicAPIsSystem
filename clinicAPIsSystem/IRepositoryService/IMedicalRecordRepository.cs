@@ -9,7 +9,6 @@ namespace clinicAPIsSystem.IRepositoryService
         public Task<MedicalRecord> GetMedicalRecordAsync(int id);
         public Task<MedicalRecord> GetMedicalRecordByPatientIdAsync(int patientId);
         public Task<MedicalRecord> UpdateMedicalRecordAsync(MedicalRecord medicalRecord);
-        public Task DeleteMedicalRecordAsync(MedicalRecord medicalRecord);
 
     }
 }

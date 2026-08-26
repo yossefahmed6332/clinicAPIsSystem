@@ -9,7 +9,7 @@ namespace clinicAPIsSystem.IService
         public Task<VitalSignsDto> GetVitalSignsAsync(int id);
         public Task<List<VitalSignsDto>> GetVitalSignsByMedicalRecordIdAsync(int medicalRecordId);
         public Task<List<VitalSignsDto>> GetVitalSignsByNurseIdAsync(int nurseId);
-        public Task<VitalSignsDto> UpdateVitalSignsAsync(UpdateVitalSignsDto updateVitalSignsDto);
+        public Task<VitalSignsDto> UpdateVitalSignsAsync(UpdateVitalSignsDto updateVitalSignsDto,int id);
         public Task DeleteVitalSignsAsync(int id);
 
     }

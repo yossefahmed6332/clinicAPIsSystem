@@ -43,11 +43,6 @@ namespace clinicAPIsSystem.RepositoryService
             await _context.SaveChangesAsync();
             return medicalRecord;
         }
-        public async Task DeleteMedicalRecordAsync(MedicalRecord medicalRecord )
-        {
-            _context.TMedicalRecords.Remove(medicalRecord);
-            await _context.SaveChangesAsync();
-        }
 
 
 
