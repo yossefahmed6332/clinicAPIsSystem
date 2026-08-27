@@ -17,8 +17,12 @@ namespace clinicAPIsSystem.DTOs.PrescriptionDTOs
         public string Instructions { get; set; } = null!;
         [Required,MaxLength(100)]
         public string Diagnosis { get;  set; } = null!;
+        [Required]
+        public DateTime Date { get; set; }
+        [Required,Range(1, int.MaxValue)]
         public int DoctorId { get;  set; }
-        public int PatientId { get;  set; }
+        [Required, Range(1, int.MaxValue)]
+        public int medicalRecordId { get; set; }
 
 
 

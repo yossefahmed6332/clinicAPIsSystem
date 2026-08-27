@@ -9,7 +9,7 @@ namespace clinicAPIsSystem.IService
         public Task<PrescriptionDto> GetPrescriptionAsync(int id);
         public Task<List<PrescriptionDto>> GetPrescriptionsByMedicalRecordIdAsync(int medicalRecordId);
         public Task<List<PrescriptionDto>> GetPrescriptionsByDoctorIdAsync(int doctorId);
-        public Task<PrescriptionDto> UpdatePrescriptionAsync(UpdatePrescriptionDto updatePrescriptionDto);
+        public Task<PrescriptionDto> UpdatePrescriptionAsync(UpdatePrescriptionDto updatePrescriptionDto,int id);
         public Task DeletePrescriptionAsync(int id);
     }
 }
