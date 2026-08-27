@@ -17,7 +17,13 @@ namespace clinicAPIsSystem.Service
 
         public async Task<FinancialReportDto> CreateFinancialReportAsync(CreateFinancialReportDto createFinancialReportDto)
         {
-            var financialReport = _mapper.Map<FinancialReport>(createFinancialReportDto);
+            var financialReport = new FinancialReport
+                (
+                createFinancialReportDto.MonthlyExpenses,
+                createFinancialReportDto.NetProfit,
+                createFinancialReportDto.MonthlyRevenue,
+                createFinancialReportDto.Date
+                );
             financialReport = await _financialReportRepository.CreateFinancialReportAsync(financialReport);
             return _mapper.Map<FinancialReportDto>(financialReport);
         }

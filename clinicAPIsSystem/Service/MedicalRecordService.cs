@@ -17,7 +17,9 @@ namespace clinicAPIsSystem.Service
 
         public async Task<MedicalRecordDto> CreateMedicalRecordAsync(CreateMedicalRecordDto createMedicalRecord)
         {
-            var medicalRecord = _mapper.Map<MedicalRecord>(createMedicalRecord);
+            var medicalRecord = new MedicalRecord
+                (
+                );
             medicalRecord = await _medicalRecordRepository.CreateMedicalRecordAsync(medicalRecord);
             return _mapper.Map<MedicalRecordDto>(medicalRecord);
         }
