@@ -20,11 +20,11 @@ namespace clinicAPIsSystem.Service
         public async Task<ExaminationResultDto> CreateExaminationResultAsync(CreateExaminationResultDto createExaminationResultDto)
         {
             var examinationResult = new ExaminationResult(
-                createExaminationResultDto.TestType
-                , createExaminationResultDto.ResultValue
-                , createExaminationResultDto.Unit
-                , createExaminationResultDto.NormalRange
-                , createExaminationResultDto.Note
+                createExaminationResultDto.TestType!
+                , createExaminationResultDto.ResultValue!
+                , createExaminationResultDto.Unit!
+                , createExaminationResultDto.NormalRange!
+                , createExaminationResultDto.Note!
                 , createExaminationResultDto.RecordedAt
                 , createExaminationResultDto.NurseId
                 , createExaminationResultDto.MedicalRecordId
