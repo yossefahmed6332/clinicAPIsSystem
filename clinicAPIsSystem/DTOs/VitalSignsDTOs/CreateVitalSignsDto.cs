@@ -7,34 +7,24 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
     {
 
         [Required, Range(0, 300)]
-        public int BloodPressureSystolic { get; private set; }
+        public int BloodPressureSystolic { get;  set; }
         [Required, Range(0, 300)]
-        public int BloodPressureDiastolic { get; private set; }
+        public int BloodPressureDiastolic { get;  set; }
         [Required, Range(0, 300)]   
-        public int HeartRate { get; private set; }
+        public int HeartRate { get;  set; }
         [Required, Range(0, 45)]
-        public decimal Temperature { get; private set; }
+        public decimal Temperature { get;  set; }
         [Required, Range(0, 100)]
-        public decimal OxygenSaturation { get; private set; }
+        public decimal OxygenSaturation { get;  set; }
         [Required]
-        public DateTime RecordedAt { get; private set; }
+        public DateTime RecordedAt { get;  set; }
         [Required, Range(1, int.MaxValue)]
-        public int NurseId { get; private  set; }
+        public int NurseId { get;   set; }
 
-        [Required]
-        public int MedicalRecordId { get; private set; }
+        [Required,Range(1,int.MaxValue)]
+        public int MedicalRecordId { get;  set; }
 
-        public CreateVitalSignsDto(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId,  int medicalRecordId)
-        {
-            BloodPressureSystolic = bloodPressureSystolic;
-            BloodPressureDiastolic = bloodPressureDiastolic;
-            HeartRate = heartRate;
-            Temperature = temperature;
-            OxygenSaturation = oxygenSaturation;
-            RecordedAt = recordedAt;
-            NurseId = nurseId;
-            MedicalRecordId = medicalRecordId;
-        }
+
 
 
     }

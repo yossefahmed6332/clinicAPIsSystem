@@ -5,29 +5,20 @@ namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
     public class CreatePaymentOperationDto
     {
         [Required, Range(0.01, double.MaxValue)]
-        public decimal Amount { get; private set; }
+        public decimal Amount { get;  set; }
         [Required]
-        public DateTime Date { get; private set; }
+        public DateTime Date { get;  set; }
         [Required, EnumDataType(typeof(OperationType))]
-        public OperationType OperationType { get; private set; }
+        public OperationType OperationType { get;  set; }
         [Required, EnumDataType(typeof(OperationStatus))]
-        public OperationStatus OperationStatus { get; private set; }
+        public OperationStatus OperationStatus { get;  set; }
         [Range(1, int.MaxValue)]
-        public int? PatientId { get; private set; }
+        public int? PatientId { get;  set; }
         [Range(1, int.MaxValue)]
-        public int? AccountantId { get; private set; }
+        public int? AccountantId { get;  set; }
         [Required, EnumDataType(typeof(PaymentMethod))]
-        public PaymentMethod PaymentMethod { get; private set; }
+        public PaymentMethod PaymentMethod { get;  set; }
 
-        public CreatePaymentOperationDto(decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
-        {
-            Amount = amount;
-            Date = date;
-            OperationType = operationType;
-            OperationStatus = operationStatus;
-            PatientId = patientId;
-            AccountantId = accountantId;
-            PaymentMethod = paymentMethod;
-        }
+
     }
 }

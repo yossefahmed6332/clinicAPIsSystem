@@ -3,25 +3,15 @@ namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
 {
     public class PaymentOperationDto
     {
-        public int Id { get; private set; }
-        public decimal Amount { get; private set; }
-        public DateTime Date { get; private set; }
-        public OperationType OperationType { get; private set; }
-        public OperationStatus OperationStatus { get; private set; }
-        public int? PatientId { get; private set; }
-        public int? AccountantId { get; private set; }
-        public PaymentMethod PaymentMethod { get; private set; }
+        public int Id { get;  set; }
+        public decimal Amount { get;  set; }
+        public DateTime Date { get;  set; }
+        public OperationType OperationType { get;  set; }
+        public OperationStatus OperationStatus { get;  set; }
+        public int? PatientId { get;  set; }
+        public int? AccountantId { get;  set; }
+        public PaymentMethod PaymentMethod { get;  set; }
 
-        public PaymentOperationDto(int id, decimal amount, DateTime date, OperationType operationType, OperationStatus operationStatus, int? patientId, int? accountantId, PaymentMethod paymentMethod)
-        {
-            Id = id;
-            Amount = amount;
-            Date = date;
-            OperationType = operationType;
-            OperationStatus = operationStatus;
-            PatientId = patientId;
-            AccountantId = accountantId;
-            PaymentMethod = paymentMethod;
-        }
+
     }
 }

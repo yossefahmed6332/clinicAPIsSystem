@@ -5,15 +5,15 @@ namespace clinicAPIsSystem.DTOs.ExaminationResultDTOs
     public class CreateExaminationResultDto
     {
         [Required,MaxLength(500)]
-        public string TestType { get;  set; }
+        public string? TestType { get;  set; }
         [Required,MaxLength(50)]
-        public string ResultValue { get;  set; }
+        public string? ResultValue { get;  set; }
         [Required, MaxLength(50)]
-        public string Unit { get;  set; }
+        public string? Unit { get;  set; }
         [Required, MaxLength(100)]
-        public string NormalRange { get;  set; }
+        public string? NormalRange { get;  set; }
         [Required, MaxLength(1000)]
-        public string Note { get;  set; }
+        public string? Note { get;  set; }
         [Required]
         public DateTime RecordedAt { get;  set; }
         [Required, Range(1, int.MaxValue)]

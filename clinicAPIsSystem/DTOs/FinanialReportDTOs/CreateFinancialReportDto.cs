@@ -5,21 +5,15 @@ namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
     public class CreateFinancialReportDto
     {
         [Required, Range(0, double.MaxValue)]
-        public decimal MonthlyExpenses { get; private set; }
+        public decimal MonthlyExpenses { get;  set; }
         [Required, Range(0, double.MaxValue)]
-        public decimal MonthlyRevenue { get;private set; }
+        public decimal MonthlyRevenue { get; set; }
         [Range(0, double.MaxValue)]
-        public decimal NetProfit { get;private set; } 
+        public decimal NetProfit { get; set; } 
         [Required]
-        public DateTime Date { get;private set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
 
-        public CreateFinancialReportDto(decimal monthlyExpenses, decimal monthlyRevenue, decimal netProfit, DateTime date)
-        {
-            MonthlyExpenses = monthlyExpenses;
-            MonthlyRevenue = monthlyRevenue;
-            NetProfit = netProfit;
-            Date = date;
-        }
+
 
 
     }
