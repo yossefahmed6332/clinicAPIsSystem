@@ -58,16 +58,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository
         {
             return await _context.TPatients.FindAsync(id);
         }
-        public async Task<(List<Appointment>, List<PaymentOperation>)> GetPatientDetailsAsync(int id)
-        {
-            var appointments = await _context.TAppointments
-                .Where(a => a.PatientId == id)
-                .ToListAsync();
-            var paymentOperations = await _context.TPaymentOperations
-                .Where(p => p.PatientId == id)
-                .ToListAsync();
-            return (appointments, paymentOperations);
-        }
+
 
         public async Task<Patient> UpdatePatientAsync(Patient patient)
         {

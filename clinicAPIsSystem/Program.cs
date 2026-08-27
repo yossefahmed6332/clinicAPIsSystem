@@ -72,6 +72,8 @@ builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
 builder.Services.AddScoped<IPaymentOperationRepository, PaymentOperationRepository>();
 builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 builder.Services.AddScoped<IVitalSignsRepository, VitalSignsRepository>();
+builder.Services.AddScoped<RoleSeeder>();
+builder.Services.AddScoped<AdminSeeder>();
 
 //dependency injection for services
 
@@ -155,6 +157,7 @@ builder.Services.AddCors(options =>
 
 #region Global Exception Handling
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 #endregion
 
 

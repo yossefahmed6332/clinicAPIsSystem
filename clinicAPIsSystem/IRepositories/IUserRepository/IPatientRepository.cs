@@ -8,7 +8,6 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository
         public Task<( Patient patient,bool addUserRes,bool addPasswordRes,bool addRoleRes)> CreatePatientAsync(Patient patient,string password);
         public Task<List<Patient>> GetAllPatientsAsync ();
         public Task<Patient?> GetPatientAsync(int id);
-        public Task<(List<Appointment>, List<PaymentOperation>)> GetPatientDetailsAsync(int id);
         public Task<Patient> UpdatePatientAsync( Patient patient);
         public Task DeletePatientAsync(Patient patient);
 
