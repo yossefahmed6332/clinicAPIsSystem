@@ -2,15 +2,15 @@
 using clinicAPIsSystem.DTOs.AppointmentDTOs;
 using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
-using clinicAPIsSystem.RepositoryService;
+using clinicAPIsSystem.IRepositoryService;
 
 namespace clinicAPIsSystem.Service
 {
     public class AppointmentService : IAppointmentService
     {
-        private readonly AppointmentRepository _appointmentRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMapper _mapper;
-        public AppointmentService(AppointmentRepository appointmentRepository, IMapper mapper)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IMapper mapper)
         {
             _appointmentRepository = appointmentRepository;
             _mapper = mapper;
@@ -25,7 +25,7 @@ namespace clinicAPIsSystem.Service
             }
 
             //check if the doctor has ather appointment in the same time range
-            if (await _appointmentRepository.GetAppointmentInTimeRange(createAppointmentDto.StartDate, createAppointmentDto.EndDate, createAppointmentDto.DoctorId) != null)
+            if (await _appointmentRepository.GetAppointmentInTimeRange(createAppointmentDto.StartDate, createAppointmentDto.EndDate, createAppointmentDto.DoctorId, createAppointmentDto.NurseId) != null)
             {
                 throw new ArgumentException("Doctor is not available in the given time range");
             }
@@ -67,13 +67,35 @@ namespace clinicAPIsSystem.Service
             UpdateAppointmentDto updateAppointmentDto,
             int id)
         {
-            var appointment = await _appointmentRepository.GetAppointmentAsync(id);
 
+            
+
+
+
+            var appointment = await _appointmentRepository.GetAppointmentAsync(id);
+            //check if appointment == null 
             if (appointment == null)
             {
                 throw new KeyNotFoundException(
                     $"Appointment with ID {id} not found.");
             }
+
+            if (updateAppointmentDto.StartDate!=appointment.StartDate||updateAppointmentDto.EndDate!= appointment.EndDate|| updateAppointmentDto.DoctorId != appointment.DoctorId|| updateAppointmentDto.NurseId != appointment.NurseId)
+            {
+                //check if the appointment is in the past 
+                if (updateAppointmentDto.StartDate < DateTime.Now)
+                {
+                    throw new ArgumentException("Appointment cannot be created in the past");
+                }
+
+                //check if the doctor has ather appointment in the same time range
+                if (await _appointmentRepository.GetAppointmentInTimeRange(updateAppointmentDto.StartDate, updateAppointmentDto.EndDate, updateAppointmentDto.DoctorId, updateAppointmentDto.NurseId) != null)
+                {
+                    throw new ArgumentException("Doctor is not available in the given time range");
+                }
+            }
+
+
 
             appointment.Update(
                 updateAppointmentDto.StartDate,

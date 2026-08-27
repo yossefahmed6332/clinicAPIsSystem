@@ -31,10 +31,10 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
         }
 
-        public async Task<Appointment> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId)
+        public async Task<Appointment> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId,int nurseId)
         {
             return await _context.TAppointments
-                .Where(a => a.StartDate < endDate && a.EndDate > startDate && a.DoctorId == doctorId)
+                .Where(a => a.StartDate < endDate && a.EndDate > startDate && a.DoctorId == doctorId && a.NurseId == nurseId)
                 .FirstOrDefaultAsync();
         }
         public async Task<Appointment> UpdateAppointmentAsync(Appointment appointment)
