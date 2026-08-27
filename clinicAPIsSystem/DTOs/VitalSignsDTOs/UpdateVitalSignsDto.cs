@@ -15,8 +15,6 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         public decimal Temperature { get;  set; }
         [Required, Range(0, 100)]
         public decimal OxygenSaturation { get;  set; }
-        [Required]
-        public DateTime RecordedAt { get;  set; }
         [Required, Range(1, int.MaxValue)]
         public int NurseId { get;  set; }
 

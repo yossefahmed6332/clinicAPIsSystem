@@ -7,7 +7,7 @@ namespace clinicAPIsSystem.DTOs.PaymentOperationDTOs
         [Required, Range(0.01, double.MaxValue)]
         public decimal Amount { get;  set; }
         [Required]
-        public DateTime Date { get;  set; }
+        public DateTime Date { get;  set; } = DateTime.UtcNow;
         [Required, EnumDataType(typeof(OperationType))]
         public OperationType OperationType { get;  set; }
         [Required, EnumDataType(typeof(OperationStatus))]

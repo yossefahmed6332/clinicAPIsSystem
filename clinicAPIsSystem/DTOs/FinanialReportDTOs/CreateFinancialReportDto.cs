@@ -11,7 +11,7 @@ namespace clinicAPIsSystem.DTOs.FinanialReportDTOs
         [Range(0, double.MaxValue)]
         public decimal NetProfit { get; set; } 
         [Required]
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.UtcNow;
 
 
 

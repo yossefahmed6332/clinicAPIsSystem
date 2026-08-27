@@ -22,7 +22,7 @@ namespace clinicAPIsSystem.RepositoryService
         {
             return await _context.TAppointments.ToListAsync();
         }
-        public async Task<Appointment> GetAppointmentAsync(int id)
+        public async Task<Appointment?> GetAppointmentAsync(int id)
         {
             return await _context.TAppointments.FindAsync(id);
         }
@@ -31,7 +31,8 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
         }
 
-        public async Task<Appointment> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId,int nurseId)
+        //catch null reference exception in the service layer, so I don't need to catch it here
+        public async Task<Appointment?> GetAppointmentInTimeRange(DateTime startDate, DateTime endDate, int doctorId,int nurseId)
         {
             return await _context.TAppointments
                 .Where(a => a.StartDate < endDate && a.EndDate > startDate && a.DoctorId == doctorId && a.NurseId == nurseId)

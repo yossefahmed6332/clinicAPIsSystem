@@ -17,7 +17,7 @@ namespace clinicAPIsSystem.DTOs.VitalSignsDTOs
         [Required, Range(0, 100)]
         public decimal OxygenSaturation { get;  set; }
         [Required]
-        public DateTime RecordedAt { get;  set; }
+        public DateTime RecordedAt { get;  set; }= DateTime.UtcNow;
         [Required, Range(1, int.MaxValue)]
         public int NurseId { get;   set; }
 

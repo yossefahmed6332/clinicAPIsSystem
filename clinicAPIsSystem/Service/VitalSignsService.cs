@@ -19,7 +19,16 @@ namespace clinicAPIsSystem.Service
 
         public async Task<VitalSignsDto> CreateVitalSignsAsync (CreateVitalSignsDto createVitalSignsDto)
         {
-            var vitalSigns = _mapper.Map<VitalSigns>(createVitalSignsDto);
+            var vitalSigns = new VitalSigns(
+                createVitalSignsDto.BloodPressureSystolic,
+                createVitalSignsDto.BloodPressureDiastolic,
+                createVitalSignsDto.HeartRate,
+                createVitalSignsDto.Temperature,
+                createVitalSignsDto.OxygenSaturation,
+                createVitalSignsDto.RecordedAt,
+                createVitalSignsDto.NurseId,
+                createVitalSignsDto.MedicalRecordId
+                );
             vitalSigns = await _vitalSignsRepository.CreateVitalSignsAsync(vitalSigns);
             return _mapper.Map<VitalSignsDto>(vitalSigns);
         }
@@ -53,10 +62,21 @@ namespace clinicAPIsSystem.Service
 
         public async Task<VitalSignsDto> UpdateVitalSignsAsync(UpdateVitalSignsDto updateVitalSignsDto,int id)
         {
-            var vitalSigns = _mapper.Map<VitalSigns>(updateVitalSignsDto);
-            vitalSigns.Id = id;
+            var vitalSigns = await _vitalSignsRepository.GetVitalSignsAsync(id);
+            if (vitalSigns == null) {
+                throw new KeyNotFoundException($"Vital Signs with ID {id} not found.");
+            }
 
-             vitalSigns = await _vitalSignsRepository.UpdateVitalSignsAsync(vitalSigns);
+            vitalSigns.Update(
+                updateVitalSignsDto.BloodPressureSystolic,
+                updateVitalSignsDto.BloodPressureDiastolic,
+                updateVitalSignsDto.HeartRate,
+                updateVitalSignsDto.Temperature,
+                updateVitalSignsDto.OxygenSaturation
+
+            );
+
+            vitalSigns = await _vitalSignsRepository.UpdateVitalSignsAsync(vitalSigns);
             return _mapper.Map<VitalSignsDto>(vitalSigns);
 
         }
@@ -68,6 +88,7 @@ namespace clinicAPIsSystem.Service
             {
                 throw new KeyNotFoundException($"Vital Signs with ID{id} Not found");
             }
+            await _vitalSignsRepository.DeleteVitalSignsAsync(vitalSigns);
         }
 
 

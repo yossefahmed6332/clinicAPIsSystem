@@ -11,7 +11,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.HasKey(e => e.Id);
             builder.Property(e => e.TestType).IsRequired().HasMaxLength(500);
             builder.Property(e => e.ResultValue).IsRequired().HasMaxLength(50);
-            builder.Property(e => e.unit).IsRequired().HasMaxLength(50);
+            builder.Property(e => e.Unit).IsRequired().HasMaxLength(50);
             builder.Property(e => e.NormalRange).IsRequired().HasMaxLength(100);
             builder.Property(e => e.RecordedAt).IsRequired().HasColumnType("DateTime2");
             builder.Property(e=>e.Notes).HasMaxLength(1000).IsRequired();

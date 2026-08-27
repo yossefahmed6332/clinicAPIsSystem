@@ -18,7 +18,7 @@ namespace clinicAPIsSystem.DTOs.PrescriptionDTOs
         [Required,MaxLength(100)]
         public string Diagnosis { get;  set; } = null!;
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow;
         [Required,Range(1, int.MaxValue)]
         public int DoctorId { get;  set; }
         [Required, Range(1, int.MaxValue)]
