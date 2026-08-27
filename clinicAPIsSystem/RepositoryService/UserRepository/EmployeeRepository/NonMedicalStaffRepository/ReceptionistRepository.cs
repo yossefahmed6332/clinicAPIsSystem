@@ -1,5 +1,5 @@
 ﻿using clinicAPIsSystem.Data;
-using clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Models.User;
 using clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
@@ -60,7 +60,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepos
             return await _context.TReceptionists.ToListAsync();
         }
 
-        public async Task<Receptionist> IGetReceptionistAsync(int id)
+        public async Task<Receptionist?> IGetReceptionistAsync(int id)
         {
             return await _context.TReceptionists.FindAsync(id);
         }

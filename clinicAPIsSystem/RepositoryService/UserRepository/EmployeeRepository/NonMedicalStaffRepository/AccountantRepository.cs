@@ -1,19 +1,17 @@
-﻿namespace clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository.NonMedicalStaffRepository
-{
+﻿using clinicAPIsSystem.Data;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.Models;
+using clinicAPIsSystem.Models.User;
+using clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-    using global::clinicAPIsSystem.Data;
-    using global::clinicAPIsSystem.IRepositoryService.IUserRepository.INonMedicalStaffRepository;
-    using global::clinicAPIsSystem.Models;
-    using global::clinicAPIsSystem.Models.User;
-    using global::clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
 
-    namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository
+namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository
     {
         public class AccountantRepository : IAccountantRepository
         {
-            private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
             private readonly ClinicDbContext _context;
 
             public AccountantRepository(
@@ -63,7 +61,7 @@
                 return await _context.TAccountants.ToListAsync();
             }
 
-            public async Task<Accountant> GetAccountantAsync(int id)
+            public async Task<Accountant?> GetAccountantAsync(int id)
             {
                 return await _context.TAccountants.FindAsync(id);
             }
@@ -87,4 +85,3 @@
             }
         }
     }
-}

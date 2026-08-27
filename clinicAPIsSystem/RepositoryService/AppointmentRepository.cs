@@ -38,7 +38,7 @@ namespace clinicAPIsSystem.RepositoryService
                 .Where(a => a.StartDate < endDate && a.EndDate > startDate && a.DoctorId == doctorId && a.NurseId == nurseId)
                 .FirstOrDefaultAsync();
         }
-        public async Task<Appointment> UpdateAppointmentAsync(Appointment appointment)
+        public async Task<Appointment?> UpdateAppointmentAsync(Appointment appointment)
         {
             _context.TAppointments.Update(appointment);
             await _context.SaveChangesAsync();

@@ -1,5 +1,5 @@
 ﻿using clinicAPIsSystem.Data;
-using clinicAPIsSystem.IRepositoryService.IUserRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository;
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.Models.User;
 using clinicAPIsSystem.Models.User.Employee;
@@ -59,9 +59,9 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository
             return await _context.TCleaners.ToListAsync(); 
         }
 
-        public async Task<Cleaner> GetCleanerAsync(int id)
+        public async Task<Cleaner?> GetCleanerAsync(int id)
         {
-            return _context.TCleaners.FirstOrDefault(a => a.Id == id);
+            return await _context.TCleaners.FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<Cleaner> UpdateCleanerAsync (Cleaner cleaner)

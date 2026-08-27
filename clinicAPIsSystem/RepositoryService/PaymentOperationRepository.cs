@@ -25,7 +25,7 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TPaymentOperations.ToListAsync();
         }
 
-        public async Task<PaymentOperation> GetPaymentOperationAsync(int id)
+        public async Task<PaymentOperation?> GetPaymentOperationAsync(int id)
         {
             return await _context.TPaymentOperations.FindAsync(id);
         }

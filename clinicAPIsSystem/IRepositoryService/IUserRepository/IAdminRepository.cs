@@ -8,7 +8,7 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository
         Admin admin,
         string password);
         public Task<List<Admin>> GetAllAdminsAsync();
-        public Task<Admin> GetAdminAsync(int id);
+        public Task<Admin?> GetAdminAsync(int id);
         public Task<Admin> UpdateAdminAsync(Admin admin);
         public Task DeleteAdminAsync(Admin admin);
 

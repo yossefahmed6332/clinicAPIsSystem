@@ -57,7 +57,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository
             return await _context.TAdmins.ToListAsync(); 
         }
 
-        public async Task<Admin> GetAdminAsync(int id)
+        public async Task<Admin?> GetAdminAsync(int id)
         {
             return await  _context.TAdmins.FirstOrDefaultAsync(a=>a.Id==id);
         }

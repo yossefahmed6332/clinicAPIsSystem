@@ -54,7 +54,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository
             return await _context.TPatients.ToListAsync();
         }
 
-        public async Task<Patient> GetPatientAsync(int id)
+        public async Task<Patient?> GetPatientAsync(int id)
         {
             return await _context.TPatients.FindAsync(id);
         }

@@ -26,7 +26,7 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TVitalSigns.ToListAsync();
         }
         
-        public async Task<VitalSigns> GetVitalSignsAsync(int id)
+        public async Task<VitalSigns?> GetVitalSignsAsync(int id)
         {
             return await _context.TVitalSigns.FirstOrDefaultAsync(vt=>vt.Id==id); 
 

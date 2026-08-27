@@ -23,16 +23,12 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TMedicalRecords.ToListAsync();
         }
 
-        public async Task<MedicalRecord> GetMedicalRecordAsync(int id)
+        public async Task<MedicalRecord?> GetMedicalRecordAsync(int id)
         {
             return await _context.TMedicalRecords.FindAsync(id);
         }
-        public async Task<MedicalRecord> GetMedicalRecordByPatientId(int patientId)
-        {
-            return await _context.TMedicalRecords.FirstOrDefaultAsync(m => m.PatientId == patientId);
-        }
-
-        public async Task<MedicalRecord> GetMedicalRecordByPatientIdAsync(int patientId)
+ 
+        public async Task<MedicalRecord?> GetMedicalRecordByPatientIdAsync(int patientId)
         {
             return await _context.TMedicalRecords.FirstOrDefaultAsync(m => m.PatientId == patientId);
         }

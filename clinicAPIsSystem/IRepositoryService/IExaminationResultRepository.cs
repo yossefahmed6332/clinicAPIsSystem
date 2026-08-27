@@ -6,7 +6,7 @@ namespace clinicAPIsSystem.IRepositoryService
     {
         public Task<ExaminationResult> CreateExaminationResultAsync(ExaminationResult examinationResult);
         public Task<List<ExaminationResult>> GetAllExaminationResultsAsync();
-        public Task<ExaminationResult> GetExaminationResultAsync(int id);
+        public Task<ExaminationResult?> GetExaminationResultAsync(int id);
         public Task<List<ExaminationResult>> GetExaminationResultsByNurseIdAsync(int nurseId);
         public Task<List<ExaminationResult>> GetExaminationResultsByMedicalRecordIdAsync(int medicalRecordId);
         public Task<ExaminationResult> UpdateExaminationResultAsync(ExaminationResult examinationResult);

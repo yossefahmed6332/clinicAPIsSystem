@@ -24,7 +24,7 @@ namespace clinicAPIsSystem.RepositoryService
         {
             return await _context.TPrescriptions.ToListAsync();
         }
-        public async Task<Prescription> GetPrescriptionAsync(int id)
+        public async Task<Prescription?> GetPrescriptionAsync(int id)
         {
             return await _context.TPrescriptions.FindAsync(id);
         }

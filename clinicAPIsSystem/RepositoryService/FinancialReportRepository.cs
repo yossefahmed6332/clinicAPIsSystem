@@ -23,7 +23,7 @@ namespace clinicAPIsSystem.RepositoryService
             return await _context.TFinancialReports.ToListAsync();
         }
 
-        public async Task<FinancialReport> GetFinancialReportAsync(int id)
+        public async Task<FinancialReport?> GetFinancialReportAsync(int id)
         {
             return await _context.TFinancialReports.FindAsync(id);
         }

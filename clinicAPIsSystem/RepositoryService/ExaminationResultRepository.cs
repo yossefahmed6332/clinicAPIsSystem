@@ -21,7 +21,7 @@ namespace clinicAPIsSystem.RepositoryService
         {
             return await _context.TExaminationResults.ToListAsync();
         }
-        public async Task<ExaminationResult> GetExaminationResultAsync(int id)
+        public async Task<ExaminationResult?> GetExaminationResultAsync(int id)
         {
             return await _context.TExaminationResults.FindAsync(id);
         }
