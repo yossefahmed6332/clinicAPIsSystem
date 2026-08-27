@@ -18,7 +18,16 @@ namespace clinicAPIsSystem.Service
 
         public async Task<PaymentOperationDto> CreatePaymentOperationAsync(CreatePaymentOperationDto createPaymentOperationDto)
         {
-            var paymentOperation = _mapper.Map<PaymentOperation>(createPaymentOperationDto);
+            var paymentOperation = 
+                new PaymentOperation(
+                createPaymentOperationDto.Amount, 
+                createPaymentOperationDto.Date,
+                createPaymentOperationDto.OperationType,
+                createPaymentOperationDto.OperationStatus,
+                createPaymentOperationDto.PatientId,
+                createPaymentOperationDto.AccountantId,
+                createPaymentOperationDto.PaymentMethod); 
+
             var createdPaymentOperation = await _paymentOperationRepository.CreatePaymentOperationAsync(paymentOperation);
             return _mapper.Map<PaymentOperationDto>(createdPaymentOperation);
         }
@@ -32,6 +41,10 @@ namespace clinicAPIsSystem.Service
         public async Task<PaymentOperationDto> GetPaymentOperationAsync(int id)
         {
             var paymentOperation = await _paymentOperationRepository.GetPaymentOperationAsync(id);
+            if (paymentOperation == null)
+            {
+                throw new KeyNotFoundException($"Payment operation with ID {id} not found.");
+            }
             return _mapper.Map<PaymentOperationDto>(paymentOperation);
         }
 
