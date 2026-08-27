@@ -5,7 +5,9 @@ using clinicAPIsSystem.IRepositoryService.IUserRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.IMedicalStaffRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
+using clinicAPIsSystem.Repositories.UserRepository;
 using clinicAPIsSystem.RepositoryService;
 using clinicAPIsSystem.RepositoryService.UserRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
@@ -56,6 +58,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 #region Dependency Injection
 //depency injection for repository services
 //depenct injection for users repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<ICleanerRepository, CleanerRepository>();
