@@ -33,6 +33,16 @@ namespace clinicAPIsSystem.Models
         {
         }
 
-
+        public void Update(int bloodPressureSystolic, int bloodPressureDiastolic, int heartRate, decimal temperature, decimal oxygenSaturation, DateTime recordedAt, int nurseId, int medicalRecordId)
+        {
+            BloodPressureSystolic = bloodPressureSystolic;
+            BloodPressureDiastolic = bloodPressureDiastolic;
+            HeartRate = heartRate;
+            Temperature = temperature;
+            OxygenSaturation = oxygenSaturation;
+            RecordedAt = recordedAt;
+            NurseId = nurseId;
+            MedicalRecordId = medicalRecordId;
+        }
     }
 }
