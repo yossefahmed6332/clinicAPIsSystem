@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="IServices\IUserServices\" />
+  </ItemGroup>
+
 </Project>

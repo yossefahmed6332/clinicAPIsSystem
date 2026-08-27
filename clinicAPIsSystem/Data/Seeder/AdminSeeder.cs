@@ -21,7 +21,7 @@ namespace clinicAPIsSystem.Data.Seeder
             if (admin != null)
                 return;
 
-            admin = new Admin("System ","Administrator","admin", "admin@clinic.com");
+            admin = new Admin("System ","Administrator","admin", "admin@clinic.com","0122222222");
           
 
             var result = await _userManager.CreateAsync(admin, "Admin@123");

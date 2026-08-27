@@ -8,7 +8,7 @@
         public TimeOnly ShiftEnd { get; protected set; } 
 
 
-        public Employee(string firstName, string lastName, string userName, string email,decimal salaryPerHour,int hoursWorked,TimeOnly shiftStart,TimeOnly shiftEnd): base(firstName, lastName, userName, email)
+        public Employee(string firstName, string lastName, string userName, string email,string phoneNumber,decimal salaryPerHour,int hoursWorked,TimeOnly shiftStart,TimeOnly shiftEnd): base(firstName, lastName, userName, email,phoneNumber)
         {
             SalaryPerHour = salaryPerHour;
             HoursWorked = hoursWorked;
@@ -19,6 +19,16 @@
         public Employee()
         {
         }
+
+        public void UpdateEmployeeInfo(string firstName, string lastName, string userName, string email, string phoneNumber, decimal salaryPerHour, int hoursWorked, TimeOnly shiftStart, TimeOnly shiftEnd)
+        {
+            UpdateUserInfo(firstName, lastName, userName, email, phoneNumber);
+            SalaryPerHour = salaryPerHour;
+            HoursWorked = hoursWorked;
+            ShiftStart = shiftStart;
+            ShiftEnd = shiftEnd;
+        }
+
 
     }
 }
