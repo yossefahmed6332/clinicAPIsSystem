@@ -2,7 +2,7 @@
 
 namespace clinicAPIsSystem.DTOs.AuthDTO
 {
-    public class AuthDto
+    public class LoginDto   
     {
         [Required,EmailAddress]
         public string Email { get; private set; }
