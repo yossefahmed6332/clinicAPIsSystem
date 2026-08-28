@@ -55,12 +55,12 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffReposito
                 addRoleRes.Succeeded);
         }
 
-        public async Task<List<Doctor>> IGetAllDoctorsAsync()
+        public async Task<List<Doctor>> GetAllDoctorsAsync()
         {
             return await _context.TDoctors.ToListAsync();
         }
 
-        public async Task<Doctor?> IGetDoctorAsync(int id)
+        public async Task<Doctor?> GetDoctorAsync(int id)
         {
             return await _context.TDoctors.FindAsync(id);
         }
@@ -68,7 +68,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffReposito
         public async Task<(
             ICollection<Appointment> appointments,
             ICollection<Prescription> prescriptions)>
-            IGetDoctorWithDetailsAsync(int id)
+            GetDoctorWithDetailsAsync(int id)
         {
             var appointments = await _context.TAppointments
                 .Where(a => a.DoctorId == id)
@@ -81,7 +81,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffReposito
             return (appointments, prescriptions);
         }
 
-        public async Task<Doctor> IUpdateDoctorAsync(
+        public async Task<Doctor> UpdateDoctorAsync(
             Doctor doctor)
         {
             _context.TDoctors.Update(doctor);
@@ -91,12 +91,6 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffReposito
             return doctor;
         }
 
-        public async Task IDeleteDoctorAsync(
-            Doctor doctor)
-        {
-            _context.TDoctors.Remove(doctor);
 
-            await _context.SaveChangesAsync();
-        }
     }
 }

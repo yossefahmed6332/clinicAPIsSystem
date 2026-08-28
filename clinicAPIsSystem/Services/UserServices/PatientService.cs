@@ -60,6 +60,7 @@ namespace clinicAPIsSystem.Services.UserServices
         }
         public async Task<PatientDto> UpdatePatientAsync(UpdatePatientDto patient, int id)
         {
+            await _userService.ValidateUserCreation(patient.Email, patient.UserName, patient.PhoneNumber);
             var patientEntity = await _patientRepository.GetPatientAsync(id);
             if (patientEntity == null)
             {

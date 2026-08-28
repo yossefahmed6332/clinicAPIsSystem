@@ -10,3 +10,4 @@ namespace clinicAPIsSystem.IServices.IUserServices.IEmployeeServices
         public Task<CleanerDto> UpdateCleanerAsync(UpdateCleanerDto updateCleanerDto, int id);
     }
 }
+ 
