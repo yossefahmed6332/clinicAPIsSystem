@@ -59,7 +59,7 @@ namespace clinicAPIsSystem.Controllers
             var result = await _userService.UsernameExistsAsync(username);
             return Ok(result);
         }
-        [Authorize(Roles = ()]
+        [Authorize ()]
         [HttpPatch("change-password")]
         public async Task<IActionResult> ChangePassword( [FromBody] ChangePasswordDto request  )
         {

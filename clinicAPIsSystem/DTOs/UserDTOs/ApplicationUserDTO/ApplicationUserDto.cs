@@ -2,22 +2,13 @@
 {
     public abstract class ApplicationUserDto
     {
-        public int Id { get; protected set; } 
-        public string UserName { get; protected set; }
-        public string Email { get; protected set; } 
-        public string FirstName { get; protected set; }
-        public string LastName { get; protected set; } 
-        public string PhoneNumber { get; protected set; }
+        public int Id { get;  set; }
+        public string UserName { get; set; } = null!; 
+        public string Email { get;  set; } = null!;
+        public string FirstName { get;  set; } = null!;
+        public string LastName { get;  set; } = null!;
+        public string PhoneNumber { get;  set; } = null!;
 
 
-        public ApplicationUserDto(int id, string userName, string email, string firstName, string lastName, string phoneNumber)
-        {
-            Id = id;
-            UserName = userName;
-            Email = email;
-            FirstName = firstName;
-            LastName = lastName;
-            PhoneNumber = phoneNumber;
-        }
     }
 }

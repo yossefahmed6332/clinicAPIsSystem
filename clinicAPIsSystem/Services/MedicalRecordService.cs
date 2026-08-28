@@ -14,19 +14,17 @@ namespace clinicAPIsSystem.Service
             _mapper = mapper;
             _medicalRecordRepository = medicalRecordRepository;
         }
-
-        public async Task<MedicalRecordDto> CreateMedicalRecordAsync(CreateMedicalRecordDto createMedicalRecord)
+        public async Task<MedicalRecordDto> CreateMedicalRecordAsync(CreateMedicalRecordDto createMedicalRecordDto)
         {
-            var medicalRecord = new MedicalRecord
-                (
-                createMedicalRecord.Height,
-                createMedicalRecord.Weight,
-                createMedicalRecord.BloodType,
-                createMedicalRecord.PatientId
-                );
-            medicalRecord = await _medicalRecordRepository.CreateMedicalRecordAsync(medicalRecord);
-            return _mapper.Map<MedicalRecordDto>(medicalRecord);
+            var medicalRecord = new MedicalRecord(
+                createMedicalRecordDto.Height,
+                createMedicalRecordDto.Weight,
+                createMedicalRecordDto.BloodType,
+                createMedicalRecordDto.PatientId);
+            var createdMedicalRecord = await _medicalRecordRepository.CreateMedicalRecordAsync(medicalRecord);
+            return _mapper.Map<MedicalRecordDto>(createdMedicalRecord);
         }
+ 
 
         public async Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync()
         {

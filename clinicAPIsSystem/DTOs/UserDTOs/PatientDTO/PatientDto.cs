@@ -7,11 +7,7 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.PatientDTO
         [Required,Range(1,int.MaxValue)]
         public int MedicalRecordId { get; private set; }
 
-        public PatientDto(int id, string userName, string email, string firstName, string lastName, string phoneNumber, int medicalRecordId)
-            : base(id, userName, email, firstName, lastName, phoneNumber)
-        {
-            MedicalRecordId = medicalRecordId;
-        }
+
     }
     
     }

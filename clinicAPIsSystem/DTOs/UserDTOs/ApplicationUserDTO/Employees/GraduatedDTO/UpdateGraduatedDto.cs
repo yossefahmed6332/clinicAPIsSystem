@@ -5,25 +5,17 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedD
     public abstract class UpdateGraduatedDto : UpdateEmployeeDto
     {
         [Required, MaxLength(100)]
-        public string Degree { get; protected set; }
+        public string Degree { get; set; } = null!; 
         [Required, MaxLength(100)]
-        public string University { get; protected set; }
+        public string University { get; set; } = null!; 
         [Required]
-        public int YearsOfExperience { get; protected set; }
+        public int YearsOfExperience { get;  set; }
         [Required, Range(1900, 2600)]
-        public int GraduationYear { get; protected set; }
+        public int GraduationYear { get;  set; }
         [Required, MaxLength(100)]
-        public string License { get; protected set; }
+        public string License { get; set; } = null!; 
 
-        public UpdateGraduatedDto(string firstName, string lastName, string email, string userName, string phoneNumber, decimal salaryPerHour, int hoursWorked, TimeOnly shiftStart, TimeOnly shiftEnd, string degree, string university, int yeatsOfExperience, int graduationYear, string license         )
-            : base(firstName, lastName, email, userName, phoneNumber, salaryPerHour, hoursWorked, shiftStart, shiftEnd)
-        {
-            Degree = degree;
-            University = university;
-            YearsOfExperience = yeatsOfExperience;
-            GraduationYear = graduationYear;
-            License = license;
-        }
+
 
     }
 }
