@@ -25,7 +25,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepos
             Receptionist receptionist,
             bool addUserRes,
             bool addPasswordRes,
-            bool addRoleRes)> ICreateReceptionistAsync(
+            bool addRoleRes)> CreateReceptionistAsync(
                 Receptionist receptionist,
                 string password)
         {
@@ -55,17 +55,17 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepos
                 addRoleRes.Succeeded);
         }
 
-        public async Task<List<Receptionist>> IGetAllReceptionistsAsync()
+        public async Task<List<Receptionist>> GetAllReceptionistsAsync()
         {
             return await _context.TReceptionists.ToListAsync();
         }
 
-        public async Task<Receptionist?> IGetReceptionistAsync(int id)
+        public async Task<Receptionist?> GetReceptionistAsync(int id)
         {
             return await _context.TReceptionists.FindAsync(id);
         }
 
-        public async Task<Receptionist> IUpdateReceptionistAsync(
+        public async Task<Receptionist> UpdateReceptionistAsync(
             Receptionist receptionist)
         {
             _context.TReceptionists.Update(receptionist);
@@ -75,7 +75,7 @@ namespace clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepos
             return receptionist;
         }
 
-        public async Task IDeleteReceptionistAsync(
+        public async Task DeleteReceptionistAsync(
             Receptionist receptionist)
         {
             _context.TReceptionists.Remove(receptionist);

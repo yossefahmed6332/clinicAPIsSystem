@@ -4,14 +4,10 @@ namespace clinicAPIsSystem.DTOs.AuthDTO
 {
     public class LoginDto   
     {
-        [Required,EmailAddress]
-        public string Email { get; private set; }
+        [Required, EmailAddress]
+        public string Email { get; set; } = null!;
         [Required, MinLength(6)]
-        public string Password { get; private set; }
-        public AuthDto(string email, string password)
-        {
-            Email = email;
-            Password = password;
-        }
+        public string Password { get; set; } = null!;
+
     }
 }
