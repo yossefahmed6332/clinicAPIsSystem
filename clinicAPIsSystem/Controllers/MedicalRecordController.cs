@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.MedicalRecordDTOs;
 using clinicAPIsSystem.IService;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clinicAPIsSystem.Controllers
@@ -16,20 +18,7 @@ namespace clinicAPIsSystem.Controllers
             _medicalRecordService = medicalRecordService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateMedicalRecord(
-            [FromBody] CreateMedicalRecordDto medicalRecord)
-        {
-            var createdMedicalRecord =
-                await _medicalRecordService.CreateMedicalRecordAsync(
-                    medicalRecord);
-
-            return CreatedAtAction(
-                nameof(GetMedicalRecord),
-                new { id = createdMedicalRecord.Id },
-                createdMedicalRecord);
-        }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Nurse)}, {nameof(UserRole.Receptionist)}, {nameof(UserRole.Manager)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllMedicalRecords()
         {
@@ -38,7 +27,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(medicalRecords);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Nurse)}, {nameof(UserRole.Receptionist)}, {nameof(UserRole.Manager)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMedicalRecord(int id)
         {
@@ -48,6 +37,7 @@ namespace clinicAPIsSystem.Controllers
             return Ok(medicalRecord);
         }
 
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Nurse)}, {nameof(UserRole.Receptionist)}, {nameof(UserRole.Manager)}")]
         [HttpGet("patient/{patientId}")]
         public async Task<IActionResult> GetMedicalRecordByPatientId(
             int patientId)
@@ -58,7 +48,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(medicalRecord);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Nurse)}, {nameof(UserRole.Receptionist)}, {nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMedicalRecord(
             int id,

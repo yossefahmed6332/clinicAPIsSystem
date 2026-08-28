@@ -4,7 +4,6 @@ namespace clinicAPIsSystem.IService
 {
     public interface IMedicalRecordService
     {
-        public Task<MedicalRecordDto> CreateMedicalRecordAsync(CreateMedicalRecordDto medicalRecord);
         public Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync();
         public Task<MedicalRecordDto> GetMedicalRecord(int id); 
         public Task<MedicalRecordDto> GetMedicalByPatientIdRecord(int PatientId);
