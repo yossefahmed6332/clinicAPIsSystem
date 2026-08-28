@@ -16,7 +16,7 @@
         public Patient()
         {
         }
-        public void UpdatePatientInfo(int medicalRecordId, string firstName, string lastName, string userName, string email ,string phoneNumber)
+        public void UpdatePatientInfo(string firstName, string lastName, string userName, string email ,string phoneNumber)
         {
             UpdateUserInfo(firstName, lastName, userName, email, phoneNumber);
         }

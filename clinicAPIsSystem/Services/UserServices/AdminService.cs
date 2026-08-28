@@ -37,7 +37,7 @@ namespace clinicAPIsSystem.Services.UserServices
                 throw new Exception("Cannot create user, try again");
             }
 
-            return _mapper.Map<AdminDto>(createdAdmin);
+            return _mapper.Map<AdminDto>(createdAdmin.admin);
         }
 
         public async Task<List<AdminDto>> GetAllAdminsAsync()
