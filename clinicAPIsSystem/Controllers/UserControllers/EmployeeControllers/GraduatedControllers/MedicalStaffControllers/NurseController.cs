@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.MedicalStaffDTO.Nurse;
 using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.IMedicalStaffServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _nurseService = nurseService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateNurse(
             [FromBody] CreateNurseDto createNurseDto
@@ -28,7 +30,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(nurse);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllNurses()
         {
@@ -37,7 +39,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(nurses);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetNurse(int id)
         {
@@ -46,7 +48,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(nurse);
         }
-
+        [Authorize(Roles = nameof(UserRole.Nurse))]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateNurseDto updateNurseDto)
@@ -66,7 +68,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedNurse);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNurse(
             int id,
