@@ -11,6 +11,8 @@ namespace clinicAPIsSystem.IServices.IUserServices
         public Task<ApplicationUserDto?> GetUserByEmailAsync(string email);
 
         public Task<ApplicationUserDto?> GetUserByUsernameAsync(string username);
+
+        public Task<int> GetIdFromTokensAsync(string tokens); 
         
         //this is to check if user exists
         public Task<bool> PhoneNumberExistsAsync(string phoneNumber);

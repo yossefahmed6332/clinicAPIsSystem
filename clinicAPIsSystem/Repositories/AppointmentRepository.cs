@@ -30,6 +30,11 @@ namespace clinicAPIsSystem.RepositoryService
         {
             return await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
         }
+
+        public async Task<List<Appointment>> GetAppointmentsForUser(int userId)
+        {
+            return await _context.TAppointments.Where(a => a.PatientId == userId || a.DoctorId == userId || a.NurseId == userId).ToListAsync();
+        }   
         public async Task<List<Appointment>> GetAppointmentsByDoctorIdAsync(int doctorId)
         {
             return await _context.TAppointments.Where(a => a.DoctorId == doctorId).ToListAsync();

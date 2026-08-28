@@ -3,17 +3,20 @@ using clinicAPIsSystem.DTOs.AppointmentDTOs;
 using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
 using clinicAPIsSystem.IRepositoryService;
+using clinicAPIsSystem.IServices.IUserServices;
 
 namespace clinicAPIsSystem.Service
 {
     public class AppointmentService : IAppointmentService
     {
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public AppointmentService(IAppointmentRepository appointmentRepository, IMapper mapper)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IMapper mapper, IUserService userService)
         {
             _appointmentRepository = appointmentRepository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public async Task<AppointmentDto> CreateAppointmentAsync(CreateAppointmentDto createAppointmentDto)
@@ -57,11 +60,40 @@ namespace clinicAPIsSystem.Service
             }
             return _mapper.Map<AppointmentDto>(appointment);
         }
+
+
+        public async Task<List<AppointmentDto>> GetAppointmentsByDoctorIdAsync(int doctorId)
+        {
+            var appointments = await _appointmentRepository.GetAppointmentsByDoctorIdAsync(doctorId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+        public async Task<List<AppointmentDto>> GetAppointmentsByPatientIdAsync(int patientId)
+        {
+            var appointments = await _appointmentRepository.GetAppointmentsByPatientIdAsync(patientId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+        public async Task<List<AppointmentDto>> GetAppointmentsByNurseIdAsync(int nurseId)
+        {
+            var appointments = await _appointmentRepository.GetAppointmentsByNurseIdAsync(nurseId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+
+
+
+
+
         public async Task<List<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status)
         {
             var appointments = await _appointmentRepository.GetAppointmentsByStatusAsync(status);
             
             return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+
+        public async Task<List<AppointmentDto>> GetAppointmentsForUserByTokens(string token)
+        {
+            var user = await _userService.GetIdFromTokensAsync(token);
+            return _mapper.Map<List<AppointmentDto>>(await _appointmentRepository.GetAppointmentsForUser(user));
+
         }
         public async Task<AppointmentDto> UpdateAppointmentAsync(
             UpdateAppointmentDto updateAppointmentDto,

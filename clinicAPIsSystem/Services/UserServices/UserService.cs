@@ -4,6 +4,8 @@ using clinicAPIsSystem.IServices.IUserServices;
 using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 namespace clinicAPIsSystem.Services.UserServices
 {
     public class UserService : IUserService
@@ -81,16 +83,33 @@ namespace clinicAPIsSystem.Services.UserServices
             }
 
         }
-        public async Task DeleteUserAsync (int id)
+        public async Task<int> GetIdFromTokensAsync(string token)
         {
-           var user =  await _userRepository.GetUserAsync(id);
+            var handler = new JwtSecurityTokenHandler();
+
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var userIdClaim = jwtToken.Claims
+                .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+                throw new UnauthorizedAccessException("User ID not found in token.");
+
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                throw new UnauthorizedAccessException("Invalid User ID in token.");
+
+            return userId;
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var user = await _userRepository.GetUserAsync(id);
             if (user == null)
             {
-                throw new KeyNotFoundException($"Cannot find user with ID{id}");
+                throw new ArgumentException("User not found.");
             }
             await _userRepository.DeleteUserAsync(user);
         }
-
 
     }
 }

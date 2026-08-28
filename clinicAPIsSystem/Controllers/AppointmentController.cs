@@ -1,6 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.AppointmentDTOs;
 using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]
@@ -14,6 +15,7 @@ public class AppointmentController : ControllerBase
         _appointmentService = appointmentService;
     }
 
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
     [HttpPost]
     public async Task<IActionResult> CreateAppointment(
         [FromBody] CreateAppointmentDto appointment)
@@ -27,6 +29,7 @@ public class AppointmentController : ControllerBase
             createdAppointment);
     }
 
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
     [HttpGet]
     public async Task<IActionResult> GetAllAppointments()
     {
@@ -36,6 +39,7 @@ public class AppointmentController : ControllerBase
         return Ok(appointments);
     }
 
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAppointmentById(int id)
     {
@@ -45,6 +49,7 @@ public class AppointmentController : ControllerBase
         return Ok(appointment);
     }
 
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
     [HttpGet("status/{status}")]
     public async Task<IActionResult> GetAppointmentsByStatus(AppointmentStatus status)
     {
@@ -53,6 +58,40 @@ public class AppointmentController : ControllerBase
 
         return Ok(appointments);
     }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("doctor/{doctorId}")]
+    public async Task<IActionResult> GetAppointmentsByDoctorId(int doctorId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByDoctorIdAsync(doctorId);
+        return Ok(appointments);
+    }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("patient/{patientId}")]
+    public async Task<IActionResult> GetAppointmentsByPatientId(int patientId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByPatientIdAsync(patientId);
+        return Ok(appointments);
+    }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("nurse/{nurseId}")]
+    public async Task<IActionResult> GetAppointmentsByNurseId(int nurseId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByNurseIdAsync(nurseId);
+        return Ok(appointments);
+    }
+
+    [Authorize()]
+    [HttpGet("user")]
+    public async Task<IActionResult> GetAppointmentsForUser()
+    {
+        var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+        var appointments = await _appointmentService.GetAppointmentsForUserByTokens(token);
+        return Ok(appointments);
+    }
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAppointment(
