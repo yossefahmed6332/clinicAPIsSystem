@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.AdminDTO;
 using clinicAPIsSystem.IServices.IUserServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -16,6 +18,7 @@ namespace clinicAPIsSystem.Controllers
             _adminService = adminService;
         }
 
+        [Authorize(Roles = "No body can create admin")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateAdmin(
             [FromBody] CreateAdminDto admin
@@ -26,7 +29,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(createdAdmin);
         }
-
+        [Authorize(Roles = nameof(UserRole.Admin))]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllAdmins()
         {
@@ -35,6 +38,7 @@ namespace clinicAPIsSystem.Controllers
             return Ok(admins);
         }
 
+        [Authorize(Roles = nameof(UserRole.Admin))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAdmin(int id)
         {
@@ -44,6 +48,7 @@ namespace clinicAPIsSystem.Controllers
         }
 
         // Update current logged-in admin
+        [Authorize(Roles = nameof(UserRole.Admin))]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateAdminDto admin)
@@ -63,6 +68,7 @@ namespace clinicAPIsSystem.Controllers
         }
 
         // Update specific admin - intended for Admin
+        [Authorize(Roles = nameof(UserRole.Admin))]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAdmin(
             int id,
