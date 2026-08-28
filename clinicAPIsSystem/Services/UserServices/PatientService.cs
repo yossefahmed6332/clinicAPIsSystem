@@ -22,10 +22,10 @@ namespace clinicAPIsSystem.Services.UserServices
             _mapper = mapper;
         }
 
-        public async Task<PatientDto> CreatePatientAsync(CreatePatientDto createPatientDto,CreateMedicalRecordDto createMedicalRecordDto, string password)
+        public async Task<PatientDto> CreatePatientAsync(CreatePatientDto createPatientDto ,string password)
         {
             await _userService.ValidateUserCreation(createPatientDto.Email,createPatientDto.UserName,createPatientDto.PhoneNumber);
-            var medicalRecord= await _medicalRecordService.CreateMedicalRecordAsync(createMedicalRecordDto);
+            var medicalRecord= await _medicalRecordService.CreateMedicalRecordAsync(createPatientDto.createMedicalRecordDto);
 
             var patient = new Patient(medicalRecord.Id,createPatientDto.FirstName,createPatientDto.LastName,createPatientDto.UserName,createPatientDto.Email,createPatientDto.PhoneNumber);
             var patientCreated = await  _patientRepository.CreatePatientAsync(patient, password);

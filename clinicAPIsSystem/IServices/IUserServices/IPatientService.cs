@@ -7,7 +7,6 @@ namespace clinicAPIsSystem.IServices.IUserServices
     {
         public Task<PatientDto> CreatePatientAsync(
             CreatePatientDto createPatientDto,
-            CreateMedicalRecordDto createMedicalRecordDto,
             string password);
         public Task<List<PatientDto>> GetAllPatientsAsync();
         public Task<PatientDto?> GetPatientAsync(int id);

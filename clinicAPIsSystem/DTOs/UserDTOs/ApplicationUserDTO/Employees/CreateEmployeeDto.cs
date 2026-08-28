@@ -14,14 +14,7 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees
         public TimeOnly ShiftEnd { get;protected set; }
 
 
-        public CreateEmployeeDto(string firstName, string lastName, string email, string userName, string phoneNumber, decimal salaryPerHour, int hoursWorked, TimeOnly shiftStart, TimeOnly shiftEnd)
-            : base(firstName, lastName, email, userName, phoneNumber)
-        {
-            SalaryPerHour = salaryPerHour;
-            HoursWorked = hoursWorked;
-            ShiftStart = shiftStart;
-            ShiftEnd = shiftEnd;
-        }
+
     }
     
     

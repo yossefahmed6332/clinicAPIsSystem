@@ -1,13 +1,14 @@
-﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO;
+﻿using clinicAPIsSystem.DTOs.MedicalRecordDTOs;
+using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO;
+using System.ComponentModel.DataAnnotations;
 
 namespace clinicAPIsSystem.DTOs.UserDTOs.PatientDTO
 {
     public class CreatePatientDto:CreateApplicationUserDto
     {
-        public CreatePatientDto(string firstName, string lastName, string email, string userName, string phoneNumber)
-            : base(firstName, lastName, email, userName, phoneNumber)
-        {
-        }
+        [Required]
+        public CreateMedicalRecordDto createMedicalRecordDto { set; get; } = null!;
+
     
     }
 }

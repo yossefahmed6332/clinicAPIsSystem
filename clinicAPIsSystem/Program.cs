@@ -5,7 +5,11 @@ using clinicAPIsSystem.IRepositoryService.IUserRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.IMedicalStaffRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.IService;
 using clinicAPIsSystem.IServices.IUserServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.IMedicalStaffServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalStaffServices;
 using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
 using clinicAPIsSystem.Repositories.UserRepository;
@@ -14,7 +18,11 @@ using clinicAPIsSystem.RepositoryService.UserRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
+using clinicAPIsSystem.Service;
 using clinicAPIsSystem.Services.UserServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaffServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -81,8 +89,24 @@ builder.Services.AddScoped<RoleSeeder>();
 builder.Services.AddScoped<AdminSeeder>();
 
 //dependency injection for services
-builder.Services.AddScoped<IUserService, UserService>(); 
-
+//dependency injection for non-user services
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IExaminationResultService, ExaminationResultService>();
+builder.Services.AddScoped<IFinancialReportService, FinancialReportService>();
+builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+builder.Services.AddScoped<IPaymentOperationService, PaymentOperationService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
+builder.Services.AddScoped<IVitalSignsService, VitalSignsService>();
+//dependency injection for user services
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ICleanerService, CleanerService>();
+builder.Services.AddScoped<IAccountantService, AccountantService>();
+builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
+builder.Services.AddScoped<INurseService, NurseService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 #endregion
 
 #region AutoMapper
