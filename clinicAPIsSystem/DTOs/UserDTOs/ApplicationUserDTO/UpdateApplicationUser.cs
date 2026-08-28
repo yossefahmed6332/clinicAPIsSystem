@@ -5,23 +5,17 @@ namespace clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO
     public abstract class UpdateApplicationUserDto
     {
         [Required, MaxLength(50)]
-        public string FirstName { get; protected set; }
+        public string FirstName { get; set; } = null!;
         [Required, MaxLength(50)]
-        public string LastName { get; protected set; }
+        public string LastName { get; set; } = null!;
         [Required, EmailAddress]
-        public string Email { get; protected set; }
+        public string Email { get; set; } = null!;
         [Required, MaxLength(50)]
-        public string UserName { get; protected set; }
+        public string UserName { get; set; } = null!;
         [Required, MaxLength(30)]
-        public string PhoneNumber { get; protected set; }
-        public UpdateApplicationUserDto(string firstName, string lastName, string email, string userName, string phoneNumber)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            UserName = userName;
-            PhoneNumber = phoneNumber;
-        }
+        public string PhoneNumber { get; set; } = null!;
+        [Required,MinLength(6)]
+        public string Password { get; set; } = null!;
 
 
 

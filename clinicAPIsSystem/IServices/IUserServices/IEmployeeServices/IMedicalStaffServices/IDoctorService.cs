@@ -5,7 +5,7 @@ namespace clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.IMedicalSta
 {
     public interface IDoctorService
     {
-        public Task<DoctorDto> CreateDoctorAsync(CreateDoctorDto createDoctorDto, string password);
+        public Task<DoctorDto> CreateDoctorAsync(CreateDoctorDto createDoctorDto);
         public Task<List<DoctorDto>> GetAllDoctorsAsync();
         public Task<DoctorDto> GetDoctorAsync(int id);
         public Task<DoctorDto> UpdateDoctorAsync(UpdateDoctorDto updateDoctorDto, int id);

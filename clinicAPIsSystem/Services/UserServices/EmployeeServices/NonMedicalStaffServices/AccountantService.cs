@@ -24,8 +24,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
         }
 
         public async Task<AccountantDto> CreateAccountantAsync(
-            CreateAccountantDto createAccountantDto,
-            string password)
+            CreateAccountantDto createAccountantDto
+            )
         {
             await _userService.ValidateUserCreation(
                 createAccountantDto.Email,
@@ -52,7 +52,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             var accountantCreated =
                 await _accountantRepository.CreateAccountantAsync(
                     accountant,
-                    password);
+                    createAccountantDto.Password);
 
             if (!(accountantCreated.addUserRes &&
                   accountantCreated.addPasswordRes &&

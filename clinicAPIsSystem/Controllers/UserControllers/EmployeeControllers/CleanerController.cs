@@ -18,12 +18,12 @@ namespace clinicAPIsSystem.Controllers
 
         [HttpPost("add")]
         public async Task<IActionResult> CreateCleaner(
-            [FromBody] CreateCleanerDto createCleanerDto,
-            string password)
+            [FromBody] CreateCleanerDto createCleanerDto
+            )
         {
             var cleaner = await _cleanerService.CreateCleanerAsync(
-                createCleanerDto,
-                password);
+                createCleanerDto
+                );
 
             return Ok(cleaner);
         }

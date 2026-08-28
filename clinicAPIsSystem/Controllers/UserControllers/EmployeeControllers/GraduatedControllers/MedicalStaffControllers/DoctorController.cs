@@ -18,13 +18,13 @@ namespace clinicAPIsSystem.Controllers
 
         [HttpPost("add")]
         public async Task<IActionResult> CreateDoctor(
-            [FromBody] CreateDoctorDto createDoctorDto,
-            string password)
+            [FromBody] CreateDoctorDto createDoctorDto
+            )
         {
             var doctor =
                 await _doctorService.CreateDoctorAsync(
-                    createDoctorDto,
-                    password);
+                    createDoctorDto
+                    );
 
             return Ok(doctor);
         }

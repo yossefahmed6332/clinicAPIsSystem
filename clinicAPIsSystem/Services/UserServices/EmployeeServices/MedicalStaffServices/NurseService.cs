@@ -19,7 +19,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
             _userService = userService;
         }
 
-        public async Task<NurseDto> CreateNurseAsync(CreateNurseDto createNurseDto, string password)
+        public async Task<NurseDto> CreateNurseAsync(CreateNurseDto createNurseDto)
         {
             await _userService.ValidateUserCreation(createNurseDto.Email, createNurseDto.UserName, createNurseDto.PhoneNumber);
 
@@ -40,7 +40,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
                 createNurseDto.License
                 );
 
-            var nurseCreated = await _nurseRepository.CreateNurseAsync(nurse, password);
+            var nurseCreated = await _nurseRepository.CreateNurseAsync(nurse, createNurseDto.Password);
 
             if (!(nurseCreated.addUserRes &&
                   nurseCreated.addPasswordRes &&

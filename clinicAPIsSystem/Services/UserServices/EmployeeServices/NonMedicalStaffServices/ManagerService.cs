@@ -19,7 +19,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             _userService = userService;
             _managerRepository = managerRepository;
         }
-        public async Task<ManagerDto> CreateManagerAsync(CreateManagerDto createManagerDto, string password)
+        public async Task<ManagerDto> CreateManagerAsync(CreateManagerDto createManagerDto)
         {
             await _userService.ValidateUserCreation(createManagerDto.Email, createManagerDto.UserName, createManagerDto.PhoneNumber);
             var manager = new Manager(
@@ -39,7 +39,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
                 createManagerDto.License
             );
 
-            var managerCreated = await _managerRepository.CreateManagerAsync(manager, password);
+            var managerCreated = await _managerRepository.CreateManagerAsync(manager, createManagerDto.Password);
             if (!(managerCreated.addUserRes &&
                   managerCreated.addPasswordRes &&
                   managerCreated.addRoleRes))

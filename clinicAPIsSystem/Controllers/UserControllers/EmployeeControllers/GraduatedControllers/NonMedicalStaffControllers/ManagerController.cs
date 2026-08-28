@@ -18,12 +18,12 @@ namespace clinicAPIsSystem.Controllers
 
         [HttpPost("add")]
         public async Task<IActionResult> CreateManager(
-            [FromBody] CreateManagerDto createManagerDto,
-            string password)
+            [FromBody] CreateManagerDto createManagerDto
+            )
         {
             var manager = await _managerService.CreateManagerAsync(
-                createManagerDto,
-                password);
+                createManagerDto
+                );
 
             return Ok(manager);
         }

@@ -18,6 +18,7 @@ namespace clinicAPIsSystem.IServices.IUserServices
         public Task<bool> EmailExistsAsync(string email);
 
         public Task<bool> UsernameExistsAsync(string username);
+        public Task ChangePasswordASync(int id, string currentPassword , string newPassword);
         //Delete user 
         public Task DeleteUserAsync (int id);
     }

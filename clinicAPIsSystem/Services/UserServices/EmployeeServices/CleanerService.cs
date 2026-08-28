@@ -20,7 +20,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices
             _mapper = mapper;
         }
 
-        public async Task<CleanerDto> CreateCleanerAsync(CreateCleanerDto createCleanerDto,string password)
+        public async Task<CleanerDto> CreateCleanerAsync(CreateCleanerDto createCleanerDto)
         { 
             await _userService.ValidateUserCreation(createCleanerDto.Email, createCleanerDto.UserName, createCleanerDto.PhoneNumber);
 
@@ -36,7 +36,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices
                 createCleanerDto.ShiftEnd
                 );
 
-            var createdCleaner = await _cleanerRepository.CreateCleanerAsync(cleaner,password);
+            var createdCleaner = await _cleanerRepository.CreateCleanerAsync(cleaner,createCleanerDto.Password);
             if (!(createdCleaner.addUserRes &&
                   createdCleaner.addPasswordRes &&
                   createdCleaner.addRoleRes))

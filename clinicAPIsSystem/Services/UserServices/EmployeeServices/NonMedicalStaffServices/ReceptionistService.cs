@@ -25,8 +25,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
         }
 
         public async Task<ReceptionistDto> CreateReceptionistAsync(
-            CreateReceptionistDto createReceptionistDto,
-            string password)
+            CreateReceptionistDto createReceptionistDto
+            )
         {
             await _userService.ValidateUserCreation(
                 createReceptionistDto.Email,
@@ -53,7 +53,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             var receptionistCreated =
                 await _receptionistRepository.CreateReceptionistAsync(
                     receptionist,
-                    password);
+                    createReceptionistDto.Password);
 
             if (!(receptionistCreated.addUserRes &&
                   receptionistCreated.addPasswordRes &&

@@ -3,6 +3,7 @@ using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO;
 using clinicAPIsSystem.IServices.IUserServices;
 using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
+using Microsoft.AspNetCore.Identity;
 namespace clinicAPIsSystem.Services.UserServices
 {
     public class UserService : IUserService
@@ -59,7 +60,27 @@ namespace clinicAPIsSystem.Services.UserServices
                 throw new ArgumentException("Phone number already exists.");
             }
         }
+        public async Task ChangePasswordASync(int id, string currentPassword, string newPassword)
+        {
+            var user = await _userRepository.GetUserAsync(id);
+            if (user == null)
+            {
+                throw new ArgumentException("User not found.");
+            }
+            var result = await _userRepository.ChangePasswordAsync(
+                     user,
+                     currentPassword,
+                      newPassword
+                    );
 
+            if (!result.Succeeded)
+            {
+                throw new ArgumentException(
+                    string.Join(", ", result.Errors.Select(e => e.Description))
+                );
+            }
+
+        }
         public async Task DeleteUserAsync (int id)
         {
            var user =  await _userRepository.GetUserAsync(id);

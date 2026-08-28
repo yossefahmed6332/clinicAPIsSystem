@@ -24,8 +24,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
         }
 
         public async Task<DoctorDto> CreateDoctorAsync(
-            CreateDoctorDto createDoctorDto,
-            string password)
+            CreateDoctorDto createDoctorDto
+           )
         {
             await _userService.ValidateUserCreation(
                 createDoctorDto.Email,
@@ -52,7 +52,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
             var doctorCreated =
                 await _doctorRepository.CreateDoctorAsync(
                     doctor,
-                    password);
+                    createDoctorDto.Password);
 
             if (!(doctorCreated.addUserRes &&
                   doctorCreated.addPasswordRes &&

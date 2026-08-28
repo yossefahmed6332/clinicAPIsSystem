@@ -5,8 +5,8 @@ namespace clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalS
     public interface IReceptionistService
     {
         public Task<ReceptionistDto> CreateReceptionistAsync(
-            CreateReceptionistDto createReceptionistDto,
-            string password);
+            CreateReceptionistDto createReceptionistDto
+            );
 
         public Task<ReceptionistDto> GetReceptionistAsync(int id);
 

@@ -18,12 +18,12 @@ namespace clinicAPIsSystem.Services.UserServices
             _userService = userService;
         }
 
-        public async Task<AdminDto> CreateAdminAsync(CreateAdminDto admin, string password)
+        public async Task<AdminDto> CreateAdminAsync(CreateAdminDto admin)
         {
             await _userService.ValidateUserCreation(admin.Email, admin.UserName, admin.PhoneNumber);
 
             var adminEntity = new Admin(admin.FirstName, admin.LastName, admin.Email, admin.UserName, admin.PhoneNumber);
-            var createdAdmin = await _adminRepository.CreateAdminAsync(adminEntity, password);
+            var createdAdmin = await _adminRepository.CreateAdminAsync(adminEntity, admin.Password);
 
             if (!(createdAdmin.addUserRes &&
                 createdAdmin.addPasswordRes &&

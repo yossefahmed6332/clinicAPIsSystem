@@ -1,5 +1,7 @@
-﻿using clinicAPIsSystem.IServices.IUserServices;
+﻿using clinicAPIsSystem.DTOs.UserDTOs.ChangePasswordDTO;
+using clinicAPIsSystem.IServices.IUserServices;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace clinicAPIsSystem.Controllers
 {
@@ -55,6 +57,22 @@ namespace clinicAPIsSystem.Controllers
             var result = await _userService.UsernameExistsAsync(username);
             return Ok(result);
         }
+
+        [HttpPatch("change-password")]
+        public async Task<IActionResult> ChangePassword( [FromBody] ChangePasswordDto request  )
+        {
+            var idClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (idClaim == null)
+                return Unauthorized();
+
+            if (!int.TryParse(idClaim.Value, out int id))
+                return Unauthorized();
+             
+            await _userService.ChangePasswordASync(id, request.CurrentPassword, request.Password);
+            return NoContent();
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)

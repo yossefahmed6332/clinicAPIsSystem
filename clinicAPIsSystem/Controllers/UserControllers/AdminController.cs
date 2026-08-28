@@ -18,11 +18,11 @@ namespace clinicAPIsSystem.Controllers
 
         [HttpPost("add")]
         public async Task<IActionResult> CreateAdmin(
-            [FromBody] CreateAdminDto admin,
-            [FromQuery] string password)
+            [FromBody] CreateAdminDto admin
+            )
         {
             var createdAdmin =
-                await _adminService.CreateAdminAsync(admin, password);
+                await _adminService.CreateAdminAsync(admin  );
 
             return Ok(createdAdmin);
         }

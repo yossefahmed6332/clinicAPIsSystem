@@ -39,6 +39,22 @@ namespace clinicAPIsSystem.Repositories.UserRepository
             return (await _userManager.FindByNameAsync(username)) != null;
         }
 
+        public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user,string currentPassword,  string newPassword )
+        {
+            var result = await _userManager.ChangePasswordAsync(
+                user,
+                currentPassword,
+                newPassword
+            );
+
+            return result; 
+        }
+
         public async Task DeleteUserAsync(ApplicationUser user) {
             await _userManager.DeleteAsync(user); 
         }
