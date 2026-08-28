@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.FinanialReportDTOs;
 using clinicAPIsSystem.IService;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clinicAPIsSystem.Controllers
@@ -16,6 +18,7 @@ namespace clinicAPIsSystem.Controllers
             _financialReportService = financialReportService;
         }
 
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Manager)}, {nameof(UserRole.Accountant)}")]
         [HttpPost]
         public async Task<IActionResult> CreateFinancialReport(
             [FromBody] CreateFinancialReportDto createFinancialReportDto)
@@ -29,7 +32,7 @@ namespace clinicAPIsSystem.Controllers
                 new { id = createdFinancialReport.Id },
                 createdFinancialReport);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Manager)}, {nameof(UserRole.Accountant)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllFinancialReports()
         {
@@ -38,7 +41,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(financialReports);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Manager)}, {nameof(UserRole.Accountant)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFinancialReport(int id)
         {
@@ -47,7 +50,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(financialReport);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Manager)}, {nameof(UserRole.Accountant)}")]
         [HttpGet("range")]
         public async Task<IActionResult> GetFinancialReportsByRange(
             [FromQuery] decimal min,
@@ -64,7 +67,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(financialReports);
         }
-
+        [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Manager)}, {nameof(UserRole.Accountant)}")]
         [HttpGet("date-range")]
         public async Task<IActionResult> GetFinancialReportsByDateRange(
             [FromQuery] DateTime startDate,
