@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.PaymentOperationDTOs;
 using clinicAPIsSystem.IService;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clinicAPIsSystem.Controllers
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _paymentOperationService = paymentOperationService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Accountant)},{nameof(UserRole.Manager)},{nameof(UserRole.Admin)}")]
         [HttpPost]
         public async Task<IActionResult> CreatePaymentOperation(
             [FromBody] CreatePaymentOperationDto createPaymentOperationDto)
@@ -29,7 +31,7 @@ namespace clinicAPIsSystem.Controllers
                 new { id = createdPaymentOperation.Id },
                 createdPaymentOperation);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Accountant)},{nameof(UserRole.Manager)},{nameof(UserRole.Admin)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllPaymentOperations()
         {
@@ -38,7 +40,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(paymentOperations);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Accountant)},{nameof(UserRole.Manager)},{nameof(UserRole.Admin)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPaymentOperation(int id)
         {
@@ -47,7 +49,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(paymentOperation);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Accountant)},{nameof(UserRole.Manager)},{nameof(UserRole.Admin)}")]
         [HttpGet("patient/{patientId}")]
         public async Task<IActionResult> GetPaymentOperationsByPatientId(
             int patientId)
@@ -58,7 +60,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(paymentOperations);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Accountant)},{nameof(UserRole.Manager)},{nameof(UserRole.Admin)}")]
         [HttpGet("accountant/{accountantId}")]
         public async Task<IActionResult> GetPaymentOperationsByAccountantId(
             int accountantId)
