@@ -20,8 +20,9 @@ namespace clinicAPIsSystem.Data.Seeder
             UserRole.Patient.ToString(),
             UserRole.Accountant.ToString(),
             UserRole.Receptionist.ToString(),
+            UserRole.Manager.ToString(),
             UserRole.Cleaner.ToString()
-        };
+            };
 
             foreach (var role in UserUserRole)
             {

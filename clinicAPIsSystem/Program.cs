@@ -19,6 +19,7 @@ using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
 using clinicAPIsSystem.Service;
+using clinicAPIsSystem.Services.AuthServices;
 using clinicAPIsSystem.Services.UserServices;
 using clinicAPIsSystem.Services.UserServices.EmployeeServices;
 using clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffServices;
@@ -107,6 +108,8 @@ builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
 builder.Services.AddScoped<IManagerService, ManagerService>();
 builder.Services.AddScoped<INurseService, NurseService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+//depency injection for auth service 
+builder.Services.AddScoped<ILoginService, LoginService>();
 #endregion
 
 #region AutoMapper
