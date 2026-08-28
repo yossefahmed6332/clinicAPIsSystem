@@ -46,7 +46,7 @@ namespace clinicAPIsSystem.Controllers
             return Ok(cleaner);
         }
 
-        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
+        [Authorize(Roles = $"{nameof(UserRole.Cleaner)}")]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateCleanerDto updateCleanerDto)

@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.NonMedicalStaffDTO.ManagerDTO;
 using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalStaffServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _managerService = managerService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateManager(
             [FromBody] CreateManagerDto createManagerDto
@@ -27,7 +29,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(manager);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllManagers()
         {
@@ -35,7 +37,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(managers);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetManager(int id)
         {
@@ -43,7 +45,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(manager);
         }
-
+        [Authorize(Roles =$"{nameof(UserRole.Manager)}")]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateManagerDto updateManagerDto)
@@ -63,7 +65,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedManager);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateManager(
             int id,

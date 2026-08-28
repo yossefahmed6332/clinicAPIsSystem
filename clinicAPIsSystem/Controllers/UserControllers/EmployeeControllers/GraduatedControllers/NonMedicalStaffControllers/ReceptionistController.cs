@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.NonMedicalStaffDTO.ReceptionistDTO;
 using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalStaffServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _receptionistService = receptionistService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateReceptionist(
             [FromBody] CreateReceptionistDto createReceptionistDto
@@ -28,6 +30,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(receptionist);
         }
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetReceptionist(int id)
@@ -37,7 +40,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(receptionist);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllReceptionists()
         {
@@ -46,7 +49,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(receptionists);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Receptionist)}")]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateReceptionistDto updateReceptionistDto)
@@ -66,7 +69,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedReceptionist);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateReceptionist(
             int id,

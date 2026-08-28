@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.GraduatedDTO.NonMedicalStaffDTO.AccountantDTO;
 using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalStaffServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _accountantService = accountantService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateAccountant(
             [FromBody] CreateAccountantDto createAccountantDto
@@ -28,7 +30,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(accountant);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllAccountants()
         {
@@ -37,7 +39,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(accountants);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccountant(int id)
         {
@@ -46,7 +48,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(accountant);
         }
-
+        [Authorize(Roles = nameof(UserRole.Accountant))]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateAccountantDto updateAccountantDto)
@@ -66,7 +68,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedAccountant);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAccountant(
             int id,
