@@ -9,8 +9,8 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
         {
             //set properties
             builder.HasKey(m => m.Id);
-            builder.Property(m=>m.Height).IsRequired();
-            builder.Property(m => m.Weight).IsRequired();
+            builder.Property(m=>m.Height).IsRequired().HasPrecision(5,2);
+            builder.Property(m => m.Weight).IsRequired().HasPrecision(5,2);
             builder.Property(m=>m.BloodType).IsRequired().HasMaxLength(10);
             builder.Property(m=>m.PatientId).IsRequired();
 

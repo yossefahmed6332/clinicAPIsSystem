@@ -8,7 +8,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration.EmployeeCo
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
             //set properties 
-            builder.Property(a => a.SalaryPerHour).IsRequired();
+            builder.Property(a => a.SalaryPerHour).IsRequired().HasPrecision(10,2);
             builder.Property(a => a.HoursWorked).IsRequired();
             builder.Property(a => a.ShiftStart).IsRequired().HasColumnType("Time");
             builder.Property(a => a.ShiftEnd).IsRequired().HasColumnType("Time");

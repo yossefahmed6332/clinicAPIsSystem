@@ -14,7 +14,7 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
             builder.Property(v => v.BloodPressureDiastolic).IsRequired();
             builder.Property(v => v.HeartRate).IsRequired();
             builder.Property(v => v.Temperature).IsRequired().HasColumnType("decimal(18,2)");
-            builder.Property(v => v.OxygenSaturation).IsRequired();
+            builder.Property(v => v.OxygenSaturation).IsRequired().HasPrecision(5,2);
             builder.Property(v => v.RecordedAt).IsRequired().HasColumnType("DateTime2");
             builder.Property(v => v.NurseId).IsRequired();
             builder.Property(v => v.MedicalRecordId).IsRequired();
