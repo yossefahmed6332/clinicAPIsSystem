@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.PrescriptionDTOs;
 using clinicAPIsSystem.IService;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clinicAPIsSystem.Controllers
@@ -16,6 +18,7 @@ namespace clinicAPIsSystem.Controllers
             _prescriptionService = prescriptionService;
         }
 
+        [Authorize(Roles =$"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)}")]
         [HttpPost]
         public async Task<IActionResult> CreatePrescription(
             [FromBody] CreatePrescriptionDto createPrescriptionDto)
@@ -29,7 +32,7 @@ namespace clinicAPIsSystem.Controllers
                 new { id = createdPrescription.Id },
                 createdPrescription);
         }
-            
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllPrescriptions()
         {
@@ -38,7 +41,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(prescriptions);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPrescription(int id)
         {
@@ -47,7 +50,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(prescription);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("medical-record/{medicalRecordId}")]
         public async Task<IActionResult> GetPrescriptionsByMedicalRecordId(
             int medicalRecordId)
@@ -58,7 +61,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(prescriptions);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("doctor/{doctorId}")]
         public async Task<IActionResult> GetPrescriptionsByDoctorId(
             int doctorId)
@@ -69,7 +72,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(prescriptions);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePrescription(
             int id,
@@ -82,7 +85,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedPrescription);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)}")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePrescription(int id)
         {
