@@ -1,6 +1,7 @@
 ﻿using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 namespace clinicAPIsSystem.Repositories.UserRepository
 {
     public class UserRepository: IUserRepository
@@ -23,11 +24,12 @@ namespace clinicAPIsSystem.Repositories.UserRepository
         {
             return await _userManager.FindByNameAsync(username);
         }
-        public async Task<bool> UserExistsAsync(int id)
+        public async Task<bool> PhoneNumberExistsAsync(string phoneNumber)
         {
-            
-            return (await _userManager.FindByIdAsync(id.ToString())) != null;
+            return await _userManager.Users
+                .AnyAsync(u => u.PhoneNumber == phoneNumber);
         }
+
         public async Task<bool> EmailExistsAsync(string email)
         {
             return (await _userManager.FindByEmailAsync(email)) != null;
@@ -35,6 +37,10 @@ namespace clinicAPIsSystem.Repositories.UserRepository
         public async Task<bool> UsernameExistsAsync(string username)
         {
             return (await _userManager.FindByNameAsync(username)) != null;
+        }
+
+        public async Task DeleteUserAsync(ApplicationUser user) {
+            await _userManager.DeleteAsync(user); 
         }
 
     }

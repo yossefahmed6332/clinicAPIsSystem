@@ -9,8 +9,7 @@ namespace clinicAPIsSystem.IServices.IUserServices
             CreateAdminDto admin,
             string password);
         public Task<List<AdminDto>> GetAllAdminsAsync(); 
-        public Task<AdminDto?> GetAdminAsync(int id);
-        public Task<AdminDto> UpdateAdminAsync(UpdateAdminDto admin);
-        public Task DeleteAdminAsync(int id);
+        public Task<AdminDto> GetAdminAsync(int id);
+        public Task<AdminDto> UpdateAdminAsync(UpdateAdminDto admin,int id);
     }
 }

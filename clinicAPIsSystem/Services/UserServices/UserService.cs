@@ -1,21 +1,21 @@
-﻿using clinicAPIsSystem.IServices.IUserServices;
-using clinicAPIsSystem.IUserRepositories;
+﻿using AutoMapper;
 using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO;
-using AutoMapper;
+using clinicAPIsSystem.IServices.IUserServices;
+using clinicAPIsSystem.IUserRepositories;
+using clinicAPIsSystem.Models.User;
 namespace clinicAPIsSystem.Services.UserServices
 {
     public class UserService : IUserService
     {
-        private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public UserService(IUserService userService, IUserRepository userRepository, IMapper mapper)
+        public UserService( IUserRepository userRepository, IMapper mapper)
         {
-            _userService = userService;
             _userRepository = userRepository;
             _mapper = mapper;
         }
+
         public async Task<ApplicationUserDto?> GetUserAsync(int id)
         {
             return _mapper.Map<ApplicationUserDto>(await _userRepository.GetUserAsync(id));
@@ -28,9 +28,9 @@ namespace clinicAPIsSystem.Services.UserServices
         {
             return _mapper.Map<ApplicationUserDto>(await _userRepository.GetUserByUsernameAsync(username));
         }
-        public async Task<bool> UserExistsAsync(int id)
+        public async Task<bool> PhoneNumberExistsAsync(string phoneNumber)
         {
-            return await _userRepository.UserExistsAsync(id);
+            return await _userRepository.PhoneNumberExistsAsync(phoneNumber);
         }
         public async Task<bool> EmailExistsAsync(string email)
         {
@@ -40,6 +40,36 @@ namespace clinicAPIsSystem.Services.UserServices
         {
             return await _userRepository.UsernameExistsAsync(username);
         }
+
+        public async Task ValidateUserCreation(string email, string username, string phoneNumber)
+        {
+            // Check if the email already exists
+            if (await EmailExistsAsync(email))
+            {
+                throw new ArgumentException("Email already exists.");
+            }
+            //check if user name is exist 
+            if (await UsernameExistsAsync(username))
+            {
+                throw new ArgumentException("Username already exists.");
+            }
+            //check if phone number is exist
+            if (await PhoneNumberExistsAsync(phoneNumber))
+            {
+                throw new ArgumentException("Phone number already exists.");
+            }
+        }
+
+        public async Task DeleteUserAsync (int id)
+        {
+           var user =  await _userRepository.GetUserAsync(id);
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"Cannot find user with ID{id}");
+            }
+            await _userRepository.DeleteUserAsync(user);
+        }
+
 
     }
 }

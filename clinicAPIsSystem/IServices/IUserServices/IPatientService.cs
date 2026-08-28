@@ -10,7 +10,7 @@ namespace clinicAPIsSystem.IServices.IUserServices
             string password);
         public Task<List<PatientDto>> GetAllPatientsAsync();
         public Task<PatientDto?> GetPatientAsync(int id);
-        public Task<PatientDto> UpdatePatientAsync(UpdatePatientDto updatePatientDto);
+        public Task<PatientDto> UpdatePatientAsync(UpdatePatientDto updatePatientDto,int id);
         public Task DeletePatientAsync(int id);
     }
 }

@@ -11,10 +11,14 @@ namespace clinicAPIsSystem.IUserRepositories
 
         public Task<ApplicationUser?> GetUserByUsernameAsync(string username);
         //this is to check if user exists
-        public Task<bool> UserExistsAsync(int id);
+        public Task<bool> PhoneNumberExistsAsync(string phoneNumber);
 
         public Task<bool> EmailExistsAsync(string email);
 
         public Task<bool> UsernameExistsAsync(string username);
+
+        //delete user 
+        public Task DeleteUserAsync (ApplicationUser user);
+        
     }
 }

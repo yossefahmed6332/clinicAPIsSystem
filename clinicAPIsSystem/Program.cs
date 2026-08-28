@@ -5,6 +5,7 @@ using clinicAPIsSystem.IRepositoryService.IUserRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.IMedicalStaffRepository;
 using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.IServices.IUserServices;
 using clinicAPIsSystem.IUserRepositories;
 using clinicAPIsSystem.Models.User;
 using clinicAPIsSystem.Repositories.UserRepository;
@@ -13,6 +14,7 @@ using clinicAPIsSystem.RepositoryService.UserRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffRepository;
 using clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
+using clinicAPIsSystem.Services.UserServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +81,7 @@ builder.Services.AddScoped<RoleSeeder>();
 builder.Services.AddScoped<AdminSeeder>();
 
 //dependency injection for services
+builder.Services.AddScoped<IUserService, UserService>(); 
 
 #endregion
 
