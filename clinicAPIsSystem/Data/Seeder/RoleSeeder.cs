@@ -12,18 +12,19 @@ namespace clinicAPIsSystem.Data.Seeder
         }
         public async Task SeedAsync()
         {
-            string[] roles =
+            string[] UserUserRole =
             {
-            Roles.Admin.ToString(),
-            Roles.Doctor.ToString(),
-            Roles.Nurse.ToString(),
-            Roles.Patient.ToString(),
-            Roles.Accountant.ToString(),
-            Roles.Receptionist.ToString(),
-            Roles.Cleaner.ToString()
-        };
+            UserRole.Admin.ToString(),
+            UserRole.Doctor.ToString(),
+            UserRole.Nurse.ToString(),
+            UserRole.Patient.ToString(),
+            UserRole.Accountant.ToString(),
+            UserRole.Receptionist.ToString(),
+            UserRole.Manager.ToString(),
+            UserRole.Cleaner.ToString()
+            };
 
-            foreach (var role in roles)
+            foreach (var role in UserUserRole)
             {
                 if (!await _roleManager.RoleExistsAsync(role))
                 {

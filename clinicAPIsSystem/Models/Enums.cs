@@ -1,27 +1,41 @@
 ﻿namespace clinicAPIsSystem.Models
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
     public enum AppointmentStatus
     {
         Pending,
+        Scheduled,
         Confirmed,
+        Completed,
         Cancelled,
-        Completed
+        NoShow
     }
-    public enum Roles
+    public enum UserRole
     {
-        Admin,
+        Manager,
         Doctor,
         Nurse,
-        Accountant,
-        Cleaner,
         Receptionist,
-        Patient }
-
-
+        Cleaner,
+        Accountant,
+        Patient,
+        Admin
     }
-
+    public enum OperationType
+    {
+        Payment, 
+        Refund, 
+        Salary,
+        Expense
+    }
+    public enum OperationStatus
+    {
+        Pending,
+        Completed,
+        Failed
+    }
+    public enum PaymentMethod
+    {
+        Cash,
+        Card
+    }
+}

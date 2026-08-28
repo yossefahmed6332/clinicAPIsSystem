@@ -1,190 +1,155 @@
-﻿using clinicAPIsSystem.Data;
-using clinicAPIsSystem.Interfaces;
-using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
+﻿using AutoMapper;
+using clinicAPIsSystem.DTOs.AppointmentDTOs;
+using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
-using Microsoft.EntityFrameworkCore;
-namespace clinicAPIsSystem.Services
+using clinicAPIsSystem.IRepositoryService;
+using clinicAPIsSystem.IServices.IUserServices;
+
+namespace clinicAPIsSystem.Service
 {
     public class AppointmentService : IAppointmentService
     {
-        private readonly ClinicDbContext _context;
-        public AppointmentService(ClinicDbContext context)
+        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        public AppointmentService(IAppointmentRepository appointmentRepository, IMapper mapper, IUserService userService)
         {
-            _context = context;
+            _appointmentRepository = appointmentRepository;
+            _mapper = mapper;
+            _userService = userService;
         }
 
-        //create method 
-        public async Task CreateAppointmentAsync(CreateAppointmentDto dto)
+        public async Task<AppointmentDto> CreateAppointmentAsync(CreateAppointmentDto createAppointmentDto)
         {
-            var appointment = new Appointment
+            //check if the appointment is in the past 
+            if (createAppointmentDto.StartDate < DateTime.Now)
             {
-                PatientId = dto.PatientId,
-                DoctorId = dto.DoctorId,
-                Status = AppointmentStatus.Pending,
-                AppointmentDate = dto.AppointmentTime,
-                Reason = dto.Reason,
-                Note = dto.Note,
-            };
-            _context.TAppointments.Add(appointment);
-            await _context.SaveChangesAsync();
-
-        }
-
-
-
-        //read method
-        public async Task<IEnumerable<AppointmentDto>> GetAllAppointmentsAsync()//get all 
-        {
-            var appointments = await _context.TAppointments.ToListAsync();
-            if (appointments.Count == 0)
-            {
-                throw new KeyNotFoundException("No appointments found.");
+                throw new ArgumentException("Appointment cannot be created in the past");
             }
-            return appointments.Select(a => new AppointmentDto
+
+            //check if the doctor has ather appointment in the same time range
+            if (await _appointmentRepository.GetAppointmentInTimeRange(createAppointmentDto.StartDate, createAppointmentDto.EndDate, createAppointmentDto.DoctorId, createAppointmentDto.NurseId) != null)
             {
-                Id = a.Id,
-                PatientId = a.PatientId,
-                DoctorId = a.DoctorId,
-                Status = a.Status,
-                AppointmentDate = a.AppointmentDate,
-                Reason = a.Reason,
-                Note = a.Note
-            });
+                throw new ArgumentException("Doctor is not available in the given time range");
+            }
+
+            var appointment = new Appointment(createAppointmentDto.StartDate
+                ,createAppointmentDto.EndDate
+                ,createAppointmentDto.PatientId
+                ,createAppointmentDto.NurseId
+                ,createAppointmentDto.DoctorId);
+
+
+            appointment =await _appointmentRepository.CreateAppointmentAsync(appointment);
+            return _mapper.Map<AppointmentDto>(appointment);
         }
 
-
-        public async Task<AppointmentDto?> GetAppointmentByIdAsync(int id)//get by id
+        public async Task<List<AppointmentDto>> GetAllAppointmentsAsync()
         {
-            var appointment = await _context.TAppointments.FindAsync(id);
+            var appointments = await _appointmentRepository.GetAllAppointmentsAsync();
+
+            return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+
+        public async Task<AppointmentDto> GetAppointmentAsync(int id)
+        {
+            var appointment = await _appointmentRepository.GetAppointmentAsync(id);
             if (appointment == null)
             {
                 throw new KeyNotFoundException($"Appointment with ID {id} not found.");
             }
-            return new AppointmentDto
-            {
-                Id = appointment.Id,
-                PatientId = appointment.PatientId,
-                DoctorId = appointment.DoctorId,
-                Status = appointment.Status,
-                AppointmentDate = appointment.AppointmentDate,
-                Reason = appointment.Reason,
-                Note = appointment.Note
-            };
+            return _mapper.Map<AppointmentDto>(appointment);
         }
 
 
-        public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByDoctorIdAsync(int doctorId)//get by doctor id
+        public async Task<List<AppointmentDto>> GetAppointmentsByDoctorIdAsync(int doctorId)
         {
-            var appointments = await _context.TAppointments.Where(a => a.DoctorId == doctorId).ToListAsync();
-            if (appointments.Count == 0)
-            {
-                throw new KeyNotFoundException($"No appointments found for doctor with ID {doctorId}.");
-            }
-            return appointments.Select(a => new AppointmentDto
-            {
-                Id = a.Id,
-                PatientId = a.PatientId,
-                DoctorId = a.DoctorId,
-                Status = a.Status,
-                AppointmentDate = a.AppointmentDate,
-                Reason = a.Reason,
-                Note = a.Note
-            });
+            var appointments = await _appointmentRepository.GetAppointmentsByDoctorIdAsync(doctorId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
         }
-
-        public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByPatientIdAsync(int patientId)//get by patient id
+        public async Task<List<AppointmentDto>> GetAppointmentsByPatientIdAsync(int patientId)
         {
-            var appointments = await _context.TAppointments.Where(a => a.PatientId == patientId).ToListAsync();
-            if (appointments.Count == 0)
-            {
-                throw new KeyNotFoundException($"No appointments found for patient with ID {patientId}.");
-            }
-            return appointments.Select(a => new AppointmentDto
-            {
-                Id = a.Id,
-                PatientId = a.PatientId,
-                DoctorId = a.DoctorId,
-                Status = a.Status,
-                AppointmentDate = a.AppointmentDate,
-                Reason = a.Reason,
-                Note = a.Note
-            });
+            var appointments = await _appointmentRepository.GetAppointmentsByPatientIdAsync(patientId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
         }
-
-        public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByPatientAndDoctorAsync(int patientId, int doctorId)//get by patient and doctor id
+        public async Task<List<AppointmentDto>> GetAppointmentsByNurseIdAsync(int nurseId)
         {
-            var appointments = await _context.TAppointments.Where(a => a.PatientId == patientId && a.DoctorId == doctorId).ToListAsync();
-            if (appointments.Count == 0)
-            {
-                throw new KeyNotFoundException($"No appointments found for patient with ID {patientId} and doctor with ID {doctorId}.");
-            }
-            return appointments.Select(a => new AppointmentDto
-            {
-                Id = a.Id,
-                PatientId = a.PatientId,
-                DoctorId = a.DoctorId,
-                Status = a.Status,
-                AppointmentDate = a.AppointmentDate,
-                Reason = a.Reason,
-                Note = a.Note
-            });
-        }
-
-        public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status)//get by status
-        {
-            var appointments = await _context.TAppointments.Where(a => a.Status == status).ToListAsync();
-            if (appointments.Count == 0)
-            {
-                throw new KeyNotFoundException($"No appointments found with status {status}.");
-            }
-            return appointments.Select(a => new AppointmentDto
-            {
-                Id = a.Id,
-                PatientId = a.PatientId,
-                DoctorId = a.DoctorId,
-                Status = a.Status,
-                AppointmentDate = a.AppointmentDate,
-                Reason = a.Reason,
-                Note = a.Note
-            });
+            var appointments = await _appointmentRepository.GetAppointmentsByNurseIdAsync(nurseId);
+            return _mapper.Map<List<AppointmentDto>>(appointments);
         }
 
 
-        //update method 
-        public async Task UpdateAppointmentAsync(int id, UpdateAppointmentDto dto)
+
+
+
+        public async Task<List<AppointmentDto>> GetAppointmentsByStatusAsync(AppointmentStatus status)
         {
-            var appointment = await _context.TAppointments.FindAsync(id);
+            var appointments = await _appointmentRepository.GetAppointmentsByStatusAsync(status);
+            
+            return _mapper.Map<List<AppointmentDto>>(appointments);
+        }
+
+        public async Task<List<AppointmentDto>> GetAppointmentsForUserByTokens(string token)
+        {
+            var user = await _userService.GetIdFromTokensAsync(token);
+            return _mapper.Map<List<AppointmentDto>>(await _appointmentRepository.GetAppointmentsForUser(user));
+
+        }
+        public async Task<AppointmentDto> UpdateAppointmentAsync(
+            UpdateAppointmentDto updateAppointmentDto,
+            int id)
+        {
+
+            
+
+
+
+            var appointment = await _appointmentRepository.GetAppointmentAsync(id);
+            //check if appointment == null 
             if (appointment == null)
             {
-                throw new KeyNotFoundException($"Appointment with ID {id} not found.");
+                throw new KeyNotFoundException(
+                    $"Appointment with ID {id} not found.");
             }
-            appointment.PatientId = dto.PatientId;
-            appointment.DoctorId = dto.DoctorId;
-            appointment.Status = dto.Status;
-            appointment.AppointmentDate = dto.AppointmentTime;
-            appointment.Reason = dto.Reason;
-            appointment.Note = dto.Note;
-            _context.TAppointments.Update(appointment);
-            await _context.SaveChangesAsync();
+
+            if (updateAppointmentDto.StartDate!=appointment.StartDate||updateAppointmentDto.EndDate!= appointment.EndDate|| updateAppointmentDto.DoctorId != appointment.DoctorId|| updateAppointmentDto.NurseId != appointment.NurseId)
+            {
+                //check if the appointment is in the past 
+                if (updateAppointmentDto.StartDate < DateTime.Now)
+                {
+                    throw new ArgumentException("Appointment cannot be created in the past");
+                }
+
+                //check if the doctor has ather appointment in the same time range
+                if (await _appointmentRepository.GetAppointmentInTimeRange(updateAppointmentDto.StartDate, updateAppointmentDto.EndDate, updateAppointmentDto.DoctorId, updateAppointmentDto.NurseId) != null)
+                {
+                    throw new ArgumentException("Doctor is not available in the given time range");
+                }
+            }
+
+
+
+            appointment.Update(
+                updateAppointmentDto.StartDate,
+                updateAppointmentDto.EndDate,
+                updateAppointmentDto.Status,
+                updateAppointmentDto.NurseId,
+                updateAppointmentDto.PatientId,
+                updateAppointmentDto.DoctorId
+            );
+            appointment = await _appointmentRepository
+                .UpdateAppointmentAsync(appointment);
+
+            return _mapper.Map<AppointmentDto>(appointment);
         }
-
-
-        //delete method
         public async Task DeleteAppointmentAsync(int id)
         {
-            var appointment = await _context.TAppointments.FindAsync(id);
+            var appointment = await _appointmentRepository.GetAppointmentAsync(id);
             if (appointment == null)
             {
                 throw new KeyNotFoundException($"Appointment with ID {id} not found.");
             }
-            _context.TAppointments.Remove(appointment);
-            await _context.SaveChangesAsync();
+            await _appointmentRepository.DeleteAppointmentAsync(appointment);
         }
-
-
-
-
-
-
     }
 }

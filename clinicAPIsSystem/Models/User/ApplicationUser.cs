@@ -1,11 +1,34 @@
 ﻿using Microsoft.AspNetCore.Identity;
-namespace clinicAPIsSystem.Models
+namespace clinicAPIsSystem.Models.User
 {
-    public  class ApplicationUser : IdentityUser<int>
+    public abstract class ApplicationUser:IdentityUser<int>
     {
-        public string FirstName { get; set; } = null!; 
-        public string LastName { get; set; } = null!;
+        public string FirstName { get; protected set; } = null!;
+        public string LastName { get; protected set; } = null!;
 
-        public Gender Gender; 
+        public ApplicationUser (string firstName, string secondName,string userName,string email,string phoneNumber)
+        {
+            FirstName = firstName;
+            LastName = secondName;
+            UserName = userName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+        }
+
+        public ApplicationUser()
+        {
+        }
+
+        public void UpdateUserInfo(string firstName, string lastName, string userName, string email ,string phoneNumber)
+        {
+            FirstName=firstName;
+            LastName=lastName;
+            UserName=userName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+
+        }
+
+
     }
 }

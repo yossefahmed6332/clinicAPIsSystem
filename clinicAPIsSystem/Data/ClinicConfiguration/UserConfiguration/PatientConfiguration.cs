@@ -7,9 +7,16 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            // Additional configuration for Patient entity can be added here if needed
-            
-            
+
+            builder.Property(p => p.MedicalRecordId).IsRequired();
+            builder.HasIndex(p => p.MedicalRecordId).IsUnique();
+            builder.HasOne(p => p.MedicalRecord)
+                .WithOne(m => m.Patient)
+                .HasForeignKey<Patient>(p => p.MedicalRecordId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
         }
     }
 }

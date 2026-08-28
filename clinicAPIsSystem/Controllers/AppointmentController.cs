@@ -1,108 +1,114 @@
-﻿using clinicAPIsSystem.ClinicDTOs.AppointmentDTOs;
-using clinicAPIsSystem.Interfaces;
+﻿using clinicAPIsSystem.DTOs.AppointmentDTOs;
+using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-namespace clinicAPIsSystem.Controllers
+
+[Route("api/[controller]")]
+[ApiController]
+public class AppointmentController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AppointmentController : ControllerBase
+    private readonly IAppointmentService _appointmentService;
+
+    public AppointmentController(IAppointmentService appointmentService)
     {
-        private readonly IAppointmentService _appointmentService;
-        public AppointmentController(IAppointmentService appointmentService)
-        {
-            _appointmentService = appointmentService;
-        }
+        _appointmentService = appointmentService;
+    }
 
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentDto appointment)
-        {
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
+    [HttpPost]
+    public async Task<IActionResult> CreateAppointment(
+        [FromBody] CreateAppointmentDto appointment)
+    {
+        var createdAppointment =
             await _appointmentService.CreateAppointmentAsync(appointment);
-            return NoContent();
-        }
 
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-all")]
-        public async Task<IActionResult> GetAllAppointments()
-        {
-            var appointments = await _appointmentService.GetAllAppointmentsAsync();
-            return Ok(appointments);
-        }
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-by-id/{id}")]
-        public async Task<IActionResult> GetAppointmentById(int id)
-        {
-            var appointment = await _appointmentService.GetAppointmentByIdAsync(id);
-            if (appointment == null)
-            {
-                return NotFound();
-            }
-            return Ok(appointment);
-        }
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-by-doctor-id/{doctorId}")]
-        public async Task<IActionResult> GetAppointmentByDoctorId(int doctorId)
-        {
-            var appointments = await _appointmentService.GetAppointmentsByDoctorIdAsync(doctorId);
-            return Ok(appointments);
-        }
+        return CreatedAtAction(
+            nameof(GetAppointmentById),
+            new { id = createdAppointment.Id },
+            createdAppointment);
+    }
 
-        //get appointments by patient id for admin and receptionist
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-by-patient-id/{id}")]
-        public async Task<IActionResult> GetAppointmentByPatientId(int id)
-        {
-            var appointments = await _appointmentService.GetAppointmentsByPatientIdAsync(id);
-            return Ok(appointments);
-        }
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
+    [HttpGet]
+    public async Task<IActionResult> GetAllAppointments()
+    {
+        var appointments =
+            await _appointmentService.GetAllAppointmentsAsync();
 
+        return Ok(appointments);
+    }
 
-        //get appointments for current user (patient) by patient id 
-        [Authorize(Roles = $"{nameof(Roles.Patient)}")]
-        [HttpGet("get-by-patient-id")]
-        public async Task<IActionResult> GetAppointmentsForCurrentUser()
-        {
-            var patientId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var appointments = await _appointmentService.GetAppointmentsByPatientIdAsync(patientId);
-            return Ok(appointments);
-        }
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAppointmentById(int id)
+    {
+        var appointment =
+            await _appointmentService.GetAppointmentAsync(id);
 
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-by-patient-and-doctor/{patientId}/{doctorId}")]
-        public async Task<IActionResult> GetAppointmentsByPatientAndDoctor(int patientId, int doctorId)
-        {
-            var appointments = await _appointmentService.GetAppointmentsByPatientAndDoctorAsync(patientId, doctorId);
-            return Ok(appointments);
-        }
+        return Ok(appointment);
+    }
 
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpGet("get-by-status/{status}")]
-        public async Task<IActionResult> GetAppointmentsByStatus(AppointmentStatus status)
-        {
-            var appointments = await _appointmentService.GetAppointmentsByStatusAsync(status);
-            return Ok(appointments);
-        }
+    [Authorize($"{nameof(UserRole.Admin)}, {nameof(UserRole.Doctor)}, {nameof(UserRole.Receptionist)}")]
+    [HttpGet("status/{status}")]
+    public async Task<IActionResult> GetAppointmentsByStatus(AppointmentStatus status)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByStatusAsync(status);
 
-        // Update appointment
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateAppointment(int id, [FromBody] UpdateAppointmentDto appointment)
-        {
-            await _appointmentService.UpdateAppointmentAsync(id, appointment);
-            return NoContent();
-        }
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Receptionist)}")]
-        [HttpPut("delete-appointment/{appointmentId}")]
-        public async Task<IActionResult> DeleteAppointment(int appointmentId)
-        {
-            await _appointmentService.DeleteAppointmentAsync(appointmentId);
-            return NoContent();
-        }
+        return Ok(appointments);
+    }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("doctor/{doctorId}")]
+    public async Task<IActionResult> GetAppointmentsByDoctorId(int doctorId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByDoctorIdAsync(doctorId);
+        return Ok(appointments);
+    }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("patient/{patientId}")]
+    public async Task<IActionResult> GetAppointmentsByPatientId(int patientId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByPatientIdAsync(patientId);
+        return Ok(appointments);
+    }
+    [Authorize($"{nameof(UserRole.Admin)},  {nameof(UserRole.Receptionist)},{nameof(UserRole.Manager)}")]
+    [HttpGet("nurse/{nurseId}")]
+    public async Task<IActionResult> GetAppointmentsByNurseId(int nurseId)
+    {
+        var appointments =
+            await _appointmentService.GetAppointmentsByNurseIdAsync(nurseId);
+        return Ok(appointments);
+    }
+
+    [Authorize()]
+    [HttpGet("user")]
+    public async Task<IActionResult> GetAppointmentsForUser()
+    {
+        var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+        var appointments = await _appointmentService.GetAppointmentsForUserByTokens(token);
+        return Ok(appointments);
+    }
 
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAppointment(
+        int id,
+        [FromBody] UpdateAppointmentDto appointment)
+    {
+        var updatedAppointment =
+            await _appointmentService.UpdateAppointmentAsync(appointment, id);
 
+        return Ok(updatedAppointment);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAppointment(int id)
+    {
+        await _appointmentService.DeleteAppointmentAsync(id);
+
+        return NoContent();
     }
 }

@@ -1,14 +1,29 @@
 using clinicAPIsSystem.Data;
 using clinicAPIsSystem.Data.Seeder;
-using clinicAPIsSystem.Interfaces;
-using clinicAPIsSystem.Interfaces.IUserService;
-using clinicAPIsSystem.Interfaces.IUserService.IMedicalStaffService;
-using clinicAPIsSystem.Interfaces.IUserService.INonMedicalStaffService;
-using clinicAPIsSystem.Models;
-using clinicAPIsSystem.Services;
-using clinicAPIsSystem.Services.UserService;
-using clinicAPIsSystem.Services.UserService.MedicalStaffService;
-using clinicAPIsSystem.Services.UserService.NonMedicalStaffService;
+using clinicAPIsSystem.IRepositoryService;
+using clinicAPIsSystem.IRepositoryService.IUserRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.IMedicalStaffRepository;
+using clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepository.INonMedicalStaffRepository;
+using clinicAPIsSystem.IService;
+using clinicAPIsSystem.IServices.IUserServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.IMedicalStaffServices;
+using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices.NonMedicalStaffServices;
+using clinicAPIsSystem.IUserRepositories;
+using clinicAPIsSystem.Models.User;
+using clinicAPIsSystem.Repositories.UserRepository;
+using clinicAPIsSystem.RepositoryService;
+using clinicAPIsSystem.RepositoryService.UserRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.EmployeeRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.MedicalStaffRepository;
+using clinicAPIsSystem.RepositoryService.UserRepository.NonMedicalStaffRepository;
+using clinicAPIsSystem.Service;
+using clinicAPIsSystem.Services.AuthServices;
+using clinicAPIsSystem.Services.UserServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffServices;
+using clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaffServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +64,61 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 .AddDefaultTokenProviders();
 
 #endregion
+
+
+#region Dependency Injection
+//depency injection for repository services
+//depenct injection for users repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<ICleanerRepository, CleanerRepository>();
+builder.Services.AddScoped<IAccountantRepository, AccountantRepository>();
+builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
+builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
+builder.Services.AddScoped<INurseRepository, NurseRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+//depenct injection for other repositories
+builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IExaminationResultRepository, ExaminationResultRepository>();
+builder.Services.AddScoped<IFinancialReportRepository, FinancialReportRepository>();
+builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+builder.Services.AddScoped<IPaymentOperationRepository, PaymentOperationRepository>();
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+builder.Services.AddScoped<IVitalSignsRepository, VitalSignsRepository>();
+builder.Services.AddScoped<RoleSeeder>();
+builder.Services.AddScoped<AdminSeeder>();
+
+//dependency injection for services
+//dependency injection for non-user services
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IExaminationResultService, ExaminationResultService>();
+builder.Services.AddScoped<IFinancialReportService, FinancialReportService>();
+builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+builder.Services.AddScoped<IPaymentOperationService, PaymentOperationService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
+builder.Services.AddScoped<IVitalSignsService, VitalSignsService>();
+//dependency injection for user services
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ICleanerService, CleanerService>();
+builder.Services.AddScoped<IAccountantService, AccountantService>();
+builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
+builder.Services.AddScoped<INurseService, NurseService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+//depency injection for auth service 
+builder.Services.AddScoped<ILoginService, LoginService>();
+#endregion
+
+#region AutoMapper
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<UserMappingProfile>();
+});
+#endregion
+
 
 
 #region JWT Key Validation
@@ -118,26 +188,11 @@ builder.Services.AddCors(options =>
 
 #endregion
 
-#region Dependency Injection
-
-builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IPatientService, PatientService>();
-builder.Services.AddScoped<IDoctorService, DoctorService>();
-builder.Services.AddScoped<INurseServices, NurseService>();
-builder.Services.AddScoped<IAccountantService, AccountantService>();
-builder.Services.AddScoped<ICleanerService, CleanerService>();
-builder.Services.AddScoped<IAppointmentService, AppointmentService>();
-builder.Services.AddScoped<IAuthServices, AuthService>();
-builder.Services.AddScoped<IMedicalService, MedicalService>();
-builder.Services.AddScoped<IOperationService, OperationService>();
-builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
-builder.Services.AddScoped<IQualificationService, QualificationService>();
-builder.Services.AddScoped<ISpecializationService, SpecializationService>();
-builder.Services.AddScoped<RoleSeeder>();
-builder.Services.AddScoped<AdminSeeder>();
-
+#region Global Exception Handling
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 #endregion
+
 
 #region OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -157,6 +212,10 @@ if (app.Environment.IsDevelopment())
 }
 
 #endregion 
+
+#region Exception handler 
+app.UseExceptionHandler();
+#endregion
 
 #region Seeder
 

@@ -22,21 +22,6 @@ namespace clinicAPIsSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MedicalPrescription", b =>
-                {
-                    b.Property<int>("MedicalsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PrescriptionsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedicalsId", "PrescriptionsId");
-
-                    b.HasIndex("PrescriptionsId");
-
-                    b.ToTable("MedicalPrescription");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -170,7 +155,242 @@ namespace clinicAPIsSystem.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.ApplicationUser", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("DateTime2");
+
+                    b.Property<int>("NurseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("DateTime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("NurseId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("TAppointments");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.ExaminationResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NormalRange")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("NurseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("DateTime2");
+
+                    b.Property<string>("ResultValue")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("TestType")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalRecordId");
+
+                    b.HasIndex("NurseId");
+
+                    b.ToTable("TExaminationResults");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.FinancialReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MonthlyExpenses")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MonthlyRevenue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("NetProfit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TFinancialReports");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.MedicalRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BloodType")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("Height")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Weight")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TMedicalRecords");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.PaymentOperation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AccountantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("DateTime2");
+
+                    b.Property<int>("OperationType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountantId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("TPaymentOperations");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("DateTime2");
+
+                    b.Property<string>("Diagnosis")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Dosage")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Frequency")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Instructions")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("MedicalName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("MedicalRecordId");
+
+                    b.ToTable("TPrescriptions");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.ApplicationUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,6 +411,7 @@ namespace clinicAPIsSystem.Migrations
                         .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -199,13 +420,13 @@ namespace clinicAPIsSystem.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -225,7 +446,9 @@ namespace clinicAPIsSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -237,10 +460,14 @@ namespace clinicAPIsSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -250,6 +477,9 @@ namespace clinicAPIsSystem.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
@@ -257,7 +487,7 @@ namespace clinicAPIsSystem.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.Appointment", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.VitalSigns", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,186 +495,57 @@ namespace clinicAPIsSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DoctorId")
+                    b.Property<int>("BloodPressureDiastolic")
                         .HasColumnType("int");
 
-                    b.Property<string>("Note")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("BloodPressureSystolic")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HeartRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("int");
 
                     b.Property<int>("NurseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
+                    b.Property<decimal>("OxygenSaturation")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("DateTime2");
 
-                    b.Property<int>("Status")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                    b.Property<decimal>("Temperature")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("MedicalRecordId");
 
                     b.HasIndex("NurseId");
 
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("TAppointments");
+                    b.ToTable("TVitalSigns");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.Medical", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Admin", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.ApplicationUser");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TakeTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TMedicals");
+                    b.HasDiscriminator().HasValue("Admin");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.Operation", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Employee", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AccountantId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("OperationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceptionistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountantId");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("ReceptionistId");
-
-                    b.ToTable("TOperations");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Prescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Diagnosis")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("TPrescriptions");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Qualification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Degree")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("University")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TQualifications");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Specialization", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TSpecializations");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee", b =>
-                {
-                    b.HasBaseType("clinicAPIsSystem.Models.ApplicationUser");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.ApplicationUser");
 
                     b.Property<int>("HoursWorked")
                         .HasColumnType("int");
 
                     b.Property<decimal>("SalaryPerHour")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<TimeOnly>("ShiftEnd")
                         .HasColumnType("Time");
@@ -457,100 +558,100 @@ namespace clinicAPIsSystem.Migrations
 
             modelBuilder.Entity("clinicAPIsSystem.Models.User.Patient", b =>
                 {
-                    b.HasBaseType("clinicAPIsSystem.Models.ApplicationUser");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.ApplicationUser");
+
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("MedicalRecordId")
+                        .IsUnique()
+                        .HasFilter("[MedicalRecordId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Patient");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.MedicalStaff", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Cleaner", b =>
                 {
-                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee");
-
-                    b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("QualificationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("YearsOfExperience")
-                        .HasColumnType("int");
-
-                    b.HasIndex("QualificationId");
-
-                    b.HasDiscriminator().HasValue("MedicalStaff");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.NonMedicalStaff.Accountant", b =>
-                {
-                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee");
-
-                    b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("YearsOfExperience")
-                        .HasColumnType("int");
-
-                    b.ToTable("AspNetUsers", t =>
-                        {
-                            t.Property("LicenseNumber")
-                                .HasColumnName("Accountant_LicenseNumber");
-
-                            t.Property("YearsOfExperience")
-                                .HasColumnName("Accountant_YearsOfExperience");
-                        });
-
-                    b.HasDiscriminator().HasValue("Accountant");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.NonMedicalStaff.Cleaner", b =>
-                {
-                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee");
-
-                    b.Property<string>("CleaningArea")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Employee");
 
                     b.HasDiscriminator().HasValue("Cleaner");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.Doctor", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.Graduated", b =>
                 {
-                    b.HasBaseType("clinicAPIsSystem.Models.User.MedicalStaff.MedicalStaff");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Employee");
 
-                    b.Property<int>("SpecializationId")
+                    b.Property<string>("Degree")
+                        .IsRequired()
                         .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("GraduationYear")
                         .HasColumnType("int");
 
-                    b.HasIndex("SpecializationId");
+                    b.Property<string>("License")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("University")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("YearsOfExperience")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Graduated");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.MedicalStaff", b =>
+                {
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.Graduated");
+
+                    b.HasDiscriminator().HasValue("MedicalStaff");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.NonMedicalStaff", b =>
+                {
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.Graduated");
+
+                    b.HasDiscriminator().HasValue("NonMedicalStaff");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Doctor", b =>
+                {
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.MedicalStaff");
 
                     b.HasDiscriminator().HasValue("Doctor");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.Nurse", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Nurse", b =>
                 {
-                    b.HasBaseType("clinicAPIsSystem.Models.User.MedicalStaff.MedicalStaff");
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.MedicalStaff");
 
                     b.HasDiscriminator().HasValue("Nurse");
                 });
 
-            modelBuilder.Entity("MedicalPrescription", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.Accountant", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.Medical", null)
-                        .WithMany()
-                        .HasForeignKey("MedicalsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.NonMedicalStaff");
 
-                    b.HasOne("clinicAPIsSystem.Models.Prescription", null)
-                        .WithMany()
-                        .HasForeignKey("PrescriptionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasDiscriminator().HasValue("Accountant");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.Manager", b =>
+                {
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.NonMedicalStaff");
+
+                    b.HasDiscriminator().HasValue("Manager");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.Receptionist", b =>
+                {
+                    b.HasBaseType("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.NonMedicalStaff");
+
+                    b.HasDiscriminator().HasValue("Receptionist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -564,7 +665,7 @@ namespace clinicAPIsSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.ApplicationUser", null)
+                    b.HasOne("clinicAPIsSystem.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -573,7 +674,7 @@ namespace clinicAPIsSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.ApplicationUser", null)
+                    b.HasOne("clinicAPIsSystem.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -588,7 +689,7 @@ namespace clinicAPIsSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("clinicAPIsSystem.Models.ApplicationUser", null)
+                    b.HasOne("clinicAPIsSystem.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -597,7 +698,7 @@ namespace clinicAPIsSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.ApplicationUser", null)
+                    b.HasOne("clinicAPIsSystem.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -606,13 +707,13 @@ namespace clinicAPIsSystem.Migrations
 
             modelBuilder.Entity("clinicAPIsSystem.Models.Appointment", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.User.MedicalStaff.Doctor", "Doctor")
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Doctor", "Doctor")
                         .WithMany("Appointments")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("clinicAPIsSystem.Models.User.MedicalStaff.Nurse", "Nurse")
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Nurse", "Nurse")
                         .WithMany("Appointments")
                         .HasForeignKey("NurseId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -631,117 +732,128 @@ namespace clinicAPIsSystem.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.Operation", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.ExaminationResult", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.User.NonMedicalStaff.Accountant", null)
-                        .WithMany("Appointments")
-                        .HasForeignKey("AccountantId");
-
-                    b.HasOne("clinicAPIsSystem.Models.Appointment", "Appointment")
-                        .WithMany("Operations")
-                        .HasForeignKey("AppointmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("clinicAPIsSystem.Models.User.Patient", "Patient")
-                        .WithMany("Operations")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("clinicAPIsSystem.Models.User.Employee", "Receptionist")
-                        .WithMany()
-                        .HasForeignKey("ReceptionistId")
+                    b.HasOne("clinicAPIsSystem.Models.MedicalRecord", "MedicalRecord")
+                        .WithMany("ExaminationResults")
+                        .HasForeignKey("MedicalRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appointment");
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Nurse", "Nurse")
+                        .WithMany("ExaminationResults")
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("MedicalRecord");
+
+                    b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.PaymentOperation", b =>
+                {
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.Accountant", "Accountant")
+                        .WithMany("PaymentOperations")
+                        .HasForeignKey("AccountantId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("clinicAPIsSystem.Models.User.Patient", "Patient")
+                        .WithMany("PaymentOperations")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Accountant");
 
                     b.Navigation("Patient");
-
-                    b.Navigation("Receptionist");
                 });
 
             modelBuilder.Entity("clinicAPIsSystem.Models.Prescription", b =>
                 {
-                    b.HasOne("clinicAPIsSystem.Models.User.MedicalStaff.Doctor", "Doctor")
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Doctor", "Doctor")
                         .WithMany("Prescriptions")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("clinicAPIsSystem.Models.User.Patient", "Patient")
+                    b.HasOne("clinicAPIsSystem.Models.MedicalRecord", "MedicalRecord")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
+                    b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.VitalSigns", b =>
+                {
+                    b.HasOne("clinicAPIsSystem.Models.MedicalRecord", "MedicalRecord")
+                        .WithMany("VitalSigns")
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Nurse", "Nurse")
+                        .WithMany("VitalSigns")
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("MedicalRecord");
+
+                    b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Patient", b =>
+                {
+                    b.HasOne("clinicAPIsSystem.Models.MedicalRecord", "MedicalRecord")
+                        .WithOne("Patient")
+                        .HasForeignKey("clinicAPIsSystem.Models.User.Patient", "MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.MedicalRecord", b =>
+                {
+                    b.Navigation("ExaminationResults");
+
                     b.Navigation("Patient");
-                });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.MedicalStaff", b =>
-                {
-                    b.HasOne("clinicAPIsSystem.Models.Qualification", "Qualification")
-                        .WithMany("MedicalStaffs")
-                        .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Navigation("Prescriptions");
 
-                    b.Navigation("Qualification");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.Doctor", b =>
-                {
-                    b.HasOne("clinicAPIsSystem.Models.Specialization", "Specialization")
-                        .WithMany("Doctors")
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Specialization");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Appointment", b =>
-                {
-                    b.Navigation("Operations");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Qualification", b =>
-                {
-                    b.Navigation("MedicalStaffs");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.Specialization", b =>
-                {
-                    b.Navigation("Doctors");
+                    b.Navigation("VitalSigns");
                 });
 
             modelBuilder.Entity("clinicAPIsSystem.Models.User.Patient", b =>
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("Operations");
-
-                    b.Navigation("Prescriptions");
+                    b.Navigation("PaymentOperations");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.NonMedicalStaff.Accountant", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.Doctor", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Doctor", b =>
                 {
                     b.Navigation("Appointments");
 
                     b.Navigation("Prescriptions");
                 });
 
-            modelBuilder.Entity("clinicAPIsSystem.Models.User.MedicalStaff.Nurse", b =>
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.MedicalStaff.Nurse", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("ExaminationResults");
+
+                    b.Navigation("VitalSigns");
+                });
+
+            modelBuilder.Entity("clinicAPIsSystem.Models.User.Employee.Graduated.NonMedicalStaff.Accountant", b =>
+                {
+                    b.Navigation("PaymentOperations");
                 });
 #pragma warning restore 612, 618
         }

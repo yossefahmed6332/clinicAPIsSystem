@@ -1,5 +1,5 @@
-﻿using clinicAPIsSystem.ClinicDTOs.PrescriptionDTOs;
-using clinicAPIsSystem.Interfaces;
+﻿using clinicAPIsSystem.DTOs.PrescriptionDTOs;
+using clinicAPIsSystem.IService;
 using clinicAPIsSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,107 +12,86 @@ namespace clinicAPIsSystem.Controllers
     {
         private readonly IPrescriptionService _prescriptionService;
 
-        public PrescriptionController(IPrescriptionService prescriptionService)
+        public PrescriptionController(
+            IPrescriptionService prescriptionService)
         {
             _prescriptionService = prescriptionService;
         }
 
-        #region Create
-
-        [Authorize(Roles = nameof(Roles.Doctor))]
+        [Authorize(Roles =$"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)}")]
         [HttpPost]
-        public async Task<IActionResult> AddPrescription([FromBody] CreatePresciptionDto dto)
+        public async Task<IActionResult> CreatePrescription(
+            [FromBody] CreatePrescriptionDto createPrescriptionDto)
         {
-            await _prescriptionService.AddPrescriptionAsync(dto);
-            return Ok();
+            var createdPrescription =
+                await _prescriptionService.CreatePrescriptionAsync(
+                    createPrescriptionDto);
+
+            return CreatedAtAction(
+                nameof(GetPrescription),
+                new { id = createdPrescription.Id },
+                createdPrescription);
         }
-
-        [Authorize(Roles = nameof(Roles.Doctor))]
-        [HttpPost("{prescriptionId:int}/medications/{medicalId:int}")]
-        public async Task<IActionResult> AddMedicalToPrescription(int prescriptionId, int medicalId)
-        {
-            await _prescriptionService.AddMedicalToPrescriptionAsync(prescriptionId, medicalId);
-            return Ok();
-        }
-
-        #endregion
-
-        #region Read
-
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Doctor)}")]
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllPrescriptions()
         {
-            var prescriptions = await _prescriptionService.GetAllPrescriptionsAsync();
+            var prescriptions =
+                await _prescriptionService.GetAllPrescriptionsAsync();
+
             return Ok(prescriptions);
         }
-
-        [Authorize]
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetPrescriptionById(int id)
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPrescription(int id)
         {
-            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(id);
+            var prescription =
+                await _prescriptionService.GetPrescriptionAsync(id);
+
             return Ok(prescription);
         }
-
-        [Authorize]
-        [HttpGet("patient/{patientId:int}")]
-        public async Task<IActionResult> GetPrescriptionsByPatientId(int patientId)
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
+        [HttpGet("medical-record/{medicalRecordId}")]
+        public async Task<IActionResult> GetPrescriptionsByMedicalRecordId(
+            int medicalRecordId)
         {
-            var prescriptions = await _prescriptionService.GetPrescriptionsByPatientIdAsync(patientId);
+            var prescriptions =
+                await _prescriptionService
+                    .GetPrescriptionsByMedicalRecordIdAsync(medicalRecordId);
+
             return Ok(prescriptions);
         }
-
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Doctor)}")]
-        [HttpGet("doctor/{doctorId:int}")]
-        public async Task<IActionResult> GetPrescriptionsByDoctorId(int doctorId)
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
+        [HttpGet("doctor/{doctorId}")]
+        public async Task<IActionResult> GetPrescriptionsByDoctorId(
+            int doctorId)
         {
-            var prescriptions = await _prescriptionService.GetPrescriptionsByDoctorIdAsync(doctorId);
+            var prescriptions =
+                await _prescriptionService
+                    .GetPrescriptionsByDoctorIdAsync(doctorId);
+
             return Ok(prescriptions);
         }
-
-        [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.Doctor)}")]
-        [HttpGet("medical/{medicalId:int}")]
-        public async Task<IActionResult> GetPrescriptionsByMedicalId(int medicalId)
-        {
-            var prescriptions = await _prescriptionService.GetPrescriptionsByMedicalIdAsync(medicalId);
-            return Ok(prescriptions);
-        }
-
-        #endregion
-
-        #region Update
-
-        [Authorize(Roles = nameof(Roles.Doctor))]
-        [HttpPut("{prescriptionId:int}")]
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePrescription(
-            int prescriptionId,
-            [FromBody] PrescriptionDto dto)
+            int id,
+            [FromBody] UpdatePrescriptionDto updatePrescriptionDto)
         {
-            await _prescriptionService.UpdatePrescriptionAsync(prescriptionId, dto);
-            return Ok();
+            var updatedPrescription =
+                await _prescriptionService.UpdatePrescriptionAsync(
+                    updatePrescriptionDto,
+                    id);
+
+            return Ok(updatedPrescription);
         }
-
-        #endregion
-
-        #region Delete
-
-        [Authorize(Roles = nameof(Roles.Doctor))]
-        [HttpDelete("{id:int}")]
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePrescription(int id)
         {
             await _prescriptionService.DeletePrescriptionAsync(id);
-            return Ok();
-        }
 
-        [Authorize(Roles = nameof(Roles.Doctor))]
-        [HttpDelete("{prescriptionId:int}/medications/{medicalId:int}")]
-        public async Task<IActionResult> RemoveMedicalFromPrescription(int prescriptionId, int medicalId)
-        {
-            await _prescriptionService.RemoveMedicalFromPrescriptionAsync(prescriptionId, medicalId);
-            return Ok();
+            return NoContent();
         }
-
-        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿using clinicAPIsSystem.Models;
+﻿using clinicAPIsSystem.Models.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
@@ -7,12 +7,29 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(u => u.FirstName)
+
+            // Set properties
+            builder.Property(a=>a.FirstName)
                 .IsRequired()
-                .HasMaxLength(100); 
-            builder.Property(u => u.LastName) 
-                .IsRequired() 
-                .HasMaxLength(100); 
+                .HasMaxLength(50);
+            builder.Property(a => a.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+            builder.Property(a => a.Email)
+                .IsRequired();
+            builder.Property(a => a.PhoneNumber)
+                .IsRequired()
+                .HasMaxLength(30);
+            builder.Property(a=>a.UserName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            // Set indexes 
+            builder.HasIndex(a => a.Email)
+                .IsUnique();
+            builder.HasIndex(a => a.PhoneNumber)
+                .IsUnique();
+
 
 
 

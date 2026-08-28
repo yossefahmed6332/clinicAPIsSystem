@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders; 
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using clinicAPIsSystem.Models;
 namespace clinicAPIsSystem.Data.ClinicConfiguration
 {
@@ -7,28 +7,32 @@ namespace clinicAPIsSystem.Data.ClinicConfiguration
     {
         public void Configure(EntityTypeBuilder<Prescription> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Diagnosis)
-                .IsRequired()
-                .HasMaxLength(100);
-            builder.Property(x => x.DoctorId)
-                .IsRequired();
-            builder.Property(x => x.PatientId)
-                .IsRequired();
+            builder.HasKey(p => p.Id);
 
-            //set relations 
-            builder.HasOne(x => x.Patient)
-                .WithMany(p => p.Prescriptions)
-                .HasForeignKey(x => x.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.Doctor)
+            //set Properties
+            builder.Property(p=>p.MedicalName).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Dosage).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Frequency).IsRequired().HasMaxLength(100);
+            builder.Property(p=>p.Duration).IsRequired().HasMaxLength(100);
+            builder.Property(p=>p.Instructions).IsRequired(false).HasMaxLength(500);
+            builder.Property(p=>p.Diagnosis).IsRequired().HasMaxLength(100);
+            builder.Property(p=>p.Date).IsRequired().HasColumnType("DateTime2");
+            builder.Property(p => p.DoctorId).IsRequired();
+            builder.Property(p => p.MedicalRecordId).IsRequired();
+
+            //set relationships
+            builder.HasOne(p => p.Doctor)
                 .WithMany(d => d.Prescriptions)
-                .HasForeignKey(x => x.DoctorId)
+                .HasForeignKey(p => p.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(p => p.MedicalRecord)
+                .WithMany(m => m.Prescriptions)
+                .HasForeignKey(p => p.MedicalRecordId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
         }
-    
+
     }
 }

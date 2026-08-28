@@ -1,4 +1,5 @@
 ﻿using clinicAPIsSystem.Models;
+using clinicAPIsSystem.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 
@@ -20,20 +21,14 @@ namespace clinicAPIsSystem.Data.Seeder
             if (admin != null)
                 return;
 
-            admin = new ApplicationUser
-            {
-                UserName = "admin",
-                Email = email,
-                FirstName = "System",
-                LastName = "Administrator",
-                EmailConfirmed = true
-            };
+            admin = new Admin("System ","Administrator","admin", "admin@clinic.com","0122222222");
+          
 
             var result = await _userManager.CreateAsync(admin, "Admin@123");
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(admin, Roles.Admin.ToString());
+                await _userManager.AddToRoleAsync(admin, UserRole.Admin.ToString());
             }
         }
 
