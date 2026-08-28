@@ -69,13 +69,23 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices
             return _mapper.Map<CleanerDto>(cleaner);
         }
 
-        public async Task<CleanerDto> UpdateCleanerAsync(UpdateCleanerDto updateCleanerDto,int id)
+        public async Task<CleanerDto> UpdateCleanerAsync(
+            UpdateCleanerDto updateCleanerDto,
+            int id)
         {
+            await _userService.ValidateUserCreation(
+                updateCleanerDto.Email,
+                updateCleanerDto.UserName,
+                updateCleanerDto.PhoneNumber);
+
             var cleaner = await _cleanerRepository.GetCleanerAsync(id);
+
             if (cleaner == null)
             {
-                throw new Exception("Cleaner not found");
+                throw new KeyNotFoundException(
+                    $"Cannot find cleaner with id {id}");
             }
+
             cleaner.UpdateCleanerInfo(
                 updateCleanerDto.FirstName,
                 updateCleanerDto.LastName,
@@ -87,11 +97,12 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices
                 updateCleanerDto.ShiftStart,
                 updateCleanerDto.ShiftEnd
             );
-            var updatedCleaner = await _cleanerRepository.UpdateCleanerAsync(cleaner);
+
+            var updatedCleaner =
+                await _cleanerRepository.UpdateCleanerAsync(cleaner);
+
             return _mapper.Map<CleanerDto>(updatedCleaner);
         }
-
-
 
     }
 }
