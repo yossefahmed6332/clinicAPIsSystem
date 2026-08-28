@@ -1,6 +1,8 @@
 ﻿using clinicAPIsSystem.DTOs.MedicalRecordDTOs;
 using clinicAPIsSystem.DTOs.UserDTOs.PatientDTO;
 using clinicAPIsSystem.IServices.IUserServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -16,7 +18,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _patientService = patientService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreatePatient(
             [FromBody] CreatePatientDto createPatientDto
@@ -28,7 +30,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(patient);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllPatients()
         {
@@ -36,7 +38,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(patients);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPatient(int id)
         {
@@ -44,7 +46,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(patient);
         }
-
+        [Authorize(Roles = (nameof(UserRole.Patient)))]
         // Update current logged-in patient
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
@@ -67,6 +69,7 @@ namespace clinicAPIsSystem.Controllers
         }
 
         // Update specific patient - Admin
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePatient(
             int id,
