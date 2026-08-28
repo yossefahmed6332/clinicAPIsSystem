@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.UserDTOs.ApplicationUserDTO.Employees.CleanerDTO;
 using clinicAPIsSystem.IServices.IUserServices.IEmployeeServices;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace clinicAPIsSystem.Controllers
         {
             _cleanerService = cleanerService;
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)}")]
         [HttpPost("add")]
         public async Task<IActionResult> CreateCleaner(
             [FromBody] CreateCleanerDto createCleanerDto
@@ -27,7 +29,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(cleaner);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllCleaners()
         {
@@ -35,7 +37,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(cleaners);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)},{nameof(UserRole.Receptionist)},{nameof(UserRole.Accountant)}")]   
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCleaner(int id)
         {
@@ -44,6 +46,7 @@ namespace clinicAPIsSystem.Controllers
             return Ok(cleaner);
         }
 
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMyAccount(
             [FromBody] UpdateCleanerDto updateCleanerDto)
@@ -63,7 +66,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedCleaner);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Admin)},{nameof(UserRole.Manager)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCleaner(
             int id,
