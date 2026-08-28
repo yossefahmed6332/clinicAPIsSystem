@@ -4,10 +4,10 @@ namespace clinicAPIsSystem.IRepositoryService.IUserRepository.IEmployeeRepositor
 {
     public interface IReceptionistRepository
     {
-        public Task<(Receptionist receptionist, bool addUserRes, bool addPasswordRes, bool addRoleRes)> ICreateReceptionistAsync(Receptionist receptionist, string password);
-        public Task<List<Receptionist>> IGetAllReceptionistsAsync();
-        public Task<Receptionist?> IGetReceptionistAsync(int id);
-        public Task<Receptionist> IUpdateReceptionistAsync(Receptionist receptionist);
-        public Task IDeleteReceptionistAsync(Receptionist receptionist);
+        public Task<(Receptionist receptionist, bool addUserRes, bool addPasswordRes, bool addRoleRes)> CreateReceptionistAsync(Receptionist receptionist, string password);
+        public Task<List<Receptionist>> GetAllReceptionistsAsync();
+        public Task<Receptionist?> GetReceptionistAsync(int id);
+        public Task<Receptionist> UpdateReceptionistAsync(Receptionist receptionist);
+        public Task DeleteReceptionistAsync(Receptionist receptionist);
     }
 }
