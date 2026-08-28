@@ -1,5 +1,7 @@
 ﻿using clinicAPIsSystem.DTOs.VitalSignsDTOs;
 using clinicAPIsSystem.IService;
+using clinicAPIsSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clinicAPIsSystem.Controllers
@@ -16,6 +18,7 @@ namespace clinicAPIsSystem.Controllers
             _vitalSignsService = vitalSignsService;
         }
 
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)}")]
         [HttpPost]
         public async Task<IActionResult> CreateVitalSigns(
             [FromBody] CreateVitalSignsDto createVitalSignsDto)
@@ -29,7 +32,7 @@ namespace clinicAPIsSystem.Controllers
                 new { id = createdVitalSigns.Id },
                 createdVitalSigns);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet]
         public async Task<IActionResult> GetAllVitalSigns()
         {
@@ -38,7 +41,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(vitalSigns);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVitalSigns(int id)
         {
@@ -48,6 +51,7 @@ namespace clinicAPIsSystem.Controllers
             return Ok(vitalSigns);
         }
 
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("medical-record/{medicalRecordId}")]
         public async Task<IActionResult> GetVitalSignsByMedicalRecordId(
             int medicalRecordId)
@@ -58,7 +62,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(vitalSigns);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)},{nameof(UserRole.Receptionist)}")]
         [HttpGet("nurse/{nurseId}")]
         public async Task<IActionResult> GetVitalSignsByNurseId(
             int nurseId)
@@ -69,7 +73,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(vitalSigns);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)}")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVitalSigns(
             int id,
@@ -82,7 +86,7 @@ namespace clinicAPIsSystem.Controllers
 
             return Ok(updatedVitalSigns);
         }
-
+        [Authorize(Roles = $"{nameof(UserRole.Doctor)},{nameof(UserRole.Admin)},{nameof(UserRole.Nurse)}")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVitalSigns(int id)
         {
