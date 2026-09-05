@@ -62,19 +62,15 @@ namespace clinicAPIsSystem.Models
             string resultValue,
             string unit,
             string normalRange,
-            string notes,
-            DateTime recordedAt,
-            int nurseId,
-            int medicalRecordId)
+            string notes
+            )z
         {
             TestType = testType;
             ResultValue = resultValue;
             Unit = unit;
             NormalRange = normalRange;
             Notes = notes;
-            RecordedAt = recordedAt;
-            NurseId = nurseId;
-            MedicalRecordId = medicalRecordId;
+
         }
     }
 }
