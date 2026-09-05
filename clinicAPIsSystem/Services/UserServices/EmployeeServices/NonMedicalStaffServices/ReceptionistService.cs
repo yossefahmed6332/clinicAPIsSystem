@@ -13,21 +13,28 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
         private readonly IReceptionistRepository _receptionistRepository;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-
+        private readonly ILogger<ReceptionistService> _logger;
         public ReceptionistService(
             IReceptionistRepository receptionistRepository,
             IUserService userService,
-            IMapper mapper)
+            IMapper mapper
+            ,ILogger<ReceptionistService> logger)
         {
             _receptionistRepository = receptionistRepository;
             _userService = userService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<ReceptionistDto> CreateReceptionistAsync(
             CreateReceptionistDto createReceptionistDto
             )
         {
+            _logger
+                .LogInformation(
+                    "Creating receptionist with email: {Email}",
+                    createReceptionistDto.Email);
+
             await _userService.ValidateUserCreation(
                 createReceptionistDto.Email,
                 createReceptionistDto.UserName,
@@ -65,9 +72,16 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
                         receptionistCreated.receptionist.Id);
                 }
 
+                _logger
+                    .LogError("Failed to create receptionist with email: {Email}",
+                        createReceptionistDto.Email); 
                 throw new Exception(
                     "Cannot create user, try again");
             }
+            _logger
+                .LogInformation(
+                    "Successfully created receptionist with email: {Email}",
+                    createReceptionistDto.Email);
 
             return _mapper.Map<ReceptionistDto>(
                 receptionistCreated.receptionist);
@@ -75,11 +89,15 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
 
         public async Task<ReceptionistDto> GetReceptionistAsync(int id)
         {
+            _logger
+                .LogDebug("Fetching receptionist with id: {Id}", id);
             var receptionist =
                 await _receptionistRepository.GetReceptionistAsync(id);
 
             if (receptionist == null)
             {
+                _logger
+                    .LogWarning("Receptionist with id: {Id} not found", id);
                 throw new KeyNotFoundException(
                     $"Cannot find receptionist with id {id}");
             }
@@ -89,6 +107,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
 
         public async Task<List<ReceptionistDto>> GetAllReceptionistsAsync()
         {
+            _logger
+                .LogDebug("Fetching all receptionists");
             var receptionists =
                 await _receptionistRepository.GetAllReceptionistsAsync();
 
@@ -99,16 +119,23 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             UpdateReceptionistDto updateReceptionistDto,
             int id)
         {
+            _logger
+                .LogInformation(
+                    "Updating receptionist with id: {Id}", id);
             await _userService.ValidateUserCreation(
                 updateReceptionistDto.Email,
                 updateReceptionistDto.UserName,
                 updateReceptionistDto.PhoneNumber);
 
+            _logger
+                .LogDebug("Fetching receptionist with id: {Id}", id);
             var receptionist =
                 await _receptionistRepository.GetReceptionistAsync(id);
 
             if (receptionist == null)
             {
+                _logger
+                    .LogWarning("Receptionist with id: {Id} not found", id);
                 throw new KeyNotFoundException(
                     $"Cannot find receptionist with id {id}");
             }
@@ -133,6 +160,10 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             var updatedReceptionist =
                 await _receptionistRepository.UpdateReceptionistAsync(
                     receptionist);
+            _logger
+                .LogInformation(
+                    "Successfully updated receptionist with id: {Id}",
+                    id);
 
             return _mapper.Map<ReceptionistDto>(updatedReceptionist);
         }

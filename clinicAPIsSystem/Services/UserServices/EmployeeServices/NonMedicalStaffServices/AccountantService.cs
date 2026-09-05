@@ -12,21 +12,28 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
         private readonly IAccountantRepository _accountantRepository;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ILogger<AccountantService> _logger;
 
         public AccountantService(
             IAccountantRepository accountantRepository,
             IUserService userService,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<AccountantService> logger)
         {
             _accountantRepository = accountantRepository;
             _userService = userService;
             _mapper = mapper;
+            _logger= logger;
         }
 
         public async Task<AccountantDto> CreateAccountantAsync(
             CreateAccountantDto createAccountantDto
             )
         {
+            _logger
+                .LogInformation("Creating new accountant");
+
+
             await _userService.ValidateUserCreation(
                 createAccountantDto.Email,
                 createAccountantDto.UserName,
@@ -63,17 +70,22 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
                     await _userService.DeleteUserAsync(
                         accountantCreated.accountant.Id);
                 }
-
+                _logger.LogError(
+                    "Failed to create accountant");
                 throw new Exception(
                     "Cannot create user, try again");
             }
-
+            _logger
+                .LogInformation("Accountant created successfully with id {AccountantId}",
+                    accountantCreated.accountant.Id);
             return _mapper.Map<AccountantDto>(
                 accountantCreated.accountant);
         }
 
         public async Task<List<AccountantDto>> GetAllAccountsAsync()
         {
+            _logger
+                .LogDebug("Retrieving all accountants from the database");
             var accountants =
                 await _accountantRepository.GetAllAccountantsAsync();
 
@@ -82,11 +94,15 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
 
         public async Task<AccountantDto> GetAccountantAsync(int id)
         {
+            _logger
+                .LogDebug("Retrieving accountant with ID {accoutantId}", id);
             var accountant =
                 await _accountantRepository.GetAccountantAsync(id);
 
             if (accountant == null)
             {
+                _logger
+                    .LogWarning("Accountant with ID {accoutantId} not found", id);
                 throw new KeyNotFoundException(
                     $"Cannot find accountant with id {id}");
             }
@@ -98,6 +114,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             UpdateAccountantDto updateAccountantDto,
             int id)
         {
+            _logger
+                .LogInformation("Updating accountant with ID {accoutantId}", id);
             await _userService.ValidateUserCreation(
                 updateAccountantDto.Email,
                 updateAccountantDto.UserName,
@@ -108,6 +126,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
 
             if (accountant == null)
             {
+                _logger
+                    .LogWarning("Accountant with ID {accoutantId} not found", id);
                 throw new KeyNotFoundException(
                     $"Cannot find accountant with id {id}");
             }
@@ -132,6 +152,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.NonMedicalStaf
             var updatedAccountant =
                 await _accountantRepository.UpdateAccountantAsync(
                     accountant);
+            _logger.
+                LogInformation("Accountant with ID {accoutantId} updated successfully", id);
 
             return _mapper.Map<AccountantDto>(updatedAccountant);
         }
