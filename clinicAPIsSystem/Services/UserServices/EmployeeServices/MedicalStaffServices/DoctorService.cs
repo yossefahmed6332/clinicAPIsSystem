@@ -12,21 +12,28 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
         private readonly IDoctorRepository _doctorRepository;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly ILogger<DoctorService> _logger;
 
         public DoctorService(
             IDoctorRepository doctorRepository,
             IMapper mapper,
-            IUserService userService)
+            IUserService userService,
+            ILogger<DoctorService> logger)
         {
             _doctorRepository = doctorRepository;
             _mapper = mapper;
             _userService = userService;
+            _logger = logger;
         }
 
         public async Task<DoctorDto> CreateDoctorAsync(
             CreateDoctorDto createDoctorDto
            )
         {
+            _logger
+                .LogInformation(
+                    "Creating new doctor"); 
+
             await _userService.ValidateUserCreation(
                 createDoctorDto.Email,
                 createDoctorDto.UserName,
@@ -63,10 +70,18 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
                     await _userService.DeleteUserAsync(
                         doctorCreated.doctor.Id);
                 }
+                _logger
+                    .LogError(
+                        "Failed to create doctor"
+                        );
 
                 throw new Exception(
                     "Cannot create user, try again");
             }
+            _logger
+                .LogInformation(
+                    "Doctor created successfully with ID {doctorId}",
+                    doctorCreated.doctor.Id);
 
             return _mapper.Map<DoctorDto>(
                 doctorCreated.doctor);
@@ -74,11 +89,18 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
         public async Task<DoctorDto> GetDoctorAsync(int id)
         {
+            _logger
+                .LogDebug(
+                    "Retrieving doctor with ID {id}",
+                    id);
             var doctor =
                 await _doctorRepository.GetDoctorAsync(id);
 
             if (doctor == null)
             {
+                _logger.LogWarning(
+                    "Doctor with ID {id} not found",
+                    id);
                 throw new KeyNotFoundException(
                     $"Cannot find doctor with id {id}");
             }
@@ -88,6 +110,7 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
         public async Task<List<DoctorDto>> GetAllDoctorsAsync()
         {
+            _logger.LogDebug("Retrieving all doctors from the database");
             var doctors =
                 await _doctorRepository.GetAllDoctorsAsync();
 
@@ -98,6 +121,10 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
             UpdateDoctorDto updateDoctorDto,
             int id)
         {
+            _logger
+                .LogInformation(
+                    "Updating doctor with ID {id}",
+                    id);
             await _userService.ValidateUserCreation(
                 updateDoctorDto.Email,
                 updateDoctorDto.UserName,
@@ -108,6 +135,9 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
             if (doctor == null)
             {
+                _logger.LogWarning(
+                    "Doctor with ID {id} not found for update",
+                    id);
                 throw new KeyNotFoundException(
                     $"Cannot find doctor with id {id}");
             }
@@ -131,6 +161,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
             var updatedDoctor =
                 await _doctorRepository.UpdateDoctorAsync(doctor);
+            _logger
+                .LogInformation("Doctor with ID {id} updated successfully", id);
 
             return _mapper.Map<DoctorDto>(updatedDoctor);
         }

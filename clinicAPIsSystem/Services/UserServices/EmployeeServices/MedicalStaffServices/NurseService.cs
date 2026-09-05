@@ -12,15 +12,19 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
         private readonly INurseRepository _nurseRepository; 
         private readonly IMapper _mapper; 
         private readonly IUserService _userService;
-        public NurseService(INurseRepository nurseRepository, IMapper mapper, IUserService userService)
+        private readonly ILogger<NurseService> _logger;
+        public NurseService(INurseRepository nurseRepository, IMapper mapper, IUserService userService, ILogger<NurseService> logger)
         {
             _nurseRepository = nurseRepository;
             _mapper = mapper;
             _userService = userService;
+            _logger = logger;
         }
 
         public async Task<NurseDto> CreateNurseAsync(CreateNurseDto createNurseDto)
         {
+            _logger
+                .LogInformation("Creating new nurse"); 
             await _userService.ValidateUserCreation(createNurseDto.Email, createNurseDto.UserName, createNurseDto.PhoneNumber);
 
             var nurse = new Nurse(
@@ -51,34 +55,45 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
                     await _userService.DeleteUserAsync(
                         nurseCreated.nurse.Id);
                 }
-
+                _logger
+                    .LogError("Failed to create nurse");
                 throw new Exception("Cannot create user, try again");
             }
+            _logger
+                .LogInformation("Nurse created successfully with ID {nurseId}", nurseCreated.nurse.Id);
 
             return _mapper.Map<NurseDto>(nurseCreated.nurse);
         }
 
         public async Task<NurseDto> GetNurseAsync(int nurseId)
         {
+            _logger
+                .LogDebug("Fetching nurse with ID {nurseId}", nurseId);
             var nurse = await _nurseRepository.GetNurseAsync(nurseId);
             if (nurse == null)
             {
+                _logger
+                    .LogWarning("Nurse with ID {nurseId} not found", nurseId);
                 throw new Exception("Nurse not found");
             }
             return _mapper.Map<NurseDto>(nurse);
         }
         public async Task<List<NurseDto>> GetAllNursesAsync()
         {
+            _logger
+                .LogDebug("Retrieving all nurses from the repository");
             var nurses = await _nurseRepository.GetAllNursesAsync();
             return _mapper.Map<List<NurseDto>>(nurses);
         }
 
 
 
-        public async Task<NurseDto> UpdateNurseAsync(
+        public async Task<NurseDto> UpdateNurseAsync(       
             
             UpdateNurseDto updateNurseDto, int id)
         {
+            _logger
+                .LogInformation("Updating nurse with ID {nurseId}", id);
             await _userService.ValidateUserCreation(
                 updateNurseDto.Email,
                 updateNurseDto.UserName,
@@ -88,6 +103,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
             if (nurse == null)
             {
+                _logger
+                    .LogWarning("Nurse with ID {nurseId} not found for update", id);
                 throw new KeyNotFoundException(
                     $"Cannot find nurse with id {id}");
             }
@@ -111,6 +128,8 @@ namespace clinicAPIsSystem.Services.UserServices.EmployeeServices.MedicalStaffSe
 
             var updatedNurse =
                 await _nurseRepository.UpdateNurseAsync(nurse);
+            _logger
+                .LogInformation("Nurse with ID {nurseId} updated successfully", id);
 
             return _mapper.Map<NurseDto>(updatedNurse);
         }
